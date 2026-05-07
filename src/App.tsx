@@ -76,6 +76,7 @@ const Navbar = () => {
     { name: 'Início', href: '#' },
     { name: 'Diferenciais', href: '#diferenciais' },
     { name: 'Cardápio', href: '#cardapio' },
+    { name: 'Galeria', href: '#galeria' },
     { name: 'Sobre', href: '#sobre' },
   ];
 
@@ -693,6 +694,91 @@ const Footer = () => {
   );
 };
 
+const GallerySection = () => {
+  const images = [
+    {
+      url: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1200&auto=format&fit=crop",
+      title: "Ambiente Acolhedor",
+      category: "Ambiente",
+      size: "large"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop",
+      title: "Hambúrguer Artesanal",
+      category: "Pratos",
+      size: "small"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=800&auto=format&fit=crop",
+      title: "Música ao Vivo",
+      category: "Show",
+      size: "small"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200&auto=format&fit=crop",
+      title: "Parrilla Premium",
+      category: "Pratos",
+      size: "medium"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1571767454098-246b94fbcf70?q=80&w=800&auto=format&fit=crop",
+      title: "Chopp Gelado",
+      category: "Bebidas",
+      size: "small"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=800&auto=format&fit=crop",
+      title: "Noite no Matriz",
+      category: "Ambiente",
+      size: "small"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=1200&auto=format&fit=crop",
+      title: "Porções Generosas",
+      category: "Pratos",
+      size: "medium"
+    }
+  ];
+
+  return (
+    <section id="galeria" className="py-20 md:py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16 md:mb-24">
+          <span className="text-brand-red font-bold uppercase tracking-widest text-xs mb-4 block underline decoration-brand-red underline-offset-8">Momentos</span>
+          <h2 className="font-display text-5xl md:text-8xl uppercase tracking-tighter mb-8 leading-[0.8]">Galeria de <span className="text-brand-wood italic">Experiências</span></h2>
+          <p className="text-white/50 max-w-xl mx-auto text-sm md:text-lg font-light">Um olhar sobre o que faz do Matriz Grill a esquina mais desejada da cidade.</p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[300px]">
+          {images.map((img, i) => (
+            <motion.div
+              key={i}
+              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className={`relative group overflow-hidden rounded-[2rem] glass border border-white/5 ${
+                img.size === 'large' ? 'col-span-2 row-span-2' : 
+                img.size === 'medium' ? 'col-span-2' : ''
+              }`}
+            >
+              <img 
+                src={img.url} 
+                alt={img.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 text-left">
+                <span className="text-brand-red text-[10px] uppercase font-bold tracking-[0.2em] mb-2">{img.category}</span>
+                <h4 className="text-xl font-display uppercase tracking-widest leading-none">{img.title}</h4>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-brand-orange selection:text-white">
@@ -703,6 +789,7 @@ export default function App() {
         <AuthorityMarquee />
         <BentoGrid />
         <MenuSection />
+        <GallerySection />
         
         {/* Location Section */}
         <section id="localizacao" className="py-20 md:py-32 bg-black/20">
