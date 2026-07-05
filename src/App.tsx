@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Music, 
@@ -26,15 +26,101 @@ import {
 // --- Components ---
 
 const Logo = () => (
-  <div className="flex items-center gap-2 py-1 select-none">
+  <div className="flex items-center select-none">
     <img 
-      src="https://i.ibb.co/Y7Y30C83/LOGO-MATRIZ-GRILL-3.png" 
+      src="https://i.ibb.co/pjwjH1mG/LOGO-MATRIZ-GRILL-4.png" 
       alt="Matriz Grill" 
-      className="h-16 md:h-20 w-auto object-contain drop-shadow-[0_0_15px_rgba(251,191,36,0.15)] hover:scale-105 transition-all duration-300"
+      className="h-24 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-300"
       referrerPolicy="no-referrer"
     />
   </div>
 );
+
+const BeforeAfterSlider = () => {
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleMove = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const position = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(position);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches[0]) {
+      handleMove(e.touches[0].clientX);
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      handleMove(e.clientX);
+    }
+  };
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden select-none cursor-ew-resize border border-white/10 shadow-2xl group"
+      onMouseMove={handleMouseMove}
+      onTouchMove={handleTouchMove}
+      onMouseDown={(e) => {
+        setIsDragging(true);
+        handleMove(e.clientX);
+      }}
+      onMouseUp={() => setIsDragging(false)}
+      onMouseLeave={() => setIsDragging(false)}
+      onTouchStart={(e) => {
+        if (e.touches[0]) handleMove(e.touches[0].clientX);
+      }}
+    >
+      {/* Before Image (Left Side) - Grayscale/Sepia or darker look for heritage */}
+      <img 
+        src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=1200&auto=format&fit=crop" 
+        alt="Antes - Bar Tradicional 1996" 
+        className="absolute inset-0 w-full h-full object-cover grayscale brightness-50 contrast-125 select-none"
+        referrerPolicy="no-referrer"
+      />
+      <div className="absolute top-4 left-4 z-20 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white border border-white/10">
+        Antes (Desde 1996)
+      </div>
+
+      {/* After Image (Right Side, clipped based on slider position) */}
+      <div 
+        className="absolute inset-0 overflow-hidden pointer-events-none"
+        style={{ clipPath: `polygon(${sliderPosition}% 0, 100% 0, 100% 100%, ${sliderPosition}% 100%)` }}
+      >
+        <img 
+          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1200&auto=format&fit=crop" 
+          alt="Depois - Gastrobar Moderno 2023" 
+          className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
+          referrerPolicy="no-referrer"
+        />
+        <div className="absolute top-4 right-4 z-20 bg-brand-amber text-black px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider border border-brand-amber/20">
+          Depois (Nova Administração 2023+)
+        </div>
+      </div>
+
+      {/* Divider Line */}
+      <div 
+        className="absolute top-0 bottom-0 w-1 bg-brand-amber z-30 pointer-events-none"
+        style={{ left: `${sliderPosition}%` }}
+      >
+        <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-brand-amber text-black flex items-center justify-center shadow-2xl border-2 border-white pointer-events-none select-none group-hover:scale-110 transition-transform duration-200">
+          <span className="text-sm font-black">↔</span>
+        </div>
+      </div>
+      
+      {/* Help Overlay - disappears on drag */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-black/60 backdrop-blur-sm px-4 py-1.5 rounded-full text-[10px] text-white/80 tracking-widest uppercase pointer-events-none select-none text-center">
+        Arraste ou clique para comparar
+      </div>
+    </div>
+  );
+};
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -243,9 +329,9 @@ const BentoGrid = () => {
           className="md:col-span-2 md:row-span-2 bento-item p-6 md:p-8 flex flex-col justify-end group min-h-[400px] md:min-h-0"
         >
           <img 
-            src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1200&auto=format&fit=crop" 
+            src="https://i.ibb.co/4RTFDyJB/Joao-Victor-e-Jos-1306.png" 
             className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" 
-            alt="Marco Aurélio e Amigos - Música ao Vivo Sertaneja"
+            alt="João Victor & José - Música ao Vivo Sertaneja"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -254,11 +340,11 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">Marco Aurélio & Amigos</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor do sertanejo com violão, sanfona e cajon transformando sua noite em um espetáculo.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">João Victor & José</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música sertaneja ao vivo em uma apresentação especial e emocionante.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
-              Sextas a partir das 20:30h
+              Sexta, 10 de Julho a partir das 20:30h
             </div>
           </div>
         </motion.div>
@@ -372,16 +458,16 @@ const AgendaSection = () => {
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20curtir%20a%20Quinta%20Burger%20com%2030%25%20OFF%21'
     },
     {
-      day: 'Sexta-feira',
+      day: 'Sexta-feira (10/07)',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta Premium com Marco Aurélio & Amigos',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um repertório sertanejo de altíssimo nível, tocado de forma acústica com violão, sanfona e cajon.',
-      disclaimer: 'Música ao vivo a partir das 20h30. Couvert artístico cobrado individualmente no caixa. Chegue cedo!',
-      imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=800&auto=format&fit=crop',
+      title: 'Sexta com João Victor & José',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sertanejo imperdível com João Victor & José para embalar a noite.',
+      disclaimer: 'Música ao vivo a partir das 20h30 na sexta, dia 10 de Julho. Couvert artístico cobrado individualmente no caixa. Chegue cedo!',
+      imageUrl: 'https://i.ibb.co/4RTFDyJB/Joao-Victor-e-Jos-1306.png',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Marco%20Aur%C3%A9lio%20%26%20Amigos%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%20%26%20Jos%C3%A9%21'
     },
     {
       day: 'Sazonal & Especiais',
@@ -882,8 +968,10 @@ const Testimonials = () => {
 };
 
 const Footer = () => {
+  const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | null>(null);
+
   return (
-    <footer id="sobre" className="pt-32 pb-12 bg-black">
+    <footer id="sobre" className="pt-32 pb-12 bg-black relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
           <div className="md:col-span-2">
@@ -891,7 +979,7 @@ const Footer = () => {
               <Logo />
             </a>
             <p className="text-white/40 max-w-sm text-lg font-light leading-relaxed">
-              Situada no coração da cidade, sendo a esquina mais movimentada da região. 
+              Situada no coração da cidade, sendo a esquina mais badalada da região. 
               O ponto de encontro oficial de Videira.
             </p>
           </div>
@@ -942,11 +1030,124 @@ const Footer = () => {
             © 2026 Matriz Grill - Todos os direitos reservados.
           </p>
           <div className="flex gap-8 text-white/20 text-[10px] uppercase tracking-[0.2em]">
-            <a href="#" className="hover:text-white transition-colors">Privacidade</a>
-            <a href="#" className="hover:text-white transition-colors">Termos</a>
+            <button 
+              onClick={() => setActiveModal('privacy')} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Privacidade
+            </button>
+            <button 
+              onClick={() => setActiveModal('terms')} 
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Termos
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Modern Dialog/Modal with AnimatePresence */}
+      <AnimatePresence>
+        {activeModal !== null && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setActiveModal(null)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+
+            {/* Modal Content */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="bg-zinc-950 border border-white/10 rounded-3xl p-6 md:p-8 max-w-lg w-full max-h-[85vh] overflow-y-auto relative z-10 shadow-2xl scrollbar-thin"
+            >
+              {/* Close Button */}
+              <button 
+                onClick={() => setActiveModal(null)}
+                className="absolute top-4 right-4 text-white/50 hover:text-white w-8 h-8 rounded-full bg-white/5 flex items-center justify-center transition-colors cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+
+              {activeModal === 'privacy' ? (
+                <div>
+                  <span className="text-brand-amber font-bold text-[10px] uppercase tracking-widest block mb-2">Segurança de Dados</span>
+                  <h3 className="font-display text-2xl uppercase tracking-wider text-white mb-6">Política de Privacidade</h3>
+                  
+                  <div className="space-y-6 text-sm text-white/70 font-light leading-relaxed">
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">1. Coleta de Informações</h4>
+                      <p>O Matriz Grill coleta apenas dados fornecidos espontaneamente por você ao realizar reservas de mesa, entrar em contato ou interagir conosco através do WhatsApp e de nossas redes sociais.</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">2. Uso dos Dados</h4>
+                      <p>Os seus dados de contato são utilizados estritamente para confirmar e gerenciar o agendamento de suas mesas, responder suas dúvidas ou enviar novidades especiais sobre nossa agenda cultural e promoções (quando previamente autorizado por você).</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">3. Confidencialidade e Segurança</h4>
+                      <p>Garantimos que suas informações nunca serão comercializadas, alugadas ou compartilhadas com terceiros. Adotamos práticas de segurança adequadas para proteger seus dados contra acessos não autorizados ou perda de informações.</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">4. Seus Direitos</h4>
+                      <p>A qualquer momento, você pode solicitar a alteração ou a exclusão total dos seus dados de contato de nossos registros enviando uma mensagem simples para o nosso suporte oficial.</p>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/5 text-[10px] text-white/40">
+                      Última atualização: Julho de 2026. Matriz Grill, Videira SC.
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <span className="text-brand-amber font-bold text-[10px] uppercase tracking-widest block mb-2">Regras de Convivência</span>
+                  <h3 className="font-display text-2xl uppercase tracking-wider text-white mb-6">Termos de Uso</h3>
+                  
+                  <div className="space-y-6 text-sm text-white/70 font-light leading-relaxed">
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">1. Reservas de Mesa</h4>
+                      <p>As reservas estão sujeitas à capacidade máxima de lotação da nossa casa. Recomendamos chegar com pelo menos 15 minutos de antecedência ao horário agendado. Em dias de grande movimento, shows de música ao vivo ou jogos da Seleção Brasileira na Copa, as reservas serão mantidas por no máximo 15 minutos de tolerância.</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">2. Promoções e Regulamentos</h4>
+                      <p>Nossas promoções clássicas (como o <strong>Quinta Burger</strong> com 30% de desconto e o <strong>Pede a Inteira e Paga a Meia de Tábua de Carne</strong>) são exclusivas para consumo no local e de forma presencial. Não são cumulativas com outros benefícios ou cupons ativos.</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">3. Consumo de Bebidas Alcoólicas</h4>
+                      <p>De acordo com a legislação federal brasileira, a venda e o consumo de bebidas alcoólicas são estritamente proibidos para menores de 18 anos. Poderá ser solicitada a apresentação de um documento oficial de identidade com foto para a liberação do consumo.</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">4. Ambiente Familiar</h4>
+                      <p>Preservamos um espaço alegre, seguro e integrativo. Reservamo-nos o direito de vetar ou convidar a se retirar indivíduos que apresentem comportamento inadequado, hostil ou que ponha em risco a segurança e integridade de nossos colaboradores e clientes.</p>
+                    </div>
+
+                    <div className="pt-4 border-t border-white/5 text-[10px] text-white/40">
+                      Última atualização: Julho de 2026. Matriz Grill, Videira SC.
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <button 
+                onClick={() => setActiveModal(null)}
+                className="mt-8 w-full py-3 bg-white text-black font-black uppercase tracking-widest text-[10px] rounded-xl hover:bg-zinc-200 transition-colors cursor-pointer"
+              >
+                Entendi, Fechar
+              </button>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </footer>
   );
 };
@@ -1169,6 +1370,68 @@ export default function App() {
                 </div>
               </div>
             </motion.div>
+          </div>
+
+          {/* Antes e Depois Interactive Subsection */}
+          <div className="mt-20 md:mt-32 pt-16 border-t border-white/5">
+            <div className="text-center mb-12 md:mb-16">
+              <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-3 block">A Evolução</span>
+              <h3 className="font-display text-3xl md:text-5xl uppercase tracking-tighter">O Matriz Através dos Anos</h3>
+              <p className="text-white/50 text-sm max-w-xl mx-auto mt-4 font-light">
+                Arraste o cursor na imagem abaixo para comparar a nossa essência tradicional com o dinamismo do nosso espaço totalmente renovado.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center">
+              {/* Slider Column */}
+              <div className="lg:col-span-7">
+                <BeforeAfterSlider />
+              </div>
+
+              {/* Text Comparison Column */}
+              <div className="lg:col-span-5 flex flex-col gap-6">
+                <div className="glass p-8 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors duration-300">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.01] rounded-full blur-2xl pointer-events-none" />
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center font-bold text-xs">1</span>
+                    <h4 className="font-display uppercase tracking-wider text-white text-base">Antes: Tradição e Raízes (1996 - 2022)</h4>
+                  </div>
+                  <p className="text-white/60 text-sm font-light leading-relaxed">
+                    Fundado como uma petiscaria clássica e grill de chapa tradicional. O foco era o aconchego rústico de um bar de bairro, oferecendo porções em ambiente familiar clássico e com ritmo mais calmo.
+                  </p>
+                  <ul className="mt-4 space-y-2 text-xs text-white/40">
+                    <li className="flex items-center gap-2">
+                      <span className="text-brand-red font-bold">✓</span> Grill rústico e ambiente familiar silencioso
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-brand-red font-bold">✓</span> Decoração tradicional de petiscaria de época
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="glass p-8 rounded-3xl border border-brand-amber/10 relative overflow-hidden group hover:border-brand-amber/20 transition-colors duration-300 bg-gradient-to-br from-brand-amber/[0.02] to-transparent">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-amber/[0.03] rounded-full blur-2xl pointer-events-none" />
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-8 h-8 rounded-full bg-brand-amber text-black flex items-center justify-center font-bold text-xs">2</span>
+                    <h4 className="font-display uppercase tracking-wider text-brand-amber text-base">Depois: A Nova Era (2023 - Presente)</h4>
+                  </div>
+                  <p className="text-white/70 text-sm font-light leading-relaxed">
+                    Sob a gestão vibrante de <strong className="text-white">Seco e Jorge</strong>, a casa se reinventou. Tornou-se o principal ponto de encontro da noite de Videira, combinando a consagrada música acústica ao vivo com hambúrgueres artesanais na brasa e tábuas premium na chapa.
+                  </p>
+                  <ul className="mt-4 space-y-2 text-xs text-white/50">
+                    <li className="flex items-center gap-2">
+                      <span className="text-brand-amber font-bold">★</span> A esquina mais badalada da cidade
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-brand-amber font-bold">★</span> Show acústico ao vivo com som de altíssima fidelidade
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <span className="text-brand-amber font-bold">★</span> Transmissões integradas em TVs de alta definição
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
