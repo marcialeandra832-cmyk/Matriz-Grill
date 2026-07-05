@@ -20,8 +20,132 @@ import {
   Flame,
   ArrowUpRight,
   Tv,
-  Trophy
+  Trophy,
+  Wine,
+  Soup,
+  Apple,
+  Smartphone,
+  ShoppingBag,
+  MessageCircle,
+  Car,
+  Baby,
+  CalendarCheck,
+  HelpCircle,
+  Ticket
 } from 'lucide-react';
+
+// --- Opening Status Helper & Components ---
+
+interface StatusInfo {
+  isOpen: boolean;
+  text: string;
+}
+
+function getOpeningStatus(): StatusInfo {
+  const now = new Date();
+  const day = now.getDay(); // 0 = Sunday, 1 = Monday, 2 = Tuesday, ...
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const currentTimeInMinutes = hour * 60 + minute;
+  
+  const openTime = 17 * 60; // 17:00
+  const closeTime = 22 * 60 + 30; // 22:30
+  
+  const isOpeningDay = day !== 1; // Not Monday
+  const isWithinHours = currentTimeInMinutes >= openTime && currentTimeInMinutes < closeTime;
+  
+  if (isOpeningDay && isWithinHours) {
+    return {
+      isOpen: true,
+      text: "Aberto agora"
+    };
+  }
+  
+  // Closed. Determine when it opens next.
+  let nextOpenDayText = "hoje";
+  
+  if (day === 1) {
+    // Today is Monday, next open is Tuesday
+    nextOpenDayText = "terça-feira";
+  } else {
+    // Today is Tuesday - Sunday
+    if (currentTimeInMinutes < openTime) {
+      // It's earlier than 17:00 on an open day
+      nextOpenDayText = "hoje";
+    } else {
+      // It's after 22:30 on an open day
+      if (day === 0) {
+        // Today is Sunday, Monday is closed, so next is Tuesday
+        nextOpenDayText = "terça-feira";
+      } else {
+        // Next day is an open day (Wednesday to Sunday)
+        const daysOfWeek = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+        const nextDayIndex = (day + 1) % 7;
+        nextOpenDayText = daysOfWeek[nextDayIndex];
+      }
+    }
+  }
+  
+  return {
+    isOpen: false,
+    text: `Fechado agora — abrimos ${nextOpenDayText} às 17h`
+  };
+}
+
+const OpenStatusBadge = () => {
+  const [status, setStatus] = useState<StatusInfo>({ isOpen: false, text: "Carregando..." });
+
+  useEffect(() => {
+    setStatus(getOpeningStatus());
+
+    const interval = setInterval(() => {
+      setStatus(getOpeningStatus());
+    }, 30000); // Check every 30s to keep it fresh
+
+    return () => clearInterval(interval);
+  }, []);
+
+  if (status.text === "Carregando...") {
+    return (
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium text-white/40 bg-white/5 animate-pulse">
+        <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+        Verificando...
+      </span>
+    );
+  }
+
+  return (
+    <span 
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-black uppercase tracking-wider transition-all duration-300 ${
+        status.isOpen 
+          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" 
+          : "bg-brand-amber/10 text-brand-amber border border-brand-amber/20"
+      }`}
+    >
+      <span className={`w-1.5 h-1.5 rounded-full ${status.isOpen ? "bg-emerald-400 animate-pulse" : "bg-brand-amber"}`} />
+      {status.text}
+    </span>
+  );
+};
+
+const FloatingWhatsApp = () => {
+  return (
+    <motion.a
+      href="https://wa.me/5549999328763?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Matriz%20Grill%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es."
+      target="_blank"
+      rel="noopener noreferrer"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 group"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay: 1, type: 'spring' }}
+      aria-label="Fale conosco no WhatsApp"
+    >
+      {/* Sutil pulse animation */}
+      <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-30 animate-ping pointer-events-none" />
+      <MessageCircle className="w-7 h-7 relative z-10" />
+    </motion.a>
+  );
+};
 
 // --- Components ---
 
@@ -137,6 +261,7 @@ const Navbar = () => {
     { name: 'Diferenciais', href: '#diferenciais' },
     { name: 'Agenda', href: '#agenda' },
     { name: 'Cardápio', href: '#cardapio' },
+    { name: 'Delivery', href: '#delivery' },
     { name: 'Galeria', href: '#galeria' },
     { name: 'Sobre', href: '#sobre' },
   ];
@@ -161,9 +286,14 @@ const Navbar = () => {
       </div>
 
       <div className={`max-w-7xl mx-auto px-6 flex justify-between items-center transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'}`}>
-        <a href="#" className="flex items-center gap-3 group">
-          <Logo />
-        </a>
+        <div className="flex items-center gap-4">
+          <a href="#" className="flex items-center gap-3 group">
+            <Logo />
+          </a>
+          <div className="hidden sm:inline-flex">
+            <OpenStatusBadge />
+          </div>
+        </div>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
@@ -201,6 +331,10 @@ const Navbar = () => {
             exit={{ opacity: 0, y: -20 }}
             className="absolute top-full left-0 w-full glass p-6 md:hidden flex flex-col gap-4 shadow-2xl"
           >
+            <div className="flex items-center justify-between pb-2 border-b border-white/10">
+              <span className="text-xs uppercase font-bold text-white/40">Status do Bar</span>
+              <OpenStatusBadge />
+            </div>
             {navLinks.map((link) => (
               <a 
                 key={link.name} 
@@ -252,7 +386,7 @@ const Hero = () => {
             aproveite como <span className="italic text-brand-wood">merece</span>.
           </h1>
           <p className="max-w-2xl mx-auto text-base md:text-xl text-white/70 mb-10 font-sans font-light leading-relaxed">
-            Música ao vivo de alta qualidade, porções lendárias na chapa e o chopp mais gelado da região. 
+            Música ao vivo de alta qualidade, porções na chapa, vinhos selecionados para o inverno, sopas aconchegantes e o chopp mais gelado da região. 
             Sua noite começa no coração e na <span className="font-bold text-white">esquina mais badalada da cidade</span>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -293,7 +427,7 @@ const Hero = () => {
 };
 
 const AuthorityMarquee = () => {
-  const items = ["MÚSICA AO VIVO", "CHOPP GELADO", "HAMBÚRGUER ARTESANAL", "PORÇÕES INCRÍVEIS", "DRINKS EXCLUSIVOS", "MELHOR ESQUINA"];
+  const items = ["MÚSICA AO VIVO", "CHOPP GELADO", "VINHOS SELECIONADOS", "SOPAS & CALDOS", "HAMBÚRGUER ARTESANAL", "PORÇÕES INCRÍVEIS", "DRINKS EXCLUSIVOS", "MELHOR ESQUINA"];
   return (
     <div className="py-12 border-y border-white/5 bg-white/[0.02] overflow-hidden whitespace-nowrap">
       <div className="flex animate-marquee">
@@ -411,6 +545,43 @@ const BentoGrid = () => {
             <p className="text-xs text-white/50">Rua Padre Anchieta, 304</p>
             <span className="text-[10px] text-brand-red font-bold uppercase tracking-widest mt-2 block">Ver no Mapa</span>
           </a>
+        </motion.div>
+
+        {/* Full-width Item 3 - Especial de Inverno */}
+        <motion.div 
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="md:col-span-4 bento-item p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6 group overflow-hidden bg-gradient-to-br from-red-950/20 via-zinc-950/40 to-purple-950/20 border border-white/5 hover:border-brand-amber/30 transition-all duration-300 relative"
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop" 
+            className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:scale-105 transition-transform duration-1000" 
+            alt="Vinhos e Sopas para o Inverno"
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left w-full justify-between">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="shrink-0 w-16 h-16 rounded-full bg-brand-amber/10 flex items-center justify-center border border-brand-amber/20 text-brand-amber">
+                <Wine className="w-8 h-8" />
+              </div>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-brand-amber bg-brand-amber/10 px-2.5 py-1 rounded border border-brand-amber/20 inline-block mb-2">Temporada de Inverno ❄️</span>
+                <h3 className="text-2xl font-display uppercase mb-1.5 text-white">Vinhos Finos & Sopas para se Aquecer</h3>
+                <p className="text-sm text-white/70 font-light max-w-2xl leading-relaxed">
+                  Combata o frio de Videira com nossa carta especial de vinhos selecionados e caldos deliciosos. Experimente nossa famosa <strong>Sopa de Agnoline (Cappelletti)</strong> ou nosso delicioso caldinho quente preparado no capricho!
+                </p>
+              </div>
+            </div>
+            <a 
+              href="#cardapio"
+              className="relative shrink-0 px-6 py-3.5 bg-white hover:bg-brand-amber hover:text-black text-black font-black uppercase tracking-widest text-[10px] rounded-xl transition-all duration-300 shadow-lg cursor-pointer"
+            >
+              Ver Menu de Inverno
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -704,6 +875,12 @@ const MenuSection = () => {
       { name: 'Caneca de Chopp 340ml', price: 'R$ 15,00', desc: 'O clássico chopp trincando de gelado, servido na caneca congelada.', image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=400&auto=format&fit=crop' },
       { name: 'Cerveja Heineken 600ml', price: 'R$ 20,00', desc: 'A cerveja premium puro malte holandesa mais pedida do mundo.', image: 'https://images.unsplash.com/photo-1618885472179-5e474019f2a9?q=80&w=400&auto=format&fit=crop' },
       { name: 'Antarctica Original 600ml', price: 'R$ 19,00', desc: 'A cerveja tradicional brasileira, extremamente leve, gelada e equilibrada.', image: 'https://images.unsplash.com/photo-1584225064785-c62a8b43d148?q=80&w=400&auto=format&fit=crop' }
+    ],
+    'Inverno & Vinhos': [
+      { name: 'Sopa de Agnoline (Cappelletti)', price: 'R$ 26,00', desc: 'Tradicional sopa com massa recheada de carne e caldo concentrado de galinha caipira, servida bem quente.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Caldinho de Feijão com Bacon', price: 'R$ 22,00', desc: 'Caldinho cremoso e quentinho de feijão preto com bacon frito e cebolinha fresca.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Cabernet Sauvignon (Taça)', price: 'R$ 18,00', desc: 'Taça de vinho tinto seco encorpado, perfeito para aquecer as noites frias de Videira.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Merlot Nacional (Garrafa)', price: 'R$ 78,00', desc: 'Garrafa de vinho tinto fino de excelente qualidade, frutado, macio e aconchegante.', image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=400&auto=format&fit=crop' }
     ]
   };
 
@@ -778,8 +955,16 @@ const MenuSection = () => {
     ],
     'Sobremesas': [
       { name: 'Mini Churros com Doce de Leite', price: 'R$ 18,00', desc: 'Mini porção de churros fritos sequinhos recheados e servidos com doce de leite cremoso.', image: 'https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Petit Gateau de Chocolate', price: 'R$ 21,00', desc: 'Bolinho quente de chocolate com recheio cremoso e derretido, servido com sorvete de creme.', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Petit Gateau de Chocolate', price: 'R$ 21,00', desc: 'Bolinho quente de chocolate com recheio cremoso and derretido, servido com sorvete de creme.', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=400&auto=format&fit=crop' },
       { name: 'Brownie Especial com Sorvete', price: 'R$ 19,00', desc: 'Fatia generosa de brownie de chocolate com castanhas, servido quente com sorvete de creme.', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=400&auto=format&fit=crop' }
+    ],
+    'Inverno & Vinhos': [
+      { name: 'Sopa de Agnoline (Cappelletti)', price: 'R$ 26,00', desc: 'Tradicional e legítima sopa com massa recheada de carne e caldo concentrado de galinha caipira, servida com queijo parmesão ralado e pão fofinho da casa.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Caldinho de Feijão Especial', price: 'R$ 22,00', desc: 'Delicioso caldo cremoso de feijão preto temperado com bacon crocante frito na hora e um toque fresco de cheiro-verde e cebolinha.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Creme de Milho Verde com Frango', price: 'R$ 24,00', desc: 'Saboroso creme aveludado de milho verde com frango desfiado suculento, ideal para as noites frias de Videira.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Cabernet Sauvignon (Taça)', price: 'R$ 18,00', desc: 'Taça de vinho tinto seco encorpado de uvas selecionadas, ideal para acompanhar nossas saborosas tábuas de carne.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Cabernet Sauvignon (Garrafa)', price: 'R$ 78,00', desc: 'Garrafa de vinho tinto encorpado de uvas selecionadas, para compartilhar e se aquecer no melhor clima da serra.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Merlot Nacional (Garrafa)', price: 'R$ 85,00', desc: 'Garrafa de vinho tinto seco, macio e aveludado, com excelentes notas frutadas que harmonizam com nossos hambúrgueres artesanais.', image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=400&auto=format&fit=crop' }
     ]
   };
 
@@ -1237,6 +1422,244 @@ const GallerySection = () => {
   );
 };
 
+const DeliverySection = () => {
+  return (
+    <section id="delivery" className="py-20 md:py-32 bg-gradient-to-b from-black via-zinc-950 to-black relative overflow-hidden border-t border-white/5">
+      {/* Background Decorative Glows */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-80 h-80 bg-brand-amber/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-80 h-80 bg-brand-red/5 rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <motion.div 
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="glass rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-16 border border-white/10 relative overflow-hidden flex flex-col lg:flex-row items-center gap-12 bg-gradient-to-br from-white/[0.01] via-zinc-950/80 to-brand-amber/[0.01]"
+        >
+          {/* Decorative Corner Light */}
+          <div className="absolute top-0 right-0 w-48 h-48 bg-brand-amber/[0.02] rounded-full blur-3xl pointer-events-none" />
+
+          {/* Left Column: Visual representation of phone / delivery */}
+          <div className="w-full lg:w-2/5 flex justify-center relative">
+            <div className="relative w-64 h-[450px] bg-zinc-950 rounded-[3rem] border-4 border-white/10 shadow-2xl p-3 flex flex-col justify-between overflow-hidden">
+              {/* Speaker / Camera Notch */}
+              <div className="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-5 bg-black rounded-full z-20 flex items-center justify-center">
+                <div className="w-12 h-1 bg-zinc-800 rounded-full" />
+              </div>
+
+              {/* Screen Mockup */}
+              <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden bg-gradient-to-b from-zinc-950 to-zinc-900 flex flex-col items-center justify-between p-6 pt-10 text-center">
+                {/* Header inside Mockup */}
+                <div className="flex justify-between items-center w-full text-[10px] text-white/40 font-mono tracking-widest">
+                  <span>MATRIZ</span>
+                  <div className="flex gap-1 items-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span>ABERTO</span>
+                  </div>
+                </div>
+
+                {/* Center Content Mockup */}
+                <div className="my-auto flex flex-col items-center gap-4">
+                  <div className="w-16 h-16 rounded-2xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center text-brand-red shadow-lg shadow-brand-red/10">
+                    <ShoppingBag className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h4 className="font-display text-lg uppercase tracking-wider text-white">AiPede Delivery</h4>
+                    <p className="text-[10px] text-white/50 max-w-[180px] mx-auto mt-1 leading-relaxed">Sabor do Matriz Grill na comodidade da sua casa</p>
+                  </div>
+                  <div className="px-3 py-1 bg-brand-amber/10 border border-brand-amber/20 rounded-full text-brand-amber text-[9px] font-black uppercase tracking-widest">
+                    Hambúrgueres & Porções
+                  </div>
+                </div>
+
+                {/* Footer inside Mockup */}
+                <div className="w-full space-y-2">
+                  <div className="h-1 bg-white/5 rounded-full w-2/3 mx-auto" />
+                  <div className="h-8 bg-brand-amber rounded-2xl w-full flex items-center justify-center text-[10px] text-black font-black uppercase tracking-widest shadow-lg shadow-brand-amber/10">
+                    Ver Restaurante
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Glowing effect behind phone */}
+            <div className="absolute inset-0 bg-brand-amber/5 rounded-full blur-2xl -z-10" />
+          </div>
+
+          {/* Right Column: Copy & CTAs */}
+          <div className="w-full lg:w-3/5 text-center lg:text-left flex flex-col justify-center">
+            <span className="text-brand-amber font-bold uppercase tracking-[0.25em] text-xs mb-4 block">Delivery Exclusivo</span>
+            <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tighter mb-6 leading-tight">
+              Peça no <br className="hidden md:inline" />
+              <span className="text-brand-red">AiPede Delivery</span>
+            </h2>
+            <p className="text-white/70 text-sm md:text-base font-light leading-relaxed mb-8 max-w-xl">
+              Não quer sair da cama ou do sofá? Sem problemas! Nós levamos os melhores grelhados, porções lendárias e lanches de Videira até você através do aplicativo <strong>AiPede Delivery</strong>. Baixe o app e faça seu pedido de forma rápida e segura!
+            </p>
+
+            {/* Download Buttons (App Stores) */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+              {/* App Store */}
+              <a 
+                href="https://apps.apple.com/us/app/aipede-app/id1628327208" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-white/10 hover:border-white/20 rounded-2xl text-white text-left transition-all duration-300 shadow-md group"
+              >
+                {/* LINK PROVISÓRIO - CONFIRMAR COM CLIENTE */}
+                <Apple className="w-7 h-7 text-white group-hover:text-brand-amber transition-colors" />
+                <div className="flex flex-col">
+                  <span className="text-[9px] uppercase tracking-wider text-white/40 leading-none">Baixar na</span>
+                  <span className="text-sm font-bold tracking-tight mt-0.5 leading-none">App Store</span>
+                </div>
+              </a>
+
+              {/* Google Play */}
+              <a 
+                href="https://play.google.com/store/apps/details?id=com.donodoapp.aipededelivery" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-6 py-3 bg-zinc-900 hover:bg-zinc-800 border border-white/10 hover:border-white/20 rounded-2xl text-white text-left transition-all duration-300 shadow-md group"
+              >
+                {/* LINK PROVISÓRIO - CONFIRMAR COM CLIENTE */}
+                <Smartphone className="w-7 h-7 text-white group-hover:text-brand-amber transition-colors" />
+                <div className="flex flex-col">
+                  <span className="text-[9px] uppercase tracking-wider text-white/40 leading-none">Disponível no</span>
+                  <span className="text-sm font-bold tracking-tight mt-0.5 leading-none">Google Play</span>
+                </div>
+              </a>
+            </div>
+
+            {/* Alternative Direct Deep Link / Web link */}
+            <div className="border-t border-white/5 pt-6 text-center lg:text-left">
+              <span className="text-xs text-white/40 block mb-3 uppercase tracking-wider">Já tem o aplicativo instalado?</span>
+              <a 
+                href="aipede://" 
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-amber/10 hover:bg-brand-amber text-brand-amber hover:text-black border border-brand-amber/20 hover:border-brand-amber font-black uppercase tracking-widest text-[10px] rounded-full transition-all duration-300 cursor-pointer"
+              >
+                {/* LINK PROVISÓRIO - CONFIRMAR COM CLIENTE */}
+                Abrir App Direto <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const BroadcastListSection = () => {
+  return (
+    <section className="py-12 bg-black/40 border-y border-white/5 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-brand-amber/[0.02] via-transparent to-brand-red/[0.01] pointer-events-none" />
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
+        <motion.div 
+          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          viewport={{ once: true }}
+          className="glass border border-white/5 rounded-3xl p-6 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 bg-gradient-to-r from-zinc-950/60 to-zinc-900/60"
+        >
+          <div className="flex items-center gap-4 text-center md:text-left flex-col md:flex-row">
+            <div className="w-12 h-12 rounded-full bg-brand-amber/10 flex items-center justify-center text-brand-amber shrink-0 border border-brand-amber/20">
+              <MessageCircle className="w-6 h-6 animate-pulse" />
+            </div>
+            <div>
+              <h3 className="font-display text-lg md:text-xl uppercase tracking-wider text-white mb-1">Fique por dentro da nossa agenda</h3>
+              <p className="text-xs md:text-sm text-white/60 font-light max-w-xl">
+                Entre na nossa lista e receba primeiro a programação da semana, promoções e eventos especiais direto no seu WhatsApp.
+              </p>
+            </div>
+          </div>
+          
+          <motion.a 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            href="https://wa.me/5549999328763?text=Quero%20entrar%20na%20lista%20de%20transmiss%C3%A3o"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 px-6 py-3 bg-zinc-900 hover:bg-brand-amber hover:text-black text-white font-black uppercase tracking-widest text-[10px] rounded-xl border border-white/10 hover:border-brand-amber transition-all duration-300"
+          >
+            {/* LINK PROVISÓRIO - CONFIRMAR LISTA DE TRANSMISSÃO COM CLIENTE */}
+            Entrar na Lista
+          </motion.a>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const FAQSection = () => {
+  const faqs = [
+    {
+      id: "faq-estacionamento",
+      icon: <Car className="w-6 h-6 text-brand-amber" />,
+      question: "Estacionamento",
+      answer: "O estacionamento é realizado de forma simples e gratuita diretamente nas vias públicas ao redor do bar (vagas na rua)."
+    },
+    {
+      id: "faq-criancas",
+      icon: <Baby className="w-6 h-6 text-brand-amber" />,
+      question: "Crianças",
+      answer: "Sim, com certeza! O Matriz Grill possui um ambiente totalmente familiar e perfeito para receber você e toda a sua família."
+    },
+    {
+      id: "faq-reservas",
+      icon: <CalendarCheck className="w-6 h-6 text-brand-amber" />,
+      question: "Reserva de Mesas",
+      answer: "A reserva de mesa é altamente recomendada, principalmente nas noites de sexta-feira com música ao vivo, para garantir o seu conforto."
+    },
+    {
+      id: "faq-entrada",
+      icon: <Ticket className="w-6 h-6 text-brand-amber" />,
+      question: "Cobrança de Entrada?",
+      answer: "Não cobramos taxa de entrada! Nos dias com shows acústicos (como sextas), cobramos apenas o valor do couvert artístico individual direto no fechamento do caixa."
+    }
+  ];
+
+  return (
+    <section id="faq" className="py-20 md:py-32 bg-zinc-950/60 relative overflow-hidden border-t border-white/5">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-brand-amber/[0.02] rounded-full blur-[100px] pointer-events-none" />
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <span className="text-brand-amber font-bold uppercase tracking-[0.25em] text-[10px] md:text-xs mb-3 block">FAQ Matriz</span>
+          <h2 className="font-display text-3xl md:text-5xl uppercase tracking-tighter text-white">
+            Dúvidas <span className="text-brand-amber italic font-light">Frequentes</span>
+          </h2>
+          <p className="text-white/50 text-xs md:text-sm font-light mt-4 max-w-xl mx-auto leading-relaxed">
+            Esclareça suas principais dúvidas sobre estacionamento, couvert, reservas e o funcionamento da nossa casa.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+          {faqs.map((faq, idx) => (
+            <motion.div 
+              key={faq.id}
+              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+              className="glass p-6 md:p-8 rounded-3xl border border-white/5 hover:border-brand-amber/20 transition-all duration-300 bg-gradient-to-br from-white/[0.01] to-transparent flex gap-5 group"
+            >
+              <div className="shrink-0 w-12 h-12 rounded-2xl bg-brand-amber/10 flex items-center justify-center border border-brand-amber/20 group-hover:bg-brand-amber/20 transition-colors">
+                {faq.icon}
+              </div>
+              <div>
+                <h3 className="font-display text-sm md:text-base uppercase tracking-wider text-white mb-2 group-hover:text-brand-amber transition-colors">
+                  {faq.question}
+                </h3>
+                <p className="text-xs md:text-sm text-white/60 font-light leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-brand-orange selection:text-white">
@@ -1247,7 +1670,9 @@ export default function App() {
         <AuthorityMarquee />
         <BentoGrid />
         <AgendaSection />
+        <BroadcastListSection />
         <MenuSection />
+        <DeliverySection />
         <GallerySection />
         <HostsSection />
         
@@ -1277,8 +1702,11 @@ export default function App() {
                       <Clock className="text-brand-amber w-5 h-5 md:w-6 md:h-6" />
                     </div>
                     <div className="text-left">
-                      <h4 className="font-display text-lg md:text-xl uppercase">Horários</h4>
-                      <p className="text-sm md:text-base text-white/60 font-light">Terça a Domingo: 17h às 22:30h</p>
+                      <div className="flex items-center gap-3">
+                        <h4 className="font-display text-lg md:text-xl uppercase">Horários</h4>
+                        <OpenStatusBadge />
+                      </div>
+                      <p className="text-sm md:text-base text-white/60 font-light mt-1">Terça a Domingo: 17h às 22:30h</p>
                     </div>
                   </div>
                 </div>
@@ -1298,11 +1726,11 @@ export default function App() {
                 whileInView={{ opacity: 1, x: 0 }}
                 initial={{ opacity: 0, x: 50 }}
                 viewport={{ once: true }}
-                className="h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass border border-white/10 relative"
+                className="h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass border border-white/10 relative group"
               >
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.446824414571!2d-51.1524316!3d-27.0016667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e1506977777777%3A0x7777777777777777!2sR.%20Padre%20Anchieta%2C%20304%20-%20Matriz%2C%20Videira%20-%20SC%2C%2089560-000!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-                  className="w-full h-full grayscale invert opacity-80"
+                  className="w-full h-full grayscale invert opacity-80 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-700"
                   style={{ border: 0 }} 
                   allowFullScreen={true} 
                   loading="lazy" 
@@ -1357,7 +1785,10 @@ export default function App() {
                 <div className="flex items-center gap-3">
                   <Clock className="text-brand-amber w-5 h-5 shrink-0" />
                   <div className="flex flex-col text-left">
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Funcionamento</span>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Funcionamento</span>
+                      <OpenStatusBadge />
+                    </div>
                     <span className="text-xs uppercase tracking-widest font-black text-white/80">Terça a Domingo: 17h às 22:30h</span>
                   </div>
                 </div>
@@ -1437,6 +1868,8 @@ export default function App() {
 
         <Testimonials />
 
+        <FAQSection />
+
         {/* CTA Section */}
         <section className="py-20 md:py-32 px-6">
           <motion.div 
@@ -1464,6 +1897,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 }
