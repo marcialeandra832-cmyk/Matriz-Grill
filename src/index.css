@@ -4,8 +4,11 @@
 @theme {
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Syne", sans-serif;
+  --color-brand-red: #8B1A1A;
   --color-brand-gold: #D4AF37;
   --color-brand-orange: #F27D26;
+  --color-brand-wood: #C19A6B;
+  --color-brand-amber: #E5A93B;
   --color-bg-dark: #050505;
   --color-bg-card: #0a0a0a;
 
