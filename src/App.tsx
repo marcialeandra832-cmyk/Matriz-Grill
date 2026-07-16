@@ -464,7 +464,7 @@ const BentoGrid = () => {
         >
           <img 
             src="https://i.ibb.co/4RTFDyJB/Joao-Victor-e-Jos-1306.png" 
-            className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-110 transition-transform duration-700" 
+            className="absolute inset-0 w-full h-full object-cover object-[center_top] opacity-50 group-hover:scale-110 transition-transform duration-700" 
             alt="João Victor & José - Música ao Vivo Sertaneja"
             referrerPolicy="no-referrer"
           />
@@ -598,23 +598,11 @@ const AgendaSection = () => {
       tag: 'PROMOÇÃO DE TÁBUAS',
       title: 'Pede a inteira e paga a meia da casa!',
       desc: 'Nossas lendárias tábuas de carne de alto padrão (Alcatra, Filé Mignon ou Picanha) com um desconto imbatível que serve toda a mesa. Perfeito para reunir os amigos ou a família no meio da semana.',
-      disclaimer: 'Válido apenas para consumo presencial (no local). Serve de 3 a 4 pessoas fartamente. OBS: Também fica ativa extraordinariamente em qualquer dia de jogo do Brasil na Copa!',
+      disclaimer: 'Válido apenas para consumo presencial (no local). Serve de 3 a 4 pessoas fartamente.',
       imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=800&auto=format&fit=crop',
       badge: 'PROMOÇÃO HISTÓRICA',
       accentColor: 'from-amber-500/20 to-brand-amber/40',
       whatsappMsg: 'Ol%C3%A1%21%20Quero%20reservar%20uma%20mesa%20para%20a%20Quarta%20das%20T%C3%A1buas%20%28Pede%20a%20Inteira%2C%20Paga%20a%20Meia%21%29'
-    },
-    {
-      day: 'Jogos do Brasil na Copa',
-      shortDay: 'Copa 🇧🇷',
-      tag: 'SELEÇÃO NA TELA & NA BRASA',
-      title: 'Transmissão Ao Vivo & Promoção Quarta da Carne!',
-      desc: 'Venha torcer pela nossa Seleção na esquina mais badalada da cidade! Transmitimos TODOS os jogos do Brasil ao vivo em nossas TVs para todo o público, com som integrado e o chopp trincando de gelado. E o melhor de tudo: em qualquer dia de jogo do Brasil na Copa, a nossa famosa PROMOÇÃO QUARTA DA CARNE (pede a tábua de carne inteira e paga o valor da meia-porção) estará 100% ATIVA durante toda a partida!',
-      disclaimer: 'Promoção de tábuas de carne (Alcatra, Mignon ou Picanha) válida exclusivamente para consumo no local durante a transmissão dos jogos do Brasil na Copa. Não cumulativa com outras promoções.',
-      imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?q=80&w=800&auto=format&fit=crop',
-      badge: 'TRANSMISSÃO AO VIVO',
-      accentColor: 'from-green-600/20 to-brand-amber/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Quero%20reservar%20uma%20mesa%20para%20assistir%20ao%20jogo%20do%20Brasil%20na%20Copa%20e%20aproveitar%20a%20promo%C3%A7%C3%A3o%2521'
     },
     {
       day: 'Quinta-feira',
@@ -636,6 +624,7 @@ const AgendaSection = () => {
       desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sertanejo imperdível com João Victor & José para embalar a noite.',
       disclaimer: 'Música ao vivo a partir das 20h30 na sexta, dia 10 de Julho. Couvert artístico cobrado individualmente no caixa. Chegue cedo!',
       imageUrl: 'https://i.ibb.co/4RTFDyJB/Joao-Victor-e-Jos-1306.png',
+      objectPosition: 'object-[center_top]',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%20%26%20Jos%C3%A9%21'
@@ -665,34 +654,6 @@ const AgendaSection = () => {
           <p className="text-white/50 max-w-xl mx-auto text-sm md:text-base font-light">As promoções e atrações que tornam o Matriz Grill o ponto de encontro preferido de Videira.</p>
         </div>
 
-        {/* Copa Alert Ribbon */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-4xl mx-auto mb-12 bg-gradient-to-r from-green-950/40 via-yellow-950/20 to-green-950/40 border border-green-500/20 rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-4 text-center md:text-left justify-between"
-        >
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center shrink-0 border border-green-500/25">
-              <Tv className="w-6 h-6 text-brand-amber animate-pulse" />
-            </div>
-            <div>
-              <h4 className="font-display text-base md:text-lg uppercase tracking-wider text-brand-amber flex items-center justify-center md:justify-start gap-2">
-                Copa na Tela, Promo na Mesa! <span className="text-[9px] px-2 py-0.5 bg-green-600 text-white font-black rounded uppercase tracking-widest leading-none">AO VIVO</span>
-              </h4>
-              <p className="text-xs text-white/70 font-light mt-1">
-                TODOS os jogos do Brasil são transmitidos na TV com a <strong>Promoção Quarta da Carne</strong> ativa durante a partida!
-              </p>
-            </div>
-          </div>
-          <button 
-            onClick={() => setSelectedDay('Copa 🇧🇷')}
-            className="px-5 py-2.5 bg-brand-amber hover:bg-brand-gold text-black font-black uppercase tracking-widest rounded-lg text-[10px] transition-all shrink-0 cursor-pointer"
-          >
-            Ver Detalhes
-          </button>
-        </motion.div>
-
         {/* Tab Selection */}
         <div className="flex justify-start md:justify-center gap-2 mb-10 overflow-x-auto no-scrollbar py-2 -mx-6 px-6 md:mx-0 md:px-0">
           {agendaDays.map((item) => (
@@ -720,7 +681,7 @@ const AgendaSection = () => {
               <img 
                 src={currentAgenda.imageUrl} 
                 alt={currentAgenda.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${currentAgenda.objectPosition || 'object-center'}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
               <div className="absolute top-4 left-4 bg-brand-red text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-md">
@@ -1298,7 +1259,7 @@ const Footer = () => {
                   <div className="space-y-6 text-sm text-white/70 font-light leading-relaxed">
                     <div>
                       <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">1. Reservas de Mesa</h4>
-                      <p>As reservas estão sujeitas à capacidade máxima de lotação da nossa casa. Recomendamos chegar com pelo menos 15 minutos de antecedência ao horário agendado. Em dias de grande movimento, shows de música ao vivo ou jogos da Seleção Brasileira na Copa, as reservas serão mantidas por no máximo 15 minutos de tolerância.</p>
+                      <p>As reservas estão sujeitas à capacidade máxima de lotação da nossa casa. Recomendamos chegar com pelo menos 15 minutos de antecedência ao horário agendado. Em dias de grande movimento ou shows de música ao vivo, as reservas serão mantidas por no máximo 15 minutos de tolerância.</p>
                     </div>
 
                     <div>
@@ -1565,9 +1526,9 @@ const BroadcastListSection = () => {
               <MessageCircle className="w-6 h-6 animate-pulse" />
             </div>
             <div>
-              <h3 className="font-display text-lg md:text-xl uppercase tracking-wider text-white mb-1">Fique por dentro da nossa agenda</h3>
+              <h3 className="font-display text-lg md:text-xl uppercase tracking-wider text-white mb-1">Grupo de Resenhas Matriz Grill</h3>
               <p className="text-xs md:text-sm text-white/60 font-light max-w-xl">
-                Entre na nossa lista e receba primeiro a programação da semana, promoções e eventos especiais direto no seu WhatsApp.
+                Entre no nosso grupo exclusivo do WhatsApp e receba em primeira mão a nossa programação da semana, novidades, promoções especiais e as melhores resenhas.
               </p>
             </div>
           </div>
@@ -1575,13 +1536,12 @@ const BroadcastListSection = () => {
           <motion.a 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            href="https://wa.me/5549999328763?text=Quero%20entrar%20na%20lista%20de%20transmiss%C3%A3o"
+            href="https://chat.whatsapp.com/JrkpvZwuntW8oRBd3V7EpU"
             target="_blank"
             rel="noopener noreferrer"
             className="shrink-0 px-6 py-3 bg-zinc-900 hover:bg-brand-amber hover:text-black text-white font-black uppercase tracking-widest text-[10px] rounded-xl border border-white/10 hover:border-brand-amber transition-all duration-300"
           >
-            {/* LINK PROVISÓRIO - CONFIRMAR LISTA DE TRANSMISSÃO COM CLIENTE */}
-            Entrar na Lista
+            Entrar no Grupo
           </motion.a>
         </motion.div>
       </div>
