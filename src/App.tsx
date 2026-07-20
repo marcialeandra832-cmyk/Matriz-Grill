@@ -149,12 +149,12 @@ const FloatingWhatsApp = () => {
 
 // --- Components ---
 
-const Logo = () => (
+const Logo = ({ className = "h-24 md:h-32" }: { className?: string }) => (
   <div className="flex items-center select-none">
     <img 
       src="https://i.ibb.co/pjwjH1mG/LOGO-MATRIZ-GRILL-4.png" 
       alt="Matriz Grill" 
-      className="h-24 md:h-32 w-auto object-contain hover:scale-105 transition-transform duration-300"
+      className={`${className} w-auto object-contain hover:scale-105 transition-transform duration-300`}
       referrerPolicy="no-referrer"
     />
   </div>
@@ -288,7 +288,7 @@ const Navbar = () => {
       <div className={`max-w-7xl mx-auto px-6 flex justify-between items-center transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'}`}>
         <div className="flex items-center gap-4">
           <a href="#" className="flex items-center gap-3 group">
-            <Logo />
+            <Logo className={isScrolled ? "h-24 md:h-32" : "h-32 md:h-44"} />
           </a>
           <div className="hidden sm:inline-flex">
             <OpenStatusBadge />
@@ -463,9 +463,9 @@ const BentoGrid = () => {
           className="md:col-span-2 md:row-span-2 bento-item p-6 md:p-8 flex flex-col justify-end group min-h-[400px] md:min-h-0"
         >
           <img 
-            src="https://i.ibb.co/4RTFDyJB/Joao-Victor-e-Jos-1306.png" 
-            className="absolute inset-0 w-full h-full object-cover object-[center_top] opacity-50 group-hover:scale-110 transition-transform duration-700" 
-            alt="João Victor & José - Música ao Vivo Sertaneja"
+            src="https://i.ibb.co/Rk0SmpW2/Whats-App-Image-2026-07-19-at-22-48-34.jpg" 
+            className="absolute inset-0 w-full h-full object-cover object-[center_15%] opacity-50 group-hover:scale-110 transition-transform duration-700" 
+            alt="Cláudio Amaral e banda - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -474,11 +474,11 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">João Victor & José</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor da música sertaneja ao vivo em uma apresentação especial e emocionante.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">Cláudio Amaral e banda</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo em uma apresentação especial com Cláudio Amaral e banda.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
-              Sexta, 10 de Julho a partir das 20:30h
+              Sexta, 24 de Julho a partir das 20:30h
             </div>
           </div>
         </motion.div>
@@ -617,17 +617,17 @@ const AgendaSection = () => {
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20curtir%20a%20Quinta%20Burger%20com%2030%25%20OFF%21'
     },
     {
-      day: 'Sexta-feira (10/07)',
+      day: 'Sexta-feira (24/07)',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta com João Victor & José',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sertanejo imperdível com João Victor & José para embalar a noite.',
-      disclaimer: 'Música ao vivo a partir das 20h30 na sexta, dia 10 de Julho. Couvert artístico cobrado individualmente no caixa. Chegue cedo!',
-      imageUrl: 'https://i.ibb.co/4RTFDyJB/Joao-Victor-e-Jos-1306.png',
-      objectPosition: 'object-[center_top]',
+      title: 'Sexta com Cláudio Amaral e banda',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Cláudio Amaral e banda para embalar a noite.',
+      disclaimer: 'Música ao vivo a partir das 20h30 na sexta, dia 24 de Julho. Couvert artístico cobrado individualmente no caixa. Chegue cedo!',
+      imageUrl: 'https://i.ibb.co/Rk0SmpW2/Whats-App-Image-2026-07-19-at-22-48-34.jpg',
+      objectPosition: 'object-[center_15%]',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%20%26%20Jos%C3%A9%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Cl%C3%A1udio%20Amaral%20e%20banda%21'
     },
     {
       day: 'Sazonal & Especiais',
@@ -753,7 +753,7 @@ const HostsSection = () => {
           <p className="text-white/50 text-sm font-light leading-relaxed mb-8">
             O <span className="font-bold text-white">Seco (proprietário)</span>, com sua simpatia inconfundível, e o <span className="font-bold text-white">Jorge (gerente)</span>, garantindo que o atendimento flua de forma impecável, formam o coração do Matriz Grill. 
             Eles criaram um ponto de encontro ideal para jovens adultos, casais e famílias que prezam por boa música e descontração, mas que não abrem mão de segurança e conforto. 
-            <span className="block mt-4 font-bold text-brand-amber">Aqui, garantimos um ambiente sempre selecionado, animado e totalmente sem baderna.</span>
+            <span className="block mt-4 font-bold text-brand-amber">Aqui, garantimos um ambiente sempre selecionado, animado, seguro e ideal para toda a família.</span>
           </p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 rounded-2xl bg-white/[0.01] border border-white/5">
