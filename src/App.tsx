@@ -13,6 +13,7 @@ import {
   Instagram, 
   Phone, 
   ChevronRight, 
+  ChevronLeft,
   Star, 
   Clock, 
   Menu as MenuIcon, 
@@ -39,6 +40,7 @@ import {
 interface StatusInfo {
   isOpen: boolean;
   text: string;
+  shortText: string;
 }
 
 function getOpeningStatus(): StatusInfo {
@@ -57,7 +59,8 @@ function getOpeningStatus(): StatusInfo {
   if (isOpeningDay && isWithinHours) {
     return {
       isOpen: true,
-      text: "Aberto agora"
+      text: "Aberto agora",
+      shortText: "Aberto"
     };
   }
   
@@ -88,12 +91,13 @@ function getOpeningStatus(): StatusInfo {
   
   return {
     isOpen: false,
-    text: `Fechado agora — abrimos ${nextOpenDayText} às 17h`
+    text: `Fechado agora — abrimos ${nextOpenDayText} às 17h`,
+    shortText: "Fechado"
   };
 }
 
-const OpenStatusBadge = () => {
-  const [status, setStatus] = useState<StatusInfo>({ isOpen: false, text: "Carregando..." });
+const OpenStatusBadge = ({ short = false }: { short?: boolean }) => {
+  const [status, setStatus] = useState<StatusInfo>({ isOpen: false, text: "Carregando...", shortText: "Carregando..." });
 
   useEffect(() => {
     setStatus(getOpeningStatus());
@@ -107,7 +111,7 @@ const OpenStatusBadge = () => {
 
   if (status.text === "Carregando...") {
     return (
-      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium text-white/40 bg-white/5 animate-pulse">
+      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium text-white/40 bg-white/5 animate-pulse whitespace-nowrap">
         <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
         Verificando...
       </span>
@@ -122,8 +126,15 @@ const OpenStatusBadge = () => {
           : "bg-brand-amber/10 text-brand-amber border border-brand-amber/20"
       }`}
     >
-      <span className={`w-1.5 h-1.5 rounded-full ${status.isOpen ? "bg-emerald-400 animate-pulse" : "bg-brand-amber"}`} />
-      {status.text}
+      <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${status.isOpen ? "bg-emerald-400 animate-pulse" : "bg-brand-amber"}`} />
+      {short ? (
+        <span>{status.shortText}</span>
+      ) : (
+        <>
+          <span className="inline sm:hidden">{status.shortText}</span>
+          <span className="hidden sm:inline">{status.text}</span>
+        </>
+      )}
     </span>
   );
 };
@@ -291,7 +302,7 @@ const Navbar = () => {
             <Logo className={isScrolled ? "h-24 md:h-32" : "h-32 md:h-44"} />
           </a>
           <div className="hidden sm:inline-flex">
-            <OpenStatusBadge />
+            <OpenStatusBadge short />
           </div>
         </div>
 
@@ -806,6 +817,41 @@ const HostsSection = () => {
 const MenuSection = () => {
   const [activeCategory, setActiveCategory] = useState('Porções');
   const [isFullMenuOpen, setIsFullMenuOpen] = useState(false);
+  const menuTabContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const checkScroll = () => {
+    if (menuTabContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = menuTabContainerRef.current;
+      setShowLeftArrow(scrollLeft > 10);
+      setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const el = menuTabContainerRef.current;
+    if (el) {
+      el.addEventListener('scroll', checkScroll);
+      // Wait slightly for layout to settle, then check
+      setTimeout(checkScroll, 150);
+      window.addEventListener('resize', checkScroll);
+    }
+    return () => {
+      if (el) el.removeEventListener('scroll', checkScroll);
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, []);
+
+  const scrollTabs = (direction: 'left' | 'right') => {
+    if (menuTabContainerRef.current) {
+      const amount = 160;
+      menuTabContainerRef.current.scrollBy({
+        left: direction === 'left' ? -amount : amount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const menuData = {
     'Porções': [
@@ -937,16 +983,41 @@ const MenuSection = () => {
             <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-2 block">Destaques da Casa</span>
             <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tighter">Sabor em <span className="italic text-brand-wood">cada detalhe</span></h2>
           </div>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2 w-full md:w-auto -mx-6 px-6 md:mx-0 md:px-0">
-            {Object.keys(menuData).map((cat) => (
+          <div className="relative flex items-center w-full md:w-auto">
+            {showLeftArrow && (
               <button 
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${activeCategory === cat ? 'bg-brand-amber text-black shadow-md shadow-brand-amber/10' : 'glass text-white/50 hover:text-white'}`}
+                onClick={() => scrollTabs('left')}
+                className="absolute left-2 z-10 p-1.5 rounded-full bg-black/90 border border-white/10 text-brand-amber hover:bg-brand-amber hover:text-black transition-all shadow-lg cursor-pointer"
+                aria-label="Rolar para esquerda"
               >
-                {cat}
+                <ChevronLeft className="w-4 h-4" />
               </button>
-            ))}
+            )}
+
+            <div 
+              ref={menuTabContainerRef}
+              className="flex gap-2 overflow-x-auto no-scrollbar pb-2 w-full md:w-auto -mx-6 px-6 md:mx-0 md:px-0 scroll-smooth"
+            >
+              {Object.keys(menuData).map((cat) => (
+                <button 
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-5 py-2.5 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest transition-all whitespace-nowrap ${activeCategory === cat ? 'bg-brand-amber text-black shadow-md shadow-brand-amber/10' : 'glass text-white/50 hover:text-white'}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {showRightArrow && (
+              <button 
+                onClick={() => scrollTabs('right')}
+                className="absolute right-2 z-10 p-1.5 rounded-full bg-black/90 border border-white/10 text-brand-amber hover:bg-brand-amber hover:text-black transition-all shadow-lg cursor-pointer"
+                aria-label="Rolar para direita"
+              >
+                <ChevronRight className="w-4 h-4 animate-pulse" />
+              </button>
+            )}
           </div>
         </div>
 
@@ -1745,9 +1816,9 @@ export default function App() {
                 <div className="flex items-center gap-3">
                   <Clock className="text-brand-amber w-5 h-5 shrink-0" />
                   <div className="flex flex-col text-left">
-                    <div className="flex items-center gap-2 mb-0.5">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
                       <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Funcionamento</span>
-                      <OpenStatusBadge />
+                      <OpenStatusBadge short />
                     </div>
                     <span className="text-xs uppercase tracking-widest font-black text-white/80">Terça a Domingo: 17h às 22:30h</span>
                   </div>
