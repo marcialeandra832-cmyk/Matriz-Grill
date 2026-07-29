@@ -219,8 +219,13 @@ const BeforeAfterSlider = () => {
         className="absolute inset-0 w-full h-full object-cover select-none"
         referrerPolicy="no-referrer"
       />
-      <div className="absolute top-4 left-4 z-20 bg-black/90 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white border border-white/20 shadow-lg">
-        Antes: Bar Simples de Bairro
+      <div 
+        className="absolute inset-0 pointer-events-none z-20"
+        style={{ clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)` }}
+      >
+        <div className="absolute top-4 left-4 bg-black/90 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white border border-white/20 shadow-lg">
+          Antes: Bar Simples de Bairro
+        </div>
       </div>
 
       {/* After Image (Right Side, clipped based on slider position) */}
