@@ -398,7 +398,7 @@ const Hero = () => {
             aproveite como <span className="italic text-brand-wood">merece</span>.
           </h1>
           <p className="max-w-2xl mx-auto text-base md:text-xl text-white/70 mb-10 font-sans font-light leading-relaxed">
-            Música ao vivo de alta qualidade, porções na chapa, vinhos selecionados para o inverno, sopas aconchegantes e o chopp mais gelado da região. 
+            Música ao vivo de alta qualidade, combos de hambúrgueres artesanais, porções na chapa, vinhos selecionados para o inverno, sopas e cremes reconfortantes e o chopp mais gelado da região. 
             Sua noite começa no coração e na <span className="font-bold text-white">esquina mais badalada da cidade</span>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -475,8 +475,8 @@ const BentoGrid = () => {
           className="md:col-span-2 md:row-span-2 bento-item p-6 md:p-8 flex flex-col justify-end group min-h-[400px] md:min-h-0"
         >
           <img 
-            src="https://i.ibb.co/Rk0SmpW2/Whats-App-Image-2026-07-19-at-22-48-34.jpg" 
-            className="absolute inset-0 w-full h-full object-cover object-[center_15%] opacity-50 group-hover:scale-110 transition-transform duration-700" 
+            src="https://i.ibb.co/RknrWQMG/Leo-e-Zimmer-3107-site.png" 
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:scale-110 transition-transform duration-700" 
             alt="Léo, Zimmer e Banda - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
@@ -601,7 +601,7 @@ const BentoGrid = () => {
 };
 
 const AgendaSection = () => {
-  const [selectedDay, setSelectedDay] = useState('Quarta');
+  const [selectedDay, setSelectedDay] = useState('Sexta');
 
   const agendaDays = [
     {
@@ -635,8 +635,8 @@ const AgendaSection = () => {
       title: 'Sexta com Léo, Zimmer e Banda',
       desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Léo, Zimmer e Banda para embalar a noite.',
       disclaimer: 'Música ao vivo a partir das 20h30 na sexta, 31 de Julho. Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
-      imageUrl: 'https://i.ibb.co/Rk0SmpW2/Whats-App-Image-2026-07-19-at-22-48-34.jpg',
-      objectPosition: 'object-[center_15%]',
+      imageUrl: 'https://i.ibb.co/RknrWQMG/Leo-e-Zimmer-3107-site.png',
+      objectPosition: 'object-center',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20L%C3%A9o%2C%20Zimmer%20e%20Banda%21'
@@ -1072,12 +1072,10 @@ const MenuSection = () => {
               <div className="p-6 md:p-8 border-t border-white/10 text-center bg-bg-dark/80 backdrop-blur-md">
                 <p className="text-white/40 text-[9px] uppercase tracking-[0.2em] mb-4">Aviso: Preços sujeitos a alteração sem aviso prévio.</p>
                 <a 
-                  href="https://wa.me/5549999328763?text=Ol%C3%A1%21%20Gostaria%20de%20fazer%20um%20pedido%20do%20Card%C3%A1pio%20do%20Matriz%20Grill%21" 
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#delivery" 
                   className="inline-flex items-center gap-2 px-8 py-3.5 bg-brand-amber hover:bg-brand-gold text-black font-black uppercase tracking-widest text-xs rounded-full shadow-lg shadow-brand-amber/10 transition-transform hover:scale-105"
                 >
-                  Fazer Pedido no WhatsApp <Phone className="w-4 h-4 fill-black" />
+                  Fazer Pedido no AiPede <ShoppingBag className="w-4 h-4 fill-black" />
                 </a>
               </div>
             </motion.div>
