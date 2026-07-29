@@ -212,15 +212,15 @@ const BeforeAfterSlider = () => {
         if (e.touches[0]) handleMove(e.touches[0].clientX);
       }}
     >
-      {/* Before Image (Left Side) - Grayscale/Sepia or darker look for heritage */}
+      {/* Before Image (Left Side) */}
       <img 
-        src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=1200&auto=format&fit=crop" 
-        alt="Antes - Bar Tradicional 1996" 
-        className="absolute inset-0 w-full h-full object-cover grayscale brightness-50 contrast-125 select-none"
+        src="https://i.ibb.co/39ZM6HgK/2.png" 
+        alt="Antes - Bar Simples de Madeira em Videira" 
+        className="absolute inset-0 w-full h-full object-cover select-none"
         referrerPolicy="no-referrer"
       />
-      <div className="absolute top-4 left-4 z-20 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white border border-white/10">
-        Antes (Desde 1996)
+      <div className="absolute top-4 left-4 z-20 bg-black/90 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider text-white border border-white/20 shadow-lg">
+        Antes: Bar Simples de Bairro
       </div>
 
       {/* After Image (Right Side, clipped based on slider position) */}
@@ -229,13 +229,13 @@ const BeforeAfterSlider = () => {
         style={{ clipPath: `polygon(${sliderPosition}% 0, 100% 0, 100% 100%, ${sliderPosition}% 100%)` }}
       >
         <img 
-          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1200&auto=format&fit=crop" 
-          alt="Depois - Gastrobar Moderno 2023" 
+          src="https://i.ibb.co/d4cFyB96/5.png" 
+          alt="Depois - Matriz Grill Gastropub Moderno" 
           className="absolute inset-0 w-full h-full object-cover select-none pointer-events-none"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute top-4 right-4 z-20 bg-brand-amber text-black px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider border border-brand-amber/20">
-          Depois (Nova Administração 2023+)
+        <div className="absolute top-4 right-4 z-20 bg-brand-amber text-black px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider border border-brand-amber/30 shadow-lg font-mono">
+          Depois: Esquina Mais Badalada
         </div>
       </div>
 
@@ -275,6 +275,7 @@ const Navbar = () => {
     { name: 'Delivery', href: '#delivery' },
     { name: 'Galeria', href: '#galeria' },
     { name: 'Sobre', href: '#sobre' },
+    { name: 'Contato', href: '#contato' },
   ];
 
   const whatsappReservationUrl = "https://wa.me/5549999328763?text=Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20no%20Matriz%20Grill.";
@@ -476,7 +477,7 @@ const BentoGrid = () => {
           <img 
             src="https://i.ibb.co/Rk0SmpW2/Whats-App-Image-2026-07-19-at-22-48-34.jpg" 
             className="absolute inset-0 w-full h-full object-cover object-[center_15%] opacity-50 group-hover:scale-110 transition-transform duration-700" 
-            alt="Cláudio Amaral e banda - Música ao Vivo"
+            alt="Léo, Zimmer e Banda - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -485,11 +486,11 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">Cláudio Amaral e banda</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo em uma apresentação especial com Cláudio Amaral e banda.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">Léo, Zimmer e Banda</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo em uma apresentação especial com Léo, Zimmer e Banda.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
-              Sexta, 24 de Julho a partir das 20:30h
+              Sexta, 31 de Julho a partir das 20:30h
             </div>
           </div>
         </motion.div>
@@ -628,29 +629,29 @@ const AgendaSection = () => {
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20curtir%20a%20Quinta%20Burger%20com%2030%25%20OFF%21'
     },
     {
-      day: 'Sexta-feira (24/07)',
+      day: 'Sexta-feira (31/07)',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta com Cláudio Amaral e banda',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Cláudio Amaral e banda para embalar a noite.',
-      disclaimer: 'Música ao vivo a partir das 20h30 na sexta, dia 24 de Julho. Couvert artístico cobrado individualmente no caixa. Chegue cedo!',
+      title: 'Sexta com Léo, Zimmer e Banda',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Léo, Zimmer e Banda para embalar a noite.',
+      disclaimer: 'Música ao vivo a partir das 20h30 na sexta, 31 de Julho. Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
       imageUrl: 'https://i.ibb.co/Rk0SmpW2/Whats-App-Image-2026-07-19-at-22-48-34.jpg',
       objectPosition: 'object-[center_15%]',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Cl%C3%A1udio%20Amaral%20e%20banda%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20L%C3%A9o%2C%20Zimmer%20e%20Banda%21'
     },
     {
-      day: 'Sazonal & Especiais',
-      shortDay: 'Especiais',
-      tag: 'EVENTOS E PARCERIAS',
-      title: 'Feijoadas Completas & Pagode de Verão',
-      desc: 'Sempre trazemos atrações esporádicas aos finais de semana: feijoadas preparadas na brasa com parcerias locais e o famoso Pagode de Verão ao ar livre.',
-      disclaimer: 'Eventos anunciados de forma antecipada no nosso Instagram. Consulte os horários ativos para a temporada.',
-      imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=800&auto=format&fit=crop',
-      badge: 'SABER MAIS NO INSTAGRAM',
+      day: 'Eventos & Celebrações',
+      shortDay: 'Eventos',
+      tag: 'ANIVERSÁRIOS, EVENTOS E PARCERIAS',
+      title: 'Comemore seus Momentos no Matriz Grill',
+      desc: 'Venha comemorar seu aniversário, organizar seu evento corporativo, confraternização ou fechar parcerias especiais! Nosso espaço na esquina mais famosa de Videira está de portas abertas para quem quiser reunir amigos, familiares e clientes para viver momentos inesquecíveis.',
+      disclaimer: 'Reservas de mesas para comemorações ou reservas exclusivas do espaço são feitas mediante consulta antecipada via WhatsApp.',
+      imageUrl: 'https://i.ibb.co/SDDrbpCb/2.png',
+      badge: 'ESPAÇO PARA EVENTOS',
       accentColor: 'from-yellow-600/20 to-yellow-500/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Quero%20saber%20mais%20sobre%20os%20pr%C3%B3ximos%20eventos%20especiais%20e%20sazonais%20do%20Matriz%20Grill%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20consultar%20informa%C3%A7%C3%B5es%20e%20reservar%20o%20espa%C3%A7o%20para%20meu%20evento%2Fanivers%C3%A1rio%20no%20Matriz%20Grill%21'
     }
   ];
 
@@ -750,69 +751,7 @@ const AgendaSection = () => {
   );
 };
 
-const HostsSection = () => {
-  return (
-    <section className="py-20 md:py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Texts */}
-        <div className="lg:col-span-7 text-left">
-          <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-3 block">Quem Recebe Você</span>
-          <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tighter mb-6">Seco & Jorge <br /><span className="text-brand-wood italic">A Força da Esquina</span></h2>
-          <p className="text-white/70 text-base font-light leading-relaxed mb-6">
-            Por trás do ambiente contagiante e de cada churrasco impecável na brasa, está o carinho pessoal de quem comanda a casa. 
-          </p>
-          <p className="text-white/50 text-sm font-light leading-relaxed mb-8">
-            O <span className="font-bold text-white">Seco (proprietário)</span>, com sua simpatia inconfundível, e o <span className="font-bold text-white">Jorge (gerente)</span>, garantindo que o atendimento flua de forma impecável, formam o coração do Matriz Grill. 
-            Eles criaram um ponto de encontro ideal para jovens adultos, casais e famílias que prezam por boa música e descontração, mas que não abrem mão de segurança e conforto. 
-            <span className="block mt-4 font-bold text-brand-amber">Aqui, garantimos um ambiente sempre selecionado, animado, seguro e ideal para toda a família.</span>
-          </p>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 rounded-2xl bg-white/[0.01] border border-white/5">
-            <div className="flex gap-3">
-              <div className="w-10 h-10 rounded-full bg-brand-amber/10 flex items-center justify-center shrink-0">
-                <Star className="text-brand-amber w-5 h-5 fill-brand-amber" />
-              </div>
-              <div>
-                <h4 className="font-display text-xs uppercase text-white mb-1">Acolhimento Real</h4>
-                <p className="text-xs text-white/40 font-light">Eles fazem questão de receber pessoalmente cada cliente.</p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <div className="w-10 h-10 rounded-full bg-brand-amber/10 flex items-center justify-center shrink-0">
-                <Beer className="text-brand-amber w-5 h-5" />
-              </div>
-              <div>
-                <h4 className="font-display text-xs uppercase text-white mb-1">Público Selecionado</h4>
-                <p className="text-xs text-white/40 font-light">Espaço familiar, seguro e propício para conversas e encontros.</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Images */}
-        <div className="lg:col-span-5 relative">
-          <div className="absolute inset-0 bg-gradient-to-tr from-brand-amber/10 to-transparent blur-3xl rounded-full" />
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 group aspect-[4/5]">
-            <img 
-              src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop" 
-              alt="Seco e Jorge com atendimento acolhedor" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 group-hover:scale-102"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-            <div className="absolute bottom-6 left-6 right-6 p-5 glass rounded-2xl text-left border border-white/10">
-              <span className="text-brand-amber text-[9px] font-black uppercase tracking-widest block mb-1">Anfitriões Matriz</span>
-              <p className="text-xs text-white/80 font-light italic leading-relaxed">
-                "Nossa missão é fazer com que você chegue como cliente e saia como parte da nossa família, sempre com o melhor da noite de Videira."
-              </p>
-              <span className="text-[9px] text-white/30 block mt-3 text-right uppercase font-bold tracking-widest">— Seco & Jorge</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 const MenuSection = () => {
   const [activeCategory, setActiveCategory] = useState('Porções');
@@ -1188,57 +1127,83 @@ const Footer = () => {
   const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | null>(null);
 
   return (
-    <footer id="sobre" className="pt-32 pb-12 bg-black relative">
+    <footer id="contato" className="pt-24 pb-12 bg-black relative border-t border-white/10">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-          <div className="md:col-span-2">
-            <a href="#" className="flex items-center gap-2 mb-8">
-              <Logo />
-            </a>
-            <p className="text-white/40 max-w-sm text-lg font-light leading-relaxed">
-              Situada no coração da cidade, sendo a esquina mais badalada da região. 
-              O ponto de encontro oficial de Videira.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-display uppercase tracking-widest text-sm mb-8">Onde Estamos</h4>
-            <ul className="space-y-4 text-white/50 text-sm">
-              <li className="flex gap-3">
-                <MapPin className="w-5 h-5 text-brand-red shrink-0" />
-                <span>Rua Padre Anchieta 304, Matriz<br />Videira, SC - 89560-000</span>
-              </li>
-              <li className="flex gap-3">
-                <Phone className="w-5 h-5 text-brand-red shrink-0" />
-                <span>(49) 99932-8763</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-display uppercase tracking-widest text-sm mb-8">Horários</h4>
-            <ul className="space-y-4 text-white/50 text-sm">
-              <li className="flex flex-col gap-1">
-                <span className="text-white/30 text-[10px] uppercase font-bold tracking-widest">Terça a Domingo</span>
-                <span className="text-white/80">17:00h às 22:30h</span>
-              </li>
-              <li className="flex flex-col gap-1">
-                <span className="text-brand-red text-[10px] uppercase font-bold tracking-widest">Sextas (Música ao Vivo)</span>
-                <span className="text-white/80 font-bold">A partir das 20:30h</span>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="font-display uppercase tracking-widest text-sm mb-8">Siga-nos</h4>
-            <div className="flex gap-4">
-              <a href="https://www.instagram.com/matrizgrill.videira/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-brand-red transition-colors">
-                <Instagram className="w-5 h-5" />
+        {/* Main Footer Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16 items-start">
+          {/* Info Columns (7 cols) */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-10 text-left">
+            <div className="sm:col-span-2">
+              <a href="#" className="flex items-center gap-2 mb-6">
+                <Logo />
               </a>
-              <a href="https://wa.me/5549999328763" target="_blank" rel="noopener noreferrer" className="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-brand-red transition-colors">
-                <Phone className="w-5 h-5" />
-              </a>
+              <p className="text-white/60 max-w-md text-base font-light leading-relaxed">
+                Situada no coração da cidade, sendo a esquina mais badalada da região. 
+                O ponto de encontro oficial de Videira.
+              </p>
             </div>
+
+            <div>
+              <h4 className="font-display uppercase tracking-widest text-sm mb-4 text-brand-amber">Onde Estamos</h4>
+              <ul className="space-y-3 text-white/70 text-sm">
+                <li className="flex gap-3 items-start">
+                  <MapPin className="w-5 h-5 text-brand-amber shrink-0 mt-0.5" />
+                  <span>Rua Padre Anchieta 304, Matriz<br />Videira, SC - 89560-000</span>
+                </li>
+                <li className="flex gap-3 items-center">
+                  <Phone className="w-5 h-5 text-brand-amber shrink-0" />
+                  <a href="https://wa.me/5549999328763" target="_blank" rel="noopener noreferrer" className="hover:text-brand-amber transition-colors">
+                    (49) 99932-8763
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-display uppercase tracking-widest text-sm mb-4 text-brand-amber">Horários</h4>
+              <ul className="space-y-3 text-white/70 text-sm">
+                <li className="flex flex-col gap-0.5">
+                  <span className="text-white/40 text-[10px] uppercase font-bold tracking-widest">Terça a Domingo</span>
+                  <span className="text-white/90">17:00h às 22:30h</span>
+                </li>
+                <li className="flex flex-col gap-0.5">
+                  <span className="text-brand-amber text-[10px] uppercase font-bold tracking-widest">Sextas (Música ao Vivo)</span>
+                  <span className="text-white/90 font-bold">A partir das 20:30h</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="sm:col-span-2">
+              <h4 className="font-display uppercase tracking-widest text-sm mb-4 text-brand-amber">Siga-nos</h4>
+              <div className="flex gap-4">
+                <a href="https://www.instagram.com/matrizgrill.videira/" target="_blank" rel="noopener noreferrer" className="w-11 h-11 glass rounded-full flex items-center justify-center hover:bg-brand-amber hover:text-black transition-colors">
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a href="https://wa.me/5549999328763" target="_blank" rel="noopener noreferrer" className="w-11 h-11 glass rounded-full flex items-center justify-center hover:bg-brand-amber hover:text-black transition-colors">
+                  <Phone className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Google Maps Embed in Footer (5 cols) */}
+          <div className="lg:col-span-5 h-[380px] sm:h-[450px] lg:h-[480px] rounded-3xl overflow-hidden glass border border-white/10 relative group shadow-2xl">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.446824414571!2d-51.1524316!3d-27.0016667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e1506977777777%3A0x7777777777777777!2sR.%20Padre%20Anchieta%2C%20304%20-%20Matriz%2C%20Videira%20-%20SC%2C%2089560-000!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
+              className="w-full h-full grayscale invert opacity-80 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-700"
+              style={{ border: 0 }} 
+              allowFullScreen={true} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=Rua+Padre+Anchieta+304+Matriz+Videira" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="absolute bottom-4 right-4 bg-black/90 hover:bg-brand-amber hover:text-black text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-2 rounded-full border border-white/20 transition-all flex items-center gap-1.5 backdrop-blur-sm"
+            >
+              Abrir no Maps <ArrowUpRight className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
 
@@ -1330,7 +1295,7 @@ const Footer = () => {
                   <div className="space-y-6 text-sm text-white/70 font-light leading-relaxed">
                     <div>
                       <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-2">1. Reservas de Mesa</h4>
-                      <p>As reservas estão sujeitas à capacidade máxima de lotação da nossa casa. Recomendamos chegar com pelo menos 15 minutos de antecedência ao horário agendado. Em dias de grande movimento ou shows de música ao vivo, as reservas serão mantidas por no máximo 15 minutos de tolerância.</p>
+                      <p>As reservas dependem da lotação da casa e ficam garantidas até as 20h45. Recomendamos chegar cedo!</p>
                     </div>
 
                     <div>
@@ -1372,10 +1337,22 @@ const Footer = () => {
 const GallerySection = () => {
   const images = [
     {
-      url: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1200&auto=format&fit=crop",
-      title: "Ambiente Acolhedor",
-      category: "Ambiente",
+      url: "https://i.ibb.co/DHw51xQS/1-1.png",
+      title: "Ambiente & Gastronomia",
+      category: "Experiência Matriz",
       size: "large"
+    },
+    {
+      url: "https://i.ibb.co/rGN8CtCc/2-1.png",
+      title: "Música & Descontração",
+      category: "Noite em Videira",
+      size: "medium"
+    },
+    {
+      url: "https://i.ibb.co/SDDrbpCb/2.png",
+      title: "O Ponto de Encontro",
+      category: "Momentos Especiais",
+      size: "medium"
     },
     {
       url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop",
@@ -1384,16 +1361,10 @@ const GallerySection = () => {
       size: "small"
     },
     {
-      url: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=800&auto=format&fit=crop",
-      title: "Música ao Vivo",
-      category: "Show",
-      size: "small"
-    },
-    {
       url: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?q=80&w=1200&auto=format&fit=crop",
       title: "Parrilla Premium",
       category: "Pratos",
-      size: "medium"
+      size: "small"
     },
     {
       url: "https://images.unsplash.com/photo-1571767454098-246b94fbcf70?q=80&w=800&auto=format&fit=crop",
@@ -1402,16 +1373,10 @@ const GallerySection = () => {
       size: "small"
     },
     {
-      url: "https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=800&auto=format&fit=crop",
-      title: "Noite no Matriz",
-      category: "Ambiente",
-      size: "small"
-    },
-    {
       url: "https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=1200&auto=format&fit=crop",
       title: "Porções Generosas",
       category: "Pratos",
-      size: "medium"
+      size: "small"
     }
   ];
 
@@ -1441,6 +1406,7 @@ const GallerySection = () => {
                 src={img.url} 
                 alt={img.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8 text-left">
                 <span className="text-brand-red text-[10px] uppercase font-bold tracking-[0.2em] mb-2">{img.category}</span>
@@ -1638,13 +1604,13 @@ const FAQSection = () => {
       id: "faq-reservas",
       icon: <CalendarCheck className="w-6 h-6 text-brand-amber" />,
       question: "Reserva de Mesas",
-      answer: "A reserva de mesa é altamente recomendada, principalmente nas noites de sexta-feira com música ao vivo, para garantir o seu conforto."
+      answer: "Recomendamos garantir sua mesa com antecedência pelo WhatsApp! As reservas são mantidas até as 20h45. Chegue cedo e aproveite!"
     },
     {
       id: "faq-entrada",
       icon: <Ticket className="w-6 h-6 text-brand-amber" />,
-      question: "Cobrança de Entrada?",
-      answer: "Não cobramos taxa de entrada! Nos dias com shows acústicos (como sextas), cobramos apenas o valor do couvert artístico individual direto no fechamento do caixa."
+      question: "Couvert Artístico & Entrada",
+      answer: "Entrada e couvert artístico são 100% gratuitos! Venha curtir a melhor música ao vivo sem pagar nada a mais por isso."
     }
   ];
 
@@ -1705,142 +1671,103 @@ export default function App() {
         <MenuSection />
         <DeliverySection />
         <GallerySection />
-        <HostsSection />
         
-        {/* Location Section */}
-        <section id="localizacao" className="py-20 md:py-32 bg-black/20">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
-              <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
-                initial={{ opacity: 0, x: -50 }}
-                viewport={{ once: true }}
-              >
-                <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-4 block">Como Chegar</span>
-                <h2 className="font-display text-4xl md:text-7xl uppercase tracking-tighter mb-8 leading-tight">A Esquina <br /><span className="text-brand-wood italic">Mais Famosa</span></h2>
-                <div className="space-y-6">
-                  <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 md:w-12 md:h-12 glass rounded-full flex items-center justify-center shrink-0">
-                      <MapPin className="text-brand-amber w-5 h-5 md:w-6 md:h-6" />
-                    </div>
-                    <div className="text-left">
-                      <h4 className="font-display text-lg md:text-xl uppercase">Endereço</h4>
-                      <p className="text-sm md:text-base text-white/60 font-light">Rua Padre Anchieta 304, Matriz<br />Videira, SC - 89560-000</p>
-                    </div>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <div className="w-10 h-10 md:w-12 md:h-12 glass rounded-full flex items-center justify-center shrink-0">
-                      <Clock className="text-brand-amber w-5 h-5 md:w-6 md:h-6" />
-                    </div>
-                    <div className="text-left">
-                      <div className="flex items-center gap-3">
-                        <h4 className="font-display text-lg md:text-xl uppercase">Horários</h4>
-                        <OpenStatusBadge />
-                      </div>
-                      <p className="text-sm md:text-base text-white/60 font-light mt-1">Terça a Domingo: 17h às 22:30h</p>
-                    </div>
-                  </div>
-                </div>
-                <motion.a 
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  href="https://www.google.com/maps/search/?api=1&query=Rua+Padre+Anchieta+304+Matriz+Videira"
-                  target="_blank"
-                  className="mt-10 md:mt-12 inline-flex items-center gap-3 px-8 py-4 bg-brand-amber hover:bg-brand-gold text-black font-black uppercase tracking-widest rounded-full text-xs"
-                >
-                  Abrir no Google Maps
-                  <ArrowUpRight className="w-4 h-4" />
-                </motion.a>
-              </motion.div>
-
-              <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
-                initial={{ opacity: 0, x: 50 }}
-                viewport={{ once: true }}
-                className="h-[300px] md:h-[500px] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden glass border border-white/10 relative group"
-              >
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3554.446824414571!2d-51.1524316!3d-27.0016667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e1506977777777%3A0x7777777777777777!2sR.%20Padre%20Anchieta%2C%20304%20-%20Matriz%2C%20Videira%20-%20SC%2C%2089560-000!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" 
-                  className="w-full h-full grayscale invert opacity-80 hover:grayscale-0 hover:invert-0 hover:opacity-100 transition-all duration-700"
-                  style={{ border: 0 }} 
-                  allowFullScreen={true} 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-                <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-bg-dark/40 to-transparent" />
-              </motion.div>
-            </div>
+        {/* Consolidated Master About & History Section */}
+        <section id="sobre" className="py-20 md:py-32 max-w-7xl mx-auto px-6 border-t border-white/5">
+          {/* Main Unified Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
+            <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-3 block">Nossa História & Anfitriões</span>
+            <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tighter mb-6 leading-tight">
+              No Coração de Videira
+            </h2>
+            <p className="text-white/70 text-base font-light leading-relaxed">
+              Fundado em <strong>1996</strong> pelo <strong>Seco</strong>, o espaço evoluiu de um tradicional bar de bairro para o novo <strong>Matriz Grill</strong>, inaugurado há 3 anos com a chegada do <strong>Jorge</strong> na gerência, unindo alta gastronomia no grill, chopp gelado e ambiente acolhedor e seguro.
+            </p>
           </div>
-        </section>
-        
-        {/* About Section with Image */}
-        <section id="sobre" className="py-20 md:py-32 max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+
+          {/* Facade & Hosts Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-center mb-20 md:mb-28">
+            {/* Seco & Jorge Hosts Image */}
             <motion.div 
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: -50 }}
               viewport={{ once: true }}
-              className="relative order-2 lg:order-1"
+              className="lg:col-span-6 relative"
             >
               <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-amber/10 rounded-full blur-3xl" />
-              <img 
-                src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=1200&auto=format&fit=crop" 
-                alt="Matriz Grill Interior" 
-                loading="lazy"
-                className="rounded-3xl relative z-10 w-full h-[300px] md:h-[500px] object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute -bottom-6 -right-6 glass p-6 md:p-8 rounded-2xl z-20 hidden sm:block">
-                <div className="flex items-center gap-4">
-                  <div className="text-3xl md:text-4xl font-display text-brand-amber">1996</div>
-                  <div className="text-[9px] md:text-[10px] uppercase tracking-widest leading-tight text-white/60 text-left">Tradição de<br />Videira</div>
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 shadow-2xl group">
+                <img 
+                  src="https://i.ibb.co/G4MRGN55/1.png" 
+                  alt="Seco & Jorge - Proprietário & Gerência no Matriz Grill" 
+                  loading="lazy"
+                  className="w-full h-[350px] sm:h-[480px] object-cover hover:scale-[1.02] transition-all duration-700"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
+                <div className="absolute bottom-6 left-6 right-6 p-5 glass rounded-2xl border border-white/10 flex items-center justify-between text-left">
+                  <div>
+                    <span className="text-brand-amber text-[10px] font-black uppercase tracking-widest block mb-1">Anfitriões Matriz</span>
+                    <p className="text-xs text-white/90 font-bold uppercase tracking-wider">Seco (Proprietário) & Jorge (Gerente)</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-2xl font-display text-brand-amber">28+</span>
+                    <span className="text-[9px] text-white/50 block uppercase tracking-wider font-medium">Anos de História</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
 
+            {/* Seco & Jorge Host Card */}
             <motion.div
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: 50 }}
               viewport={{ once: true }}
-              className="order-1 lg:order-2 text-left"
+              className="lg:col-span-6 text-left"
             >
-              <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-4 block">Nossa História</span>
-              <h2 className="font-display text-4xl md:text-6xl uppercase tracking-tighter mb-6 md:mb-8 leading-tight">No coração <br /><span className="text-brand-amber">de Videira</span></h2>
-              <p className="text-white/70 text-base font-light leading-relaxed mb-6">
-                Fundado originalmente em <strong>1996</strong>, o Matriz Grill é um verdadeiro marco histórico da cidade de Videira. Em <strong>2023</strong>, a casa passou por uma completa reestruturação de posicionamento sob a gerência e nova administração de <strong>Seco</strong> e <strong>Jorge</strong>.
-              </p>
-              <p className="text-white/50 text-sm font-light leading-relaxed mb-8">
-                Unindo a rica tradição do grill na brasa com o espírito moderno de música ao vivo acústica, consolidou-se como "a esquina mais badalada da cidade" — o destino preferido para jovens e famílias exigentes que desejam curtir com segurança, comida de alta qualidade e um clima festivo espetacular.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="flex items-center gap-3">
-                  <Clock className="text-brand-amber w-5 h-5 shrink-0" />
-                  <div className="flex flex-col text-left">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Funcionamento</span>
-                      <OpenStatusBadge short />
-                    </div>
-                    <span className="text-xs uppercase tracking-widest font-black text-white/80">Terça a Domingo: 17h às 22:30h</span>
+              <div className="glass p-8 md:p-10 rounded-3xl border border-brand-amber/20 relative overflow-hidden bg-gradient-to-br from-brand-amber/[0.03] to-transparent">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-12 h-12 rounded-full bg-brand-amber/20 flex items-center justify-center shrink-0 border border-brand-amber/30 text-brand-amber">
+                    <Star className="w-6 h-6 fill-brand-amber" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-2xl uppercase tracking-tight text-white">Seco & Jorge</h3>
+                    <span className="text-xs text-brand-amber font-bold uppercase tracking-widest">Proprietário & Gerência</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Music className="text-brand-amber w-5 h-5 shrink-0" />
-                  <div className="flex flex-col text-left">
-                    <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Música ao Vivo</span>
-                    <span className="text-xs uppercase tracking-widest font-black text-brand-amber">Sextas-Feiras: a partir de 20:30h</span>
+
+                <p className="text-white/80 text-sm font-light leading-relaxed mb-6 italic">
+                  "Nossa missão é fazer com que você chegue como cliente e saia como parte da nossa família. Garantimos um ambiente acolhedor, animado, seguro e ideal para casais, amigos e toda a família."
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 border-t border-white/10">
+                  <div className="flex items-center gap-3">
+                    <Clock className="text-brand-amber w-5 h-5 shrink-0" />
+                    <div className="flex flex-col text-left">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Funcionamento</span>
+                        <OpenStatusBadge short />
+                      </div>
+                      <span className="text-xs uppercase tracking-widest font-black text-white/80">Terça a Domingo: 17h às 22:30h</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Music className="text-brand-amber w-5 h-5 shrink-0" />
+                    <div className="flex flex-col text-left">
+                      <span className="text-[10px] uppercase tracking-widest font-bold text-white/40">Música ao Vivo</span>
+                      <span className="text-xs uppercase tracking-widest font-black text-brand-amber">Sextas-Feiras: a partir de 20:30h</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          {/* Antes e Depois Interactive Subsection */}
-          <div className="mt-20 md:mt-32 pt-16 border-t border-white/5">
-            <div className="text-center mb-12 md:mb-16">
-              <span className="text-brand-amber font-bold uppercase tracking-widest text-xs mb-3 block">A Evolução</span>
-              <h3 className="font-display text-3xl md:text-5xl uppercase tracking-tighter">O Matriz Através dos Anos</h3>
-              <p className="text-white/50 text-sm max-w-xl mx-auto mt-4 font-light">
-                Arraste o cursor na imagem abaixo para comparar a nossa essência tradicional com o dinamismo do nosso espaço totalmente renovado.
+          {/* Interactive Before & After Subsection */}
+          <div className="pt-16 border-t border-white/5">
+            <div className="text-center mb-12">
+              <h3 className="font-display text-2xl md:text-4xl uppercase tracking-tighter">A Transformação da Nossa Esquina</h3>
+              <p className="text-white/50 text-sm max-w-xl mx-auto mt-2 font-light">
+                Arraste o divisor na imagem abaixo para comparar a antiga estrutura de madeira com a modernidade do nosso gastropub atual.
               </p>
             </div>
 
@@ -1850,47 +1777,26 @@ export default function App() {
                 <BeforeAfterSlider />
               </div>
 
-              {/* Text Comparison Column */}
-              <div className="lg:col-span-5 flex flex-col gap-6">
+              {/* Text Comparison Cards */}
+              <div className="lg:col-span-5 flex flex-col gap-6 text-left">
                 <div className="glass p-8 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-colors duration-300">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.01] rounded-full blur-2xl pointer-events-none" />
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center font-bold text-xs">1</span>
-                    <h4 className="font-display uppercase tracking-wider text-white text-base">Antes: Tradição e Raízes (1996 - 2022)</h4>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="w-7 h-7 rounded-full bg-white/10 text-white flex items-center justify-center font-bold text-xs">1</span>
+                    <h4 className="font-display uppercase tracking-wider text-white text-sm">Antes: Bar Simples de Madeira</h4>
                   </div>
-                  <p className="text-white/60 text-sm font-light leading-relaxed">
-                    Fundado como uma petiscaria clássica e grill de chapa tradicional. O foco era o aconchego rústico de um bar de bairro, oferecendo porções em ambiente familiar clássico e com ritmo mais calmo.
+                  <p className="text-white/60 text-xs font-light leading-relaxed">
+                    A estrutura original na esquina da Rua Campos Novos era uma casa de madeira tradicional com venezianas azuis e ambiente simples de bar de bairro.
                   </p>
-                  <ul className="mt-4 space-y-2 text-xs text-white/40">
-                    <li className="flex items-center gap-2">
-                      <span className="text-brand-red font-bold">✓</span> Grill rústico e ambiente familiar silencioso
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-brand-red font-bold">✓</span> Decoração tradicional de petiscaria de época
-                    </li>
-                  </ul>
                 </div>
 
-                <div className="glass p-8 rounded-3xl border border-brand-amber/10 relative overflow-hidden group hover:border-brand-amber/20 transition-colors duration-300 bg-gradient-to-br from-brand-amber/[0.02] to-transparent">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-amber/[0.03] rounded-full blur-2xl pointer-events-none" />
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-8 h-8 rounded-full bg-brand-amber text-black flex items-center justify-center font-bold text-xs">2</span>
-                    <h4 className="font-display uppercase tracking-wider text-brand-amber text-base">Depois: A Nova Era (2023 - Presente)</h4>
+                <div className="glass p-8 rounded-3xl border border-brand-amber/20 relative overflow-hidden group hover:border-brand-amber/30 transition-colors duration-300 bg-gradient-to-br from-brand-amber/[0.03] to-transparent">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="w-7 h-7 rounded-full bg-brand-amber text-black flex items-center justify-center font-bold text-xs">2</span>
+                    <h4 className="font-display uppercase tracking-wider text-brand-amber text-sm">Depois: Gastropub Moderno & Badalado</h4>
                   </div>
-                  <p className="text-white/70 text-sm font-light leading-relaxed">
-                    Sob a gestão vibrante de <strong className="text-white">Seco e Jorge</strong>, a casa se reinventou. Tornou-se o principal ponto de encontro da noite de Videira, combinando a consagrada música acústica ao vivo com hambúrgueres artesanais na brasa e tábuas premium na chapa.
+                  <p className="text-white/70 text-xs font-light leading-relaxed">
+                    Uma renovação completa do espaço: arquitetura moderna e aconchegante com grandes vitrais, acabamento impecável, cortes nobres no grill e atendimento de excelência.
                   </p>
-                  <ul className="mt-4 space-y-2 text-xs text-white/50">
-                    <li className="flex items-center gap-2">
-                      <span className="text-brand-amber font-bold">★</span> A esquina mais badalada da cidade
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-brand-amber font-bold">★</span> Show acústico ao vivo com som de altíssima fidelidade
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-brand-amber font-bold">★</span> Transmissões integradas em TVs de alta definição
-                    </li>
-                  </ul>
                 </div>
               </div>
             </div>
