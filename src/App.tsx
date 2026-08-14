@@ -486,7 +486,7 @@ const BentoGrid = () => {
           <img 
             src={musicaAoVivoImg} 
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:scale-110 transition-transform duration-700" 
-            alt="Léo, Weslley e Rafa - Música ao Vivo"
+            alt="João Victor, Weslley e Rafa - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -495,8 +495,8 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">Léo, Weslley e Rafa</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com Léo, Weslley e Rafa.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">João Victor, Weslley e Rafa</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com João Victor, Weslley e Rafa.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
               Toda sexta-feira a partir das 20:30h
@@ -641,14 +641,14 @@ const AgendaSection = () => {
       day: 'Sexta-feira',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta com Léo, Weslley e Rafa',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Léo, Weslley e Rafa para embalar a noite, toda semana.',
+      title: 'Sexta com João Victor, Weslley e Rafa',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com João Victor, Weslley e Rafa para embalar a noite, toda semana.',
       disclaimer: 'Música ao vivo a partir das 20h30 toda sexta-feira. Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
       imageUrl: musicaAoVivoImg,
       objectPosition: 'object-center',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20L%C3%A9o%2C%20Weslley%20e%20Rafa%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%2C%20Weslley%20e%20Rafa%21'
     },
     {
       day: 'Eventos & Celebrações',
