@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1c1917" />
+      <stop offset="100%" stop-color="#0a0a0a" />
+    </radialGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Full Solid Black Background -->
+  <rect width="512" height="512" fill="#000000" rx="96" />
+  
+  <!-- Outer Dark Circle with Gold Border -->
+  <circle cx="256" cy="256" r="236" fill="#0c0a09" stroke="url(#goldGrad)" stroke-width="18" />
+  
+  <!-- Inner Ring -->
+  <circle cx="256" cy="256" r="212" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6,6" opacity="0.6" />
+  
+  <!-- Stylized House Roof / Grill Roof -->
+  <path d="M 128 220 L 256 110 L 384 220 L 350 220 L 256 140 L 162 220 Z" fill="url(#goldGrad)" />
+  
+  <!-- Chimney -->
+  <rect x="310" y="130" width="28" height="45" fill="url(#goldGrad)" />
+  
+  <!-- Grill Flames / Lines -->
+  <path d="M 200 245 Q 220 230 256 245 Q 292 260 312 245" fill="none" stroke="#f59e0b" stroke-width="8" stroke-linecap="round" />
+  <path d="M 215 270 Q 235 255 256 270 Q 277 285 297 270" fill="none" stroke="#d97706" stroke-width="8" stroke-linecap="round" />
+  
+  <!-- MATRIZ Text -->
+  <text x="256" y="340" font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" font-weight="900" font-size="44" fill="#ffffff" text-anchor="middle" letter-spacing="6">MATRIZ</text>
+  
+  <!-- GRILL Text with Amber accent -->
+  <text x="256" y="388" font-family="'Cinzel', Georgia, serif" font-weight="700" font-size="34" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="10">GRILL</text>
+  
+  <!-- Subtle decorative stars -->
+  <circle cx="160" cy="378" r="4" fill="#f59e0b" />
+  <circle cx="352" cy="378" r="4" fill="#f59e0b" />
+</svg>
