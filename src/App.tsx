@@ -6,6 +6,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import musicaAoVivoImg from './assets/images/musica_ao_vivo_semanal.jpg';
+import galeriaAmbienteImg from './assets/images/galeria/galeria_ambiente.jpg';
+import galeriaMusicaImg from './assets/images/galeria/galeria_musica.jpg';
+import galeriaEncontroImg from './assets/images/galeria/galeria_encontro.jpg';
 import { 
   Music, 
   Utensils, 
@@ -164,9 +167,10 @@ const FloatingWhatsApp = () => {
 const Logo = ({ className = "h-24 md:h-32" }: { className?: string }) => (
   <div className="flex items-center select-none">
     <img 
-      src="/logo.png" 
+      src="https://i.ibb.co/pjwjH1mG/LOGO-MATRIZ-GRILL-4.png" 
       alt="Matriz Grill" 
       className={`${className} w-auto object-contain hover:scale-105 transition-transform duration-300`}
+      referrerPolicy="no-referrer"
     />
   </div>
 );
@@ -482,7 +486,7 @@ const BentoGrid = () => {
           <img 
             src={musicaAoVivoImg} 
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:scale-110 transition-transform duration-700" 
-            alt="João Victor, Weslley e Rafa - Música ao Vivo"
+            alt="Léo, Weslley e Rafa - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -491,8 +495,8 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">João Victor, Weslley e Rafa</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com João Victor, Weslley e Rafa.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">Léo, Weslley e Rafa</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com Léo, Weslley e Rafa.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
               Toda sexta-feira a partir das 20:30h
@@ -637,14 +641,14 @@ const AgendaSection = () => {
       day: 'Sexta-feira',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta com João Victor, Weslley e Rafa',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com João Victor, Weslley e Rafa para embalar a noite, toda semana.',
+      title: 'Sexta com Léo, Weslley e Rafa',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Léo, Weslley e Rafa para embalar a noite, toda semana.',
       disclaimer: 'Música ao vivo a partir das 20h30 toda sexta-feira. Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
       imageUrl: musicaAoVivoImg,
       objectPosition: 'object-center',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%2C%20Weslley%20e%20Rafa%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20L%C3%A9o%2C%20Weslley%20e%20Rafa%21'
     },
     {
       day: 'Eventos & Celebrações',
@@ -653,7 +657,7 @@ const AgendaSection = () => {
       title: 'Comemore seus Momentos no Matriz Grill',
       desc: 'Venha comemorar seu aniversário, organizar seu evento corporativo, confraternização ou fechar parcerias especiais! Nosso espaço na esquina mais famosa de Videira está de portas abertas para quem quiser reunir amigos, familiares e clientes para viver momentos inesquecíveis.',
       disclaimer: 'Reservas de mesas para comemorações ou reservas exclusivas do espaço são feitas mediante consulta antecipada via WhatsApp.',
-      imageUrl: 'https://i.ibb.co/SDDrbpCb/2.png',
+      imageUrl: galeriaEncontroImg,
       badge: 'ESPAÇO PARA EVENTOS',
       accentColor: 'from-yellow-600/20 to-yellow-500/40',
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20consultar%20informa%C3%A7%C3%B5es%20e%20reservar%20o%20espa%C3%A7o%20para%20meu%20evento%2Fanivers%C3%A1rio%20no%20Matriz%20Grill%21'
@@ -1340,19 +1344,19 @@ const Footer = () => {
 const GallerySection = () => {
   const images = [
     {
-      url: "https://i.ibb.co/DHw51xQS/1-1.png",
+      url: galeriaAmbienteImg,
       title: "Ambiente & Gastronomia",
       category: "Experiência Matriz",
       size: "large"
     },
     {
-      url: "https://i.ibb.co/rGN8CtCc/2-1.png",
+      url: galeriaMusicaImg,
       title: "Música & Descontração",
       category: "Noite em Videira",
       size: "medium"
     },
     {
-      url: "https://i.ibb.co/SDDrbpCb/2.png",
+      url: galeriaEncontroImg,
       title: "O Ponto de Encontro",
       category: "Momentos Especiais",
       size: "medium"
