@@ -5,7 +5,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import musicaAoVivoImg from './assets/images/musica_ao_vivo_semanal.jpg';
+import musicaAoVivoImg from './assets/images/musica_ao_vivo_semanal.png';
+import eventoMarcoAndersonImg from './assets/images/eventos/marco_e_anderson_0609.png';
 import galeriaAmbienteImg from './assets/images/galeria/galeria_ambiente.jpg';
 import galeriaMusicaImg from './assets/images/galeria/galeria_musica.jpg';
 import galeriaEncontroImg from './assets/images/galeria/galeria_encontro.jpg';
@@ -486,7 +487,7 @@ const BentoGrid = () => {
           <img 
             src={musicaAoVivoImg} 
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:scale-110 transition-transform duration-700" 
-            alt="João Victor, Weslley e Rafa - Música ao Vivo"
+            alt="João Victor e José - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -495,8 +496,8 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">João Victor, Weslley e Rafa</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com João Victor, Weslley e Rafa.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">João Victor e José</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com João Victor e José.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
               Toda sexta-feira a partir das 20:30h
@@ -641,14 +642,27 @@ const AgendaSection = () => {
       day: 'Sexta-feira',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta com João Victor, Weslley e Rafa',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com João Victor, Weslley e Rafa para embalar a noite, toda semana.',
+      title: 'Sexta com João Victor e José',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com João Victor e José para embalar a noite com modão, sertanejo e muita animação.',
       disclaimer: 'Música ao vivo a partir das 20h30 toda sexta-feira. Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
       imageUrl: musicaAoVivoImg,
       objectPosition: 'object-center',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%2C%20Weslley%20e%20Rafa%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%20e%20Jos%C3%A9%21'
+    },
+    {
+      day: '06/09 (Véspera de Feriado)',
+      shortDay: '06/09 Especial',
+      tag: 'SHOW ESPECIAL • VÉSPERA DE FERIADO',
+      title: 'Marco e Anderson com Banda',
+      desc: 'Super evento de véspera de feriado no Matriz Grill! Show completo com Marco e Anderson acompanhados de banda ao vivo a partir das 20:30h. Chopp trincando de gelado, porções na brasa e a esquina mais animada da cidade.',
+      disclaimer: 'Data especial: 06 de Setembro (Véspera de Feriado) a partir das 20:30h. Mesas com lugares limitados — garanta sua reserva com antecedência!',
+      imageUrl: eventoMarcoAndersonImg,
+      objectPosition: 'object-center',
+      badge: '06/09 • VÉSPERA DE FERIADO - 20:30h',
+      accentColor: 'from-amber-600/20 to-brand-red/40',
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20garantir%20minha%20reserva%20para%20o%20Show%20Especial%20de%20V%C3%A9spera%20de%20Feriado%20%2806%2F09%29%20com%20Marco%20e%20Anderson%20com%20Banda%21'
     },
     {
       day: 'Eventos & Celebrações',
