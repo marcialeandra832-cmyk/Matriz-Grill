@@ -4,9 +4,16 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import musicaAoVivoImg from './assets/images/musica_ao_vivo_semanal.png';
-import eventoMarcoAndersonImg from './assets/images/eventos/marco_e_anderson_0609.png';
+import { 
+  motion, 
+  AnimatePresence, 
+  useScroll, 
+  useTransform, 
+  useReducedMotion,
+  MotionValue 
+} from 'motion/react';
+import musicaAoVivoImg from './assets/images/galeria/sexta-18-09-card.png';
+import eventoLeoZimmerImg from './assets/domingo-11-10-card.png';
 import galeriaAmbienteImg from './assets/images/galeria/galeria_ambiente.jpg';
 import galeriaMusicaImg from './assets/images/galeria/galeria_musica.jpg';
 import galeriaEncontroImg from './assets/images/galeria/galeria_encontro.jpg';
@@ -408,7 +415,7 @@ const Hero = () => {
             aproveite como <span className="italic text-brand-wood">merece</span>.
           </h1>
           <p className="max-w-2xl mx-auto text-base md:text-xl text-white/70 mb-10 font-sans font-light leading-relaxed">
-            Música ao vivo de alta qualidade, combos de hambúrgueres artesanais, porções na chapa, vinhos selecionados para o inverno, sopas e cremes reconfortantes e o chopp mais gelado da região. 
+            Música ao vivo de alta qualidade, combos de hambúrgueres artesanais, porções na chapa, vinhos selecionados, drinks especiais e o chopp mais gelado da região. 
             Sua noite começa no coração e na <span className="font-bold text-white">esquina mais badalada da cidade</span>.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -487,7 +494,7 @@ const BentoGrid = () => {
           <img 
             src={musicaAoVivoImg} 
             className="absolute inset-0 w-full h-full object-cover object-center opacity-80 group-hover:scale-110 transition-transform duration-700" 
-            alt="João Victor e José - Música ao Vivo"
+            alt="Daniel Bonetto e Banda - Música ao Vivo"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -496,8 +503,8 @@ const BentoGrid = () => {
               <Music className="text-brand-red w-10 h-10" />
               <span className="px-3 py-1 bg-brand-red text-[10px] font-bold uppercase tracking-widest rounded-full">Destaque da Semana</span>
             </div>
-            <h3 className="text-3xl font-display uppercase mb-2">João Victor e José</h3>
-            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com João Victor e José.</p>
+            <h3 className="text-3xl font-display uppercase mb-2">Daniel Bonetto e Banda</h3>
+            <p className="text-white/80 font-medium mb-2">O melhor da música ao vivo, toda sexta-feira, com Daniel Bonetto e banda.</p>
             <div className="flex items-center gap-2 text-brand-wood font-bold text-sm uppercase tracking-widest">
               <Clock className="w-4 h-4" />
               Toda sexta-feira a partir das 20:30h
@@ -568,50 +575,143 @@ const BentoGrid = () => {
             <span className="text-[10px] text-brand-red font-bold uppercase tracking-widest mt-2 block">Ver no Mapa</span>
           </a>
         </motion.div>
-
-        {/* Full-width Item 3 - Especial de Inverno */}
-        <motion.div 
-          whileInView={{ opacity: 1, y: 0 }}
-          initial={{ opacity: 0, y: 20 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="md:col-span-4 bento-item p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6 group overflow-hidden bg-gradient-to-br from-red-950/20 via-zinc-950/40 to-purple-950/20 border border-white/5 hover:border-brand-amber/30 transition-all duration-300 relative"
-        >
-          <img 
-            src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=1200&auto=format&fit=crop" 
-            className="absolute inset-0 w-full h-full object-cover opacity-15 group-hover:scale-105 transition-transform duration-1000" 
-            alt="Vinhos e Sopas para o Inverno"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative z-10 flex flex-col md:flex-row items-center gap-6 text-center md:text-left w-full justify-between">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="shrink-0 w-16 h-16 rounded-full bg-brand-amber/10 flex items-center justify-center border border-brand-amber/20 text-brand-amber">
-                <Wine className="w-8 h-8" />
-              </div>
-              <div>
-                <span className="text-[10px] font-black uppercase tracking-widest text-brand-amber bg-brand-amber/10 px-2.5 py-1 rounded border border-brand-amber/20 inline-block mb-2">Temporada de Inverno ❄️</span>
-                <h3 className="text-2xl font-display uppercase mb-1.5 text-white">Vinhos Finos & Sopas para se Aquecer</h3>
-                <p className="text-sm text-white/70 font-light max-w-2xl leading-relaxed">
-                  Combata o frio de Videira com nossa carta especial de vinhos selecionados e caldos deliciosos. Experimente nossa famosa <strong>Sopa de Agnoline (Cappelletti)</strong> ou nosso delicioso caldinho quente preparado no capricho!
-                </p>
-              </div>
-            </div>
-            <a 
-              href="#cardapio"
-              className="relative shrink-0 px-6 py-3.5 bg-white hover:bg-brand-amber hover:text-black text-black font-black uppercase tracking-widest text-[10px] rounded-xl transition-all duration-300 shadow-lg cursor-pointer"
-            >
-              Ver Menu de Inverno
-            </a>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
 };
 
+interface AgendaDay {
+  day: string;
+  shortDay: string;
+  tag: string;
+  title: string;
+  desc: string;
+  disclaimer: string;
+  imageUrl: string;
+  badge: string;
+  accentColor: string;
+  whatsappMsg: string;
+  objectPosition?: string;
+}
+
+interface AgendaCardProps {
+  key?: string;
+  item: AgendaDay;
+  i: number;
+  total: number;
+  progresso: MotionValue<number>;
+  shouldReduceMotion: boolean | null;
+}
+
+const AgendaCard = ({ item, i, total, progresso, shouldReduceMotion }: AgendaCardProps) => {
+  const fim = (i + 1) / total;
+  const sobrando = total - 1 - i;
+  const escala = useTransform(progresso, [fim, 1], [1, 1 - sobrando * 0.035]);
+  const veu = useTransform(progresso, [fim, 1], [0, sobrando ? 0.62 : 0]);
+
+  return (
+    <motion.div
+      style={{
+        scale: shouldReduceMotion ? 1 : escala,
+        zIndex: i + 1,
+      }}
+      className={`origin-top ${
+        shouldReduceMotion
+          ? "relative h-auto mb-8 md:mb-12 rounded-3xl md:rounded-[2.5rem] bg-[#0c0c0e] border border-white/10 p-6 md:p-12 overflow-hidden shadow-2xl"
+          : "sticky top-0 h-[88svh] rounded-3xl md:rounded-[2.5rem] bg-[#0c0c0e] border border-white/10 overflow-hidden shadow-2xl flex flex-col justify-center p-6 md:p-12"
+      }`}
+    >
+      {/* Dimming veil for stacking cards effect */}
+      {!shouldReduceMotion && (
+        <motion.div
+          style={{ opacity: veu }}
+          className="absolute inset-0 bg-[#050505] pointer-events-none z-20 rounded-3xl md:rounded-[2.5rem]"
+        />
+      )}
+
+      {/* Atmospheric subtle glow matching the day's theme */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${item.accentColor || 'from-amber-500/20 to-brand-amber/40'} opacity-25 pointer-events-none`} />
+
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-12 items-center w-full">
+        {/* Promotion Poster Image: hidden on mobile, displayed on desktop/tablet */}
+        <div className="hidden md:block md:col-span-5 relative group overflow-hidden rounded-2xl border border-white/10 aspect-video md:aspect-square">
+          <img 
+            src={item.imageUrl} 
+            alt={item.title} 
+            className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${item.objectPosition || 'object-center'}`}
+            referrerPolicy="no-referrer"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          <div className="absolute top-4 left-4 bg-brand-red text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-md shadow-md">
+            {item.badge}
+          </div>
+        </div>
+
+        {/* Text Information */}
+        <div className="md:col-span-7 flex flex-col justify-center text-left">
+          <div className="flex flex-wrap items-center gap-2 mb-3">
+            <span className="px-3.5 py-1.5 rounded-full bg-brand-amber text-black font-black tracking-wider text-[11px] uppercase shadow-md shadow-brand-amber/10">
+              {item.day}
+            </span>
+            <span className="text-brand-amber font-black tracking-[0.2em] text-[10px] uppercase">
+              {item.tag}
+            </span>
+            <span className="md:hidden px-2.5 py-1 rounded-md bg-brand-red text-white text-[9px] font-black uppercase tracking-widest">
+              {item.badge}
+            </span>
+          </div>
+
+          <h3 className="font-display text-2xl sm:text-3xl lg:text-4xl uppercase tracking-tight text-white mb-3 md:mb-4">
+            {item.title}
+          </h3>
+
+          <p className="text-white/70 text-sm sm:text-base font-light leading-relaxed mb-4 md:mb-6">
+            {item.desc}
+          </p>
+          
+          <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/5 mb-4 md:mb-6 flex items-start gap-3">
+            <Clock className="w-5 h-5 text-brand-amber shrink-0 mt-0.5" />
+            <span className="text-xs text-white/50 leading-relaxed font-light">
+              <span className="font-bold text-white uppercase block mb-0.5">Regras e Detalhes:</span>
+              {item.disclaimer}
+            </span>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <motion.a
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              href={`https://wa.me/5549999328763?text=${item.whatsappMsg}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3.5 sm:py-4 bg-brand-amber hover:bg-brand-amber/90 text-black font-black uppercase tracking-widest text-xs rounded-full flex items-center justify-center gap-2 shadow-lg shadow-brand-amber/10"
+            >
+              <Phone className="w-4 h-4 fill-black" />
+              Reservar para {item.shortDay}
+            </motion.a>
+            <a
+              href="https://www.instagram.com/matrizgrill.videira/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3.5 sm:py-4 border border-white/10 hover:border-brand-amber text-white font-bold uppercase tracking-widest text-xs rounded-full flex items-center justify-center gap-2 transition-colors"
+            >
+              <Instagram className="w-4 h-4 text-brand-amber" />
+              Ver Programação Completa
+            </a>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
 const AgendaSection = () => {
-  const [selectedDay, setSelectedDay] = useState('Sexta');
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+  const shouldReduceMotion = useReducedMotion();
 
   const agendaDays = [
     {
@@ -631,7 +731,7 @@ const AgendaSection = () => {
       shortDay: 'Quinta',
       tag: 'QUINTA BURGER',
       title: '30% OFF em Hambúrgueres Artesanais!',
-      desc: 'Os melhores blends artesanais grelhados na brasa com um desconto de 30% para você saborear. Pão selado, maionese artesanal e ingredientes frescos de verdade.',
+      desc: 'Os melhores blends artesanais feitos na chapa com um desconto de 30% para você saborear. Pão selado, maionese artesanal e ingredientes frescos de verdade.',
       disclaimer: 'Exceto X-Burger, Burger Cordeiro, Burger Mignon e Burger Vegetariano. Válido apenas para consumo presencial no local.',
       imageUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop',
       badge: '30% DE DESCONTO',
@@ -639,30 +739,30 @@ const AgendaSection = () => {
       whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20curtir%20a%20Quinta%20Burger%20com%2030%25%20OFF%21'
     },
     {
-      day: 'Sexta-feira',
+      day: 'Sexta-feira (18/09)',
       shortDay: 'Sexta',
       tag: 'MÚSICA AO VIVO',
-      title: 'Sexta com João Victor e José',
-      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com João Victor e José para embalar a noite com modão, sertanejo e muita animação.',
-      disclaimer: 'Música ao vivo a partir das 20h30 toda sexta-feira. Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
+      title: 'Sexta com Daniel Bonetto e Banda',
+      desc: 'Sua sexta-feira com a melhor energia musical de Videira! Um show sensacional com Daniel Bonetto e banda para embalar a noite com muito sertanejo, sucessos e animação.',
+      disclaimer: 'Música ao vivo a partir das 20h30 nesta sexta-feira (18/09). Entrada e couvert gratuitos! Guardamos mesas reservadas até as 20h45.',
       imageUrl: musicaAoVivoImg,
       objectPosition: 'object-center',
       badge: 'SHOW AO VIVO - 20:30h',
       accentColor: 'from-brand-red/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20com%20Jo%C3%A3o%20Victor%20e%20Jos%C3%A9%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20para%20o%20show%20de%20Sexta-feira%20%2818%2F09%29%20com%20Daniel%20Bonetto%20e%20Banda%21'
     },
     {
-      day: '06/09 (Véspera de Feriado)',
-      shortDay: '06/09 Especial',
+      day: '11/10 (Domingo - Véspera de Feriado)',
+      shortDay: '11/10 Especial',
       tag: 'SHOW ESPECIAL • VÉSPERA DE FERIADO',
-      title: 'Marco e Anderson com Banda',
-      desc: 'Super evento de véspera de feriado no Matriz Grill! Show completo com Marco e Anderson acompanhados de banda ao vivo a partir das 20:30h. Chopp trincando de gelado, porções na brasa e a esquina mais animada da cidade.',
-      disclaimer: 'Data especial: 06 de Setembro (Véspera de Feriado) a partir das 20:30h. Mesas com lugares limitados — garanta sua reserva com antecedência!',
-      imageUrl: eventoMarcoAndersonImg,
+      title: 'Domingo com Léo, Zimmer e Banda',
+      desc: 'Super evento de véspera de feriado no Matriz Grill! Show imperdível com Léo, Zimmer e banda ao vivo a partir das 20:30h. Chopp trincando de gelado, porções na chapa e a esquina mais animada da cidade.',
+      disclaimer: 'Data especial: 11 de Outubro (Domingo - Véspera de Feriado) a partir das 20:30h. Mesas com lugares limitados — garanta sua reserva com antecedência!',
+      imageUrl: eventoLeoZimmerImg,
       objectPosition: 'object-center',
-      badge: '06/09 • VÉSPERA DE FERIADO - 20:30h',
+      badge: '11/10 • VÉSPERA DE FERIADO - 20:30h',
       accentColor: 'from-amber-600/20 to-brand-red/40',
-      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20garantir%20minha%20reserva%20para%20o%20Show%20Especial%20de%20V%C3%A9spera%20de%20Feriado%20%2806%2F09%29%20com%20Marco%20e%20Anderson%20com%20Banda%21'
+      whatsappMsg: 'Ol%C3%A1%21%20Gostaria%20de%20garantir%20minha%20reserva%20para%20o%20Show%20Especial%20de%20V%C3%A9spera%20de%20Feriado%20%2811%2F10%29%20com%20L%C3%A9o%2C%20Zimmer%20e%20Banda%21'
     },
     {
       day: 'Eventos & Celebrações',
@@ -678,8 +778,6 @@ const AgendaSection = () => {
     }
   ];
 
-  const currentAgenda = agendaDays.find(d => d.shortDay === selectedDay) || agendaDays[0];
-
   return (
     <section id="agenda" className="py-20 md:py-32 bg-gradient-to-b from-transparent via-black/40 to-transparent">
       <div className="max-w-7xl mx-auto px-6">
@@ -689,85 +787,18 @@ const AgendaSection = () => {
           <p className="text-white/50 max-w-xl mx-auto text-sm md:text-base font-light">As promoções e atrações que tornam o Matriz Grill o ponto de encontro preferido de Videira.</p>
         </div>
 
-        {/* Tab Selection */}
-        <div className="flex justify-start md:justify-center gap-2 mb-10 overflow-x-auto no-scrollbar py-2 -mx-6 px-6 md:mx-0 md:px-0">
-          {agendaDays.map((item) => (
-            <button
+        {/* Stacking Cards Container */}
+        <div ref={containerRef} className="relative">
+          {agendaDays.map((item, index) => (
+            <AgendaCard
               key={item.shortDay}
-              onClick={() => setSelectedDay(item.shortDay)}
-              className={`px-6 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 whitespace-nowrap ${
-                selectedDay === item.shortDay
-                  ? 'bg-brand-amber text-black shadow-lg shadow-brand-amber/20'
-                  : 'glass text-white/50 hover:text-white hover:bg-white/10'
-              }`}
-            >
-              {item.shortDay}
-            </button>
+              item={item}
+              i={index}
+              total={agendaDays.length}
+              progresso={scrollYProgress}
+              shouldReduceMotion={shouldReduceMotion}
+            />
           ))}
-        </div>
-
-        {/* Selected Day Event Card */}
-        <div className="relative glass border border-white/5 rounded-3xl overflow-hidden p-6 md:p-12">
-          <div className="absolute inset-0 bg-gradient-to-br from-bg-dark/95 via-bg-dark/98 to-bg-dark opacity-90" />
-          
-          <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Image / Promotion Poster Theme */}
-            <div className="lg:col-span-5 relative group overflow-hidden rounded-2xl border border-white/10 aspect-video lg:aspect-square">
-              <img 
-                src={currentAgenda.imageUrl} 
-                alt={currentAgenda.title} 
-                className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${currentAgenda.objectPosition || 'object-center'}`}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              <div className="absolute top-4 left-4 bg-brand-red text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-md">
-                {currentAgenda.badge}
-              </div>
-            </div>
-
-            {/* Information */}
-            <div className="lg:col-span-7 flex flex-col justify-center text-left">
-              <span className="text-brand-amber font-black tracking-[0.2em] text-[10px] uppercase mb-2">
-                {currentAgenda.tag}
-              </span>
-              <h3 className="font-display text-2xl md:text-4xl uppercase tracking-tight text-white mb-4">
-                {currentAgenda.title}
-              </h3>
-              <p className="text-white/70 text-sm font-light leading-relaxed mb-6">
-                {currentAgenda.desc}
-              </p>
-              
-              <div className="p-4 rounded-xl bg-white/[0.02] border border-white/5 mb-6 flex items-start gap-3">
-                <Clock className="w-5 h-5 text-brand-amber shrink-0 mt-0.5" />
-                <span className="text-xs text-white/50 leading-relaxed font-light">
-                  <span className="font-bold text-white uppercase block mb-1">Regras e Detalhes:</span>
-                  {currentAgenda.disclaimer}
-                </span>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <motion.a
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  href={`https://wa.me/5549999328763?text=${currentAgenda.whatsappMsg}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-4 bg-brand-amber hover:bg-brand-amber/90 text-black font-black uppercase tracking-widest text-xs rounded-full flex items-center justify-center gap-2 shadow-lg shadow-brand-amber/10"
-                >
-                  <Phone className="w-4 h-4 fill-black" />
-                  Reservar para {currentAgenda.shortDay}
-                </motion.a>
-                <a
-                  href="https://www.instagram.com/matrizgrill.videira/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-4 border border-white/10 hover:border-brand-amber text-white font-bold uppercase tracking-widest text-xs rounded-full flex items-center justify-center gap-2 transition-colors"
-                >
-                  <Instagram className="w-4 h-4 text-brand-amber" />
-                  Ver Programação Completa
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -830,8 +861,8 @@ const MenuSection = () => {
       { name: 'Burger Picanha Premium', price: 'R$ 43,00', desc: 'Pão brioche, suculento blend de picanha 180g, queijo prato, cebola roxa grelhada e molho barbecue.', image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop', promo: '30% OFF QUINTA' }
     ],
     'Tábuas de Carne': [
-      { name: 'Tábua Alcatra (Inteira)', price: 'R$ 120,00', desc: 'Alcatra grelhada na brasa fatiada. Acompanha batata frita, pão de alho, farofa especial, cebola grelhada e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
-      { name: 'Tábua Filé Mignon (Inteira)', price: 'R$ 145,00', desc: 'Filé Mignon super macio grelhado na brasa. Acompanha batata frita, pão de alho, farofa especial, cebola grelhada e maionese.', image: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
+      { name: 'Tábua Alcatra (Inteira)', price: 'R$ 120,00', desc: 'Alcatra grelhada na chapa fatiada. Acompanha batata frita, pão de alho, farofa especial, cebola grelhada e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
+      { name: 'Tábua Filé Mignon (Inteira)', price: 'R$ 145,00', desc: 'Filé Mignon super macio grelhado na chapa. Acompanha batata frita, pão de alho, farofa especial, cebola grelhada e maionese.', image: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
       { name: 'Tábua Picanha (Inteira)', price: 'R$ 155,00', desc: 'Picanha fatiada premium grelhada no ponto certo. Acompanha batata frita, pão de alho, farofa, cebola e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' }
     ],
     'Drinks': [
@@ -845,11 +876,9 @@ const MenuSection = () => {
       { name: 'Cerveja Heineken 600ml', price: 'R$ 20,00', desc: 'A cerveja premium puro malte holandesa mais pedida do mundo.', image: 'https://images.unsplash.com/photo-1618885472179-5e474019f2a9?q=80&w=400&auto=format&fit=crop' },
       { name: 'Antarctica Original 600ml', price: 'R$ 19,00', desc: 'A cerveja tradicional brasileira, extremamente leve, gelada e equilibrada.', image: 'https://images.unsplash.com/photo-1584225064785-c62a8b43d148?q=80&w=400&auto=format&fit=crop' }
     ],
-    'Inverno & Vinhos': [
-      { name: 'Sopa de Agnoline (Cappelletti)', price: 'R$ 26,00', desc: 'Tradicional sopa com massa recheada de carne e caldo concentrado de galinha caipira, servida bem quente.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Caldinho de Feijão com Bacon', price: 'R$ 22,00', desc: 'Caldinho cremoso e quentinho de feijão preto com bacon frito e cebolinha fresca.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Vinho Cabernet Sauvignon (Taça)', price: 'R$ 18,00', desc: 'Taça de vinho tinto seco encorpado, perfeito para aquecer as noites frias de Videira.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Vinho Merlot Nacional (Garrafa)', price: 'R$ 78,00', desc: 'Garrafa de vinho tinto fino de excelente qualidade, frutado, macio e aconchegante.', image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=400&auto=format&fit=crop' }
+    'Vinhos': [
+      { name: 'Vinho Cabernet Sauvignon (Taça)', price: 'R$ 18,00', desc: 'Taça de vinho tinto seco encorpado, perfeito para harmonizar com nossas tábuas de carne.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Merlot Nacional (Garrafa)', price: 'R$ 78,00', desc: 'Garrafa de vinho tinto fino de excelente qualidade, frutado, macio e encorpado.', image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=400&auto=format&fit=crop' }
     ]
   };
 
@@ -866,7 +895,7 @@ const MenuSection = () => {
       { name: 'Iscas de Tilápia com Fritas', price: 'R$ 54,00', desc: 'Filé de tilápia empanado super crocante, acompanhado de batatas fritas.', image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=400&auto=format&fit=crop' },
       { name: 'Iscas de Tilápia com Polenta', price: 'R$ 50,00', desc: 'Filés de tilápia crocantes servidos com polenta frita.', image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?q=80&w=400&auto=format&fit=crop' },
       { name: 'Mandioquinha Frita com Queijo', price: 'R$ 29,00', desc: 'Delicioso bolinho de mandioca frita com recheio cremoso de queijo coalho.', image: 'https://images.unsplash.com/photo-1541529086526-db283c563270?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Linguiça Campeira na Brasa 500g', price: 'R$ 47,00', desc: 'Linguiça de costela servida na chapa com farofa crocante e mostarda.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' }
+      { name: 'Linguiça Campeira na Chapa 500g', price: 'R$ 47,00', desc: 'Linguiça de costela servida na chapa com farofa crocante e mostarda.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' }
     ],
     'Petiscos': [
       { name: 'Frango Acebolado com Fritas', price: 'R$ 48,00', desc: 'Iscas de peito de frango aceboladas na chapa com porção generosa de batatas fritas.', image: 'https://images.unsplash.com/photo-1562967914-608f82629710?q=80&w=400&auto=format&fit=crop' },
@@ -879,12 +908,12 @@ const MenuSection = () => {
       { name: 'Sopa de Agnoline Tradicional', price: 'R$ 26,00', desc: 'Tradicional sopa com massa recheada de carne e caldo concentrado de galinha caipira.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' }
     ],
     'Tábuas de Carne': [
-      { name: 'Tábua Alcatra (Meia)', price: 'R$ 85,00', desc: 'Alcatra grelhada na brasa. Acompanha batata frita, pão de alho, farofa especial e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Tábua Alcatra (Inteira)', price: 'R$ 120,00', desc: 'Alcatra inteira grelhada na brasa. Acompanha batata frita, pão de alho, farofa especial, cebola grelhada e maionese. (Pede a inteira e paga meia na Quarta-feira!)', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
-      { name: 'Tábua Filé Mignon (Meia)', price: 'R$ 100,00', desc: 'Filé Mignon grelhado na brasa. Acompanha batata frita, pão de alho, farofa e maionese.', image: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Tábua Filé Mignon (Inteira)', price: 'R$ 145,00', desc: 'Filé Mignon inteiro na brasa. Acompanha batata frita, pão de alho, farofa, cebola grelhada e maionese. (Pede a inteira e paga meia na Quarta-feira!)', image: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
-      { name: 'Tábua Picanha (Meia)', price: 'R$ 105,00', desc: 'Picanha fatiada premium na brasa. Acompanha batata frita, pão de alho, farofa e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Tábua Picanha (Inteira)', price: 'R$ 155,00', desc: 'Picanha inteira premium na brasa. Acompanha batata frita, pão de alho, farofa, cebola e maionese. (Pede a inteira e paga meia na Quarta-feira!)', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' }
+      { name: 'Tábua Alcatra (Meia)', price: 'R$ 85,00', desc: 'Alcatra grelhada na chapa. Acompanha batata frita, pão de alho, farofa especial e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Tábua Alcatra (Inteira)', price: 'R$ 120,00', desc: 'Alcatra inteira grelhada na chapa. Acompanha batata frita, pão de alho, farofa especial, cebola grelhada e maionese. (Pede a inteira e paga meia na Quarta-feira!)', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
+      { name: 'Tábua Filé Mignon (Meia)', price: 'R$ 100,00', desc: 'Filé Mignon grelhado na chapa. Acompanha batata frita, pão de alho, farofa e maionese.', image: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Tábua Filé Mignon (Inteira)', price: 'R$ 145,00', desc: 'Filé Mignon inteiro na chapa. Acompanha batata frita, pão de alho, farofa, cebola grelhada e maionese. (Pede a inteira e paga meia na Quarta-feira!)', image: 'https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' },
+      { name: 'Tábua Picanha (Meia)', price: 'R$ 105,00', desc: 'Picanha fatiada premium na chapa. Acompanha batata frita, pão de alho, farofa e maionese.', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Tábua Picanha (Inteira)', price: 'R$ 155,00', desc: 'Picanha inteira premium na chapa. Acompanha batata frita, pão de alho, farofa, cebola e maionese. (Pede a inteira e paga meia na Quarta-feira!)', image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=400&auto=format&fit=crop', promo: 'MEIA NA QUARTA' }
     ],
     'Hambúrgueres': [
       { name: 'X-Burger Clássico', price: 'R$ 20,00', desc: 'Pão brioche, hambúrguer 100g smash, queijo prato derretido e maionese da casa. Acompanha batata.', image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop' },
@@ -927,12 +956,9 @@ const MenuSection = () => {
       { name: 'Petit Gateau de Chocolate', price: 'R$ 21,00', desc: 'Bolinho quente de chocolate com recheio cremoso and derretido, servido com sorvete de creme.', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=400&auto=format&fit=crop' },
       { name: 'Brownie Especial com Sorvete', price: 'R$ 19,00', desc: 'Fatia generosa de brownie de chocolate com castanhas, servido quente com sorvete de creme.', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?q=80&w=400&auto=format&fit=crop' }
     ],
-    'Inverno & Vinhos': [
-      { name: 'Sopa de Agnoline (Cappelletti)', price: 'R$ 26,00', desc: 'Tradicional e legítima sopa com massa recheada de carne e caldo concentrado de galinha caipira, servida com queijo parmesão ralado e pão fofinho da casa.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Caldinho de Feijão Especial', price: 'R$ 22,00', desc: 'Delicioso caldo cremoso de feijão preto temperado com bacon crocante frito na hora e um toque fresco de cheiro-verde e cebolinha.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Creme de Milho Verde com Frango', price: 'R$ 24,00', desc: 'Saboroso creme aveludado de milho verde com frango desfiado suculento, ideal para as noites frias de Videira.', image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=400&auto=format&fit=crop' },
+    'Vinhos': [
       { name: 'Vinho Cabernet Sauvignon (Taça)', price: 'R$ 18,00', desc: 'Taça de vinho tinto seco encorpado de uvas selecionadas, ideal para acompanhar nossas saborosas tábuas de carne.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
-      { name: 'Vinho Cabernet Sauvignon (Garrafa)', price: 'R$ 78,00', desc: 'Garrafa de vinho tinto encorpado de uvas selecionadas, para compartilhar e se aquecer no melhor clima da serra.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
+      { name: 'Vinho Cabernet Sauvignon (Garrafa)', price: 'R$ 78,00', desc: 'Garrafa de vinho tinto encorpado de uvas selecionadas, para compartilhar e celebrar no melhor ambiente da cidade.', image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?q=80&w=400&auto=format&fit=crop' },
       { name: 'Vinho Merlot Nacional (Garrafa)', price: 'R$ 85,00', desc: 'Garrafa de vinho tinto seco, macio e aveludado, com excelentes notas frutadas que harmonizam com nossos hambúrgueres artesanais.', image: 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=400&auto=format&fit=crop' }
     ]
   };
