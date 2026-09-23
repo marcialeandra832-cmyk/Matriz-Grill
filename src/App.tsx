@@ -17,6 +17,7 @@ import eventoLeoZimmerImg from './assets/domingo-11-10-card.png';
 import galeriaAmbienteImg from './assets/images/galeria/galeria_ambiente.jpg';
 import galeriaMusicaImg from './assets/images/galeria/galeria_musica.jpg';
 import galeriaEncontroImg from './assets/images/galeria/galeria_encontro.jpg';
+import logoImg from './assets/images/logo.png';
 import { 
   Music, 
   Utensils, 
@@ -172,13 +173,15 @@ const FloatingWhatsApp = () => {
 
 // --- Components ---
 
-const Logo = ({ className = "h-24 md:h-32" }: { className?: string }) => (
-  <div className="flex items-center select-none">
+const Logo = ({ className = "h-20 md:h-28" }: { className?: string }) => (
+  <div className="flex items-center justify-center select-none">
     <img 
-      src="https://i.ibb.co/pjwjH1mG/LOGO-MATRIZ-GRILL-4.png" 
+      src={logoImg || "https://i.ibb.co/pjwjH1mG/LOGO-MATRIZ-GRILL-4.png"} 
       alt="Matriz Grill" 
-      className={`${className} w-auto object-contain hover:scale-105 transition-transform duration-300`}
-      referrerPolicy="no-referrer"
+      className={`${className} w-auto object-contain hover:scale-105 transition-transform duration-300 drop-shadow-md`}
+      onError={(e) => {
+        (e.target as HTMLImageElement).src = "https://i.ibb.co/pjwjH1mG/LOGO-MATRIZ-GRILL-4.png";
+      }}
     />
   </div>
 );
@@ -285,39 +288,37 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Início', href: '#' },
-    { name: 'Diferenciais', href: '#diferenciais' },
-    { name: 'Agenda', href: '#agenda' },
-    { name: 'Cardápio', href: '#cardapio' },
-    { name: 'Delivery', href: '#delivery' },
-    { name: 'Galeria', href: '#galeria' },
-    { name: 'Sobre', href: '#sobre' },
-    { name: 'Contato', href: '#contato' },
+    { name: 'HOME', href: '#', active: true },
+    { name: 'MENU', href: '#cardapio' },
+    { name: 'DRINKS', href: '#cardapio' },
+    { name: 'LIVE MUSIC', href: '#agenda' },
+    { name: 'GALLERY', href: '#galeria' },
   ];
 
   const whatsappReservationUrl = "https://wa.me/5549999328763?text=Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20no%20Matriz%20Grill.";
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'glass shadow-2xl' : 'bg-gradient-to-b from-bg-dark/95 via-bg-dark/50 to-transparent'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-[#120a06]/95 backdrop-blur-md shadow-2xl border-b border-amber-900/30' : 'bg-gradient-to-b from-black/90 via-black/50 to-transparent'}`}>
       {/* Top Impact Phrase Bar */}
-      <div className="w-full bg-brand-red py-2 px-6 overflow-hidden">
+      <div className="w-full bg-brand-red py-1.5 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto flex justify-center items-center">
           <motion.span 
-            initial={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] text-white flex items-center gap-2 whitespace-nowrap"
           >
             <Flame className="w-3.5 h-3.5 fill-brand-amber text-brand-amber animate-pulse" />
-            A esquina mais badalada da cidade
+            A ESQUINA MAIS BADALADA DA CIDADE
             <Flame className="w-3.5 h-3.5 fill-brand-amber text-brand-amber animate-pulse" />
           </motion.span>
         </div>
       </div>
 
-      <div className={`max-w-7xl mx-auto px-6 flex justify-between items-center transition-all duration-500 ${isScrolled ? 'py-3' : 'py-5'}`}>
+      <div className="max-w-7xl mx-auto px-6 py-2.5 flex justify-between items-center">
+        {/* Brand Logo */}
         <div className="flex items-center gap-4">
           <a href="#" className="flex items-center gap-3 group">
-            <Logo className={isScrolled ? "h-24 md:h-32" : "h-32 md:h-44"} />
+            <Logo className="h-12 sm:h-14 md:h-16" />
           </a>
           <div className="hidden sm:inline-flex">
             <OpenStatusBadge short />
@@ -325,12 +326,16 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3">
           {navLinks.map((link) => (
             <a 
               key={link.name} 
               href={link.href} 
-              className="text-xs font-bold tracking-widest text-white/75 hover:text-brand-amber transition-colors uppercase"
+              className={`text-xs uppercase tracking-wider transition-all duration-200 ${
+                link.active 
+                  ? 'border border-[#b45309]/80 bg-[#3a1d09]/70 text-white font-semibold px-3.5 py-1.5 rounded' 
+                  : 'text-white/80 hover:text-white font-medium px-3 py-1.5 hover:bg-white/5 rounded'
+              }`}
             >
               {link.name}
             </a>
@@ -339,9 +344,9 @@ const Navbar = () => {
             href={whatsappReservationUrl}
             target="_blank" 
             rel="noopener noreferrer"
-            className="px-6 py-2.5 bg-brand-amber hover:bg-brand-amber/95 text-black text-xs font-black uppercase tracking-widest rounded-full transition-all duration-300 shadow-lg shadow-brand-amber/20 hover:shadow-brand-amber/40 hover:scale-105"
+            className="ml-2 px-5 py-2 bg-[#c66a2b] hover:bg-[#b45d22] text-white text-xs font-bold uppercase tracking-wider rounded transition-all duration-300 shadow-md hover:scale-105"
           >
-            Reservar Mesa
+            RESERVAR
           </a>
         </div>
 
@@ -358,7 +363,7 @@ const Navbar = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 w-full glass p-6 md:hidden flex flex-col gap-4 shadow-2xl"
+            className="absolute top-full left-0 w-full bg-[#120a06]/95 backdrop-blur-md p-6 md:hidden flex flex-col gap-4 shadow-2xl border-b border-amber-900/30"
           >
             <div className="flex items-center justify-between pb-2 border-b border-white/10">
               <span className="text-xs uppercase font-bold text-white/40">Status do Bar</span>
@@ -378,7 +383,7 @@ const Navbar = () => {
               href={whatsappReservationUrl}
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-full py-4 bg-brand-amber text-black text-center font-black uppercase tracking-widest rounded-xl mt-4"
+              className="w-full py-3.5 bg-[#c66a2b] text-white text-center font-black uppercase tracking-widest rounded-lg mt-2"
             >
               Reservar Agora
             </a>
@@ -390,67 +395,172 @@ const Navbar = () => {
 };
 
 const Hero = () => {
+  const whatsappReservationUrl = "https://wa.me/5549999328763?text=Ol%C3%A1%21%20Gostaria%20de%20reservar%20uma%20mesa%20no%20Matriz%20Grill.";
+
+  const destaquesHero = [
+    {
+      id: 1,
+      badgeText: '1',
+      title: 'HAMBÚRGUERES ARTESANAIS',
+      subtitle: 'Suculentos & Feitos na Chapa',
+      image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop',
+      href: '#cardapio'
+    },
+    {
+      id: 2,
+      badgeText: '2',
+      title: 'TÁBUAS DE CARNES',
+      subtitle: 'Alcatra, Mignon & Picanha na Chapa',
+      image: 'https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=600&auto=format&fit=crop',
+      href: '#cardapio'
+    },
+    {
+      id: 3,
+      badgeText: '3',
+      title: 'MÚSICA AO VIVO',
+      subtitle: 'Shows, Artistas & Energia',
+      image: 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600&auto=format&fit=crop',
+      href: '#agenda'
+    },
+    {
+      id: 4,
+      badgeText: '4',
+      title: 'DRINKS',
+      subtitle: 'Clássicos, Gins & Caipirinhas',
+      image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?q=80&w=600&auto=format&fit=crop',
+      href: '#cardapio'
+    },
+    {
+      id: 5,
+      badgeText: '5',
+      title: 'CHOPP GELADO',
+      subtitle: 'Trincando & Refrescante',
+      image: 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?q=80&w=600&auto=format&fit=crop',
+      href: '#cardapio'
+    }
+  ];
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32 md:pt-40">
-      {/* Background Image with Overlay */}
+    <section className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-28 pb-8 md:pt-32 md:pb-12">
+      {/* Background Atmosphere Image with Warm Rustic Grading matching mockup */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?q=80&w=1920&auto=format&fit=crop" 
-          alt="Bar Atmosphere" 
-          className="w-full h-full object-cover opacity-40"
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop" 
+          alt="Matriz Grill Ambiente Gastronômico" 
+          className="w-full h-full object-cover"
           referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-dark via-transparent to-bg-dark" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#120a06]/85 via-[#180e08]/75 to-[#0e0704]/95" />
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 text-center mt-20 md:mt-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full flex-1 flex flex-col justify-center">
+        {/* Main Center Callout */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mt-2 sm:mt-6"
         >
-          <h1 className="font-display text-5xl md:text-8xl lg:text-9xl tracking-tighter leading-[0.9] mb-8 uppercase text-white">
-            Chegue como <span className="text-brand-amber">está</span>,<br />
-            aproveite como <span className="italic text-brand-wood">merece</span>.
+          {/* Official Logo in Hero */}
+          <div className="flex justify-center mb-3">
+            <Logo className="h-24 sm:h-28 md:h-36 drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]" />
+          </div>
+
+          {/* Eyebrow Badge Destaque */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-amber/15 border border-brand-amber/40 text-brand-amber text-xs sm:text-sm font-black uppercase tracking-[0.22em] mb-4 shadow-lg backdrop-blur-sm">
+            <Flame className="w-3.5 h-3.5 fill-brand-amber text-brand-amber animate-pulse" />
+            A ESQUINA MAIS BADALADA DA CIDADE
+            <Flame className="w-3.5 h-3.5 fill-brand-amber text-brand-amber animate-pulse" />
+          </div>
+
+          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[54px] text-white font-bold uppercase tracking-[0.06em] leading-[1.15] drop-shadow-md max-w-5xl mx-auto">
+            EXPERIÊNCIA GASTRONÔMICA<br />
+            E MÚSICA AO VIVO
           </h1>
-          <p className="max-w-2xl mx-auto text-base md:text-xl text-white/70 mb-10 font-sans font-light leading-relaxed">
-            Música ao vivo de alta qualidade, combos de hambúrgueres artesanais, porções na chapa, vinhos selecionados, drinks especiais e o chopp mais gelado da região. 
-            Sua noite começa no coração e na <span className="font-bold text-white">esquina mais badalada da cidade</span>.
+          <p className="text-white/85 text-xs sm:text-sm md:text-[15px] font-light text-center max-w-2xl mx-auto mt-3 mb-6 leading-relaxed">
+            A esquina mais badalada da cidade para carnes na chapa, burgers artesanais, drinks autorais e chopp trincando de gelado.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <motion.a 
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="https://wa.me/5549999328763?text=Ol%C3%A1%21%20Quero%20falar%20com%20o%20Matriz%20Grill%20para%20tirar%20d%C3%BAvidas%20ou%20fazer%20uma%20reserva%21"
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-12">
+            <a 
+              href="#cardapio"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#c66a2b] hover:bg-[#b45d22] text-white text-xs font-bold uppercase tracking-wider rounded shadow-lg shadow-black/40 hover:scale-105 transition-all duration-300"
+            >
+              VER NOSSO CARDÁPIO
+            </a>
+            <a 
+              href={whatsappReservationUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-10 py-5 bg-gradient-to-r from-brand-amber to-brand-gold text-black font-black uppercase tracking-widest rounded-full flex items-center justify-center gap-2 shadow-xl shadow-brand-amber/10 hover:shadow-brand-amber/30 transition-all duration-300"
+              className="px-5 sm:px-6 py-2.5 sm:py-3 bg-[#c66a2b] hover:bg-[#b45d22] text-white text-xs font-bold uppercase tracking-wider rounded shadow-lg shadow-black/40 flex items-center gap-2 hover:scale-105 transition-all duration-300"
             >
-              <Phone className="w-4 h-4 fill-black" />
-              Falar no WhatsApp
-            </motion.a>
-            <motion.a 
-              whileHover={{ scale: 1.05, bg: "rgba(255, 255, 255, 0.05)" }}
-              whileTap={{ scale: 0.95 }}
-              href="#cardapio"
-              className="w-full sm:w-auto px-10 py-5 border border-white/20 hover:border-brand-amber text-white font-bold uppercase tracking-widest rounded-full flex items-center justify-center gap-2 transition-all duration-300"
-            >
-              Ver Cardápio
-              <ChevronRight className="w-4 h-4" />
-            </motion.a>
+              RESERVAR VIA WHATSAPP
+              <MessageCircle className="w-4 h-4 fill-current" />
+            </a>
           </div>
         </motion.div>
-      </div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-30"
-      >
-        <div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
-      </motion.div>
+        {/* NOSSOS DESTAQUES Row */}
+        <div className="w-full">
+          <div className="text-center mb-4 sm:mb-6">
+            <h2 className="font-serif text-sm sm:text-base md:text-lg uppercase tracking-[0.25em] text-white/95 font-semibold">
+              NOSSOS DESTAQUES
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4 max-w-6xl mx-auto">
+            {destaquesHero.map((item) => (
+              <a 
+                key={item.id}
+                href={item.href}
+                className="group bg-[#0e0a07]/90 backdrop-blur-sm border border-[#3d2414] hover:border-[#c66a2b] rounded-lg overflow-hidden flex flex-col transition-all duration-300 shadow-xl hover:-translate-y-1"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/60">
+                  <div className="absolute top-2 left-2 w-5 h-5 bg-[#d97706] text-black font-black text-[11px] flex items-center justify-center rounded-sm shadow-md z-10">
+                    {item.badgeText}
+                  </div>
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
+                </div>
+                <div className="p-3 text-center flex flex-col items-center justify-between flex-1">
+                  <div>
+                    <h3 className="text-[11px] md:text-xs font-bold uppercase tracking-wider text-white group-hover:text-amber-400 transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-[10px] text-white/60 font-light mt-0.5 mb-2">
+                      {item.subtitle}
+                    </p>
+                  </div>
+                  <span className="text-[9px] font-bold uppercase tracking-widest text-[#d97706] group-hover:text-amber-300 border-b border-[#d97706]/40 pb-0.5 transition-colors">
+                    SAIBA MAIS
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="mt-8 sm:mt-10 flex flex-col items-center justify-center opacity-40 hover:opacity-100 transition-opacity"
+        >
+          <a href="#diferenciais" className="flex flex-col items-center gap-1.5 cursor-pointer group">
+            <span className="text-[10px] tracking-[0.25em] uppercase text-white/70 font-semibold group-hover:text-brand-amber transition-colors">
+              Explorar
+            </span>
+            <div className="w-px h-8 bg-gradient-to-b from-brand-amber to-transparent" />
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 };
