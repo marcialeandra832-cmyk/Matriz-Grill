@@ -4,7 +4,7 @@ Página única (`index.html`) com as áreas Início, Agenda, Feriados, Cardápio
 
 ## Atualização semanal (sexta ao vivo)
 
-1. Salve a foto da semana em `public/midia/` (ex.: `sexta-09-10.jpg`). Vale a faixa dos músicos recortada do story, sem o logo e sem os textos: no story de 941x1672 é o trecho de 398 a 1055 de altura. A data e o nome o site já escreve.
+1. Salve a foto da semana em `public/midia/` (ex.: `sexta-09-10.jpg`). O ideal é a arte quadrada e limpa (sem logo e sem textos), 1200x1200: a data e o nome o site já escreve. Se só houver o story, vale recortar a faixa dos músicos.
 2. No `index.html`, procure por **ATUALIZAR TODA SEMANA** e troque `dia`, `artista` e `foto`.
 
 Depois que a sexta passa, o site volta sozinho para "Ao vivo toda sexta".
