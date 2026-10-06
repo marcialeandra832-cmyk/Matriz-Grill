@@ -1,20 +1,24 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Site do Matriz Grill
 
-# Run and deploy your AI Studio app
+Página única (`index.html`) com as áreas Início, Agenda, Feriados, Cardápio, Delivery, Fotos e vídeos e A casa.
 
-This contains everything you need to run your app locally.
+## Atualização semanal (sexta ao vivo)
 
-View your app in AI Studio: https://ai.studio/apps/72d0e486-c19d-4003-b173-2ba61016d324
+1. Salve a arte da semana em `public/midia/` (ex.: `sexta-09-10.jpg`, quadrada, 1200x1200).
+2. No `index.html`, procure por **ATUALIZAR TODA SEMANA** e troque `dia`, `artista` e `foto`.
 
-## Run Locally
+Depois que a sexta passa, o site volta sozinho para "Ao vivo toda sexta".
 
-**Prerequisites:**  Node.js
+## Especial de feriado
 
+Procure por `data-fim` no `index.html`: é a data em que o aviso some sozinho.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Cardápio
+
+Os itens ficam no bloco `var cardapio` do `index.html`. Os preços precisam bater com o cardápio digital (https://cardapio-matrizgrill.vercel.app/).
+
+## Pastas
+
+- `public/midia` fotos e vídeos
+- `public/fontes` letras do site
+- `public/vendor` animações (GSAP, Lenis) e `efeitos.js`
