@@ -1096,7 +1096,7 @@ footer{background:#120E0C;padding:110px 0 50px}
    nunca fica mostrando data vencida.
    ===================================================================== */
 var SEMANA = {
-  sexta: { dia: '2026-10-09', artista: 'Renan Thalles', foto: '' }
+  sexta: { dia: '2026-10-09', artista: 'Renan Thalles', foto: '/midia/sexta-09-10.jpg' }
 };
 </script>
 <script>var ASSETS={"P_ESQUINA": "/midia/p-esquina.jpg","F_PETIT": "/midia/f-petit.jpg","HERO_WIDE_MP4": "/midia/hero-wide.mp4","C_DRONE_MP4": "/midia/c-drone.mp4","MONT_JPG": "/midia/mont.jpg","P_DEPOIS": "/midia/p-depois.jpg","F_ENTREVERO": "/midia/f-entrevero.jpg","HERO_JPG": "/midia/hero.jpg","F_VINHOS": "/midia/f-vinhos.jpg","C_PRATO_MP4": "/midia/c-prato.mp4","MESAS_JPG": "/midia/mesas.jpg","C_PRATO_JPG": "/midia/c-prato.jpg","P_DONOS": "/midia/p-donos.jpg","F_TILAPIA": "/midia/f-tilapia.jpg","P_TETO": "/midia/p-teto.jpg","E_FERIADO": "/midia/e-feriado.jpg","P_ANTES": "/midia/p-antes.jpg","GALERA_JPG": "/midia/galera.jpg","C_DRONE_JPG": "/midia/c-drone.jpg","C_VIOLAO_JPG": "/midia/c-violao.jpg","SELO": "/midia/selo.png","C_CHOPP_MP4": "/midia/c-chopp.mp4","F_TABUA": "/midia/f-tabua.jpg","P_GALERA": "/midia/p-galera.jpg","F_HAMB2": "/midia/f-hamb2.jpg","F_TABUA03": "/midia/f-tabua03.jpg","F_COMBO": "/midia/f-combo.jpg","P_ANTES2": "/midia/p-antes2.jpg","C_VIOLAO_MP4": "/midia/c-violao.mp4","C_CHOPP_JPG": "/midia/c-chopp.jpg","P_ANTES1": "/midia/p-antes1.jpg","MONT_MP4": "/midia/mont.mp4","E_SEXTA": "/midia/e-sexta.jpg","F_TABUA02": "/midia/f-tabua02.jpg","F_LINGUICA": "/midia/f-linguica.jpg","HERO_WIDE_JPG": "/midia/hero-wide.jpg","F_HAMB1": "/midia/f-hamb1.jpg","SALAO_JPG": "/midia/salao.jpg","BANDA_JPG": "/midia/banda.jpg","F_POLENTA": "/midia/f-polenta.jpg","LOGO": "/midia/logo.png"};</script>
@@ -1114,6 +1114,10 @@ var SEMANA = {
     poe('titulo',function(el){ if(sxNome){el.textContent=sxNome}else{el.innerHTML='Ao vivo<br>nesta sexta.'} });
     poe('linha',function(el){el.textContent=sxRot+(sxNome?', com '+sxNome:'')+'. Mesa reservada até as 20h45.'});
     poe('foto',function(el){el.alt=sx.foto?((sxNome?sxNome+', atração da ':'Atração da ')+sxRot.toLowerCase()+', no Matriz Grill'):'Casa cheia numa sexta no Matriz Grill'});
+    /* a moldura acompanha o formato da arte (deitada, quadrada ou em pé) */
+    if(sx.foto){var fig=document.querySelector('.atracao figure'),fim=fig&&fig.querySelector('img');
+      var ajusta=function(){if(fim.naturalWidth)fig.style.aspectRatio=String(Math.min(1.5,Math.max(.75,fim.naturalWidth/fim.naturalHeight)))};
+      if(fim){fim.addEventListener('load',ajusta);ajusta()}}
     poe('zap',function(el){el.href='https://wa.me/5549999328763?text='+encodeURIComponent('Olá! Quero reservar uma mesa pra sexta, '+sxCurto+'.')});
   } else {
     document.querySelectorAll('[data-sx="texto"]').forEach(function(el){el.textContent='Show a partir das 20h30. Quem toca na semana sai primeiro no grupo do WhatsApp e no Instagram.'});
