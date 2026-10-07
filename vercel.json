@@ -1,0 +1,7 @@
+{
+  "headers": [
+    {"source": "/midia/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800"}]},
+    {"source": "/fontes/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
+    {"source": "/vendor/(gsap.min.js|ScrollTrigger.min.js|lenis.min.js)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]}
+  ]
+}
