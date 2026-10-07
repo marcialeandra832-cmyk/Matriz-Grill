@@ -57,10 +57,19 @@
       if(esq)gsap.fromTo(esq.querySelector('img'),{yPercent:-6,scale:1.14},{yPercent:6,scale:1.14,ease:'none',scrollTrigger:{trigger:esq,start:'top bottom',end:'bottom top',scrub:true}});
       /* galeria de pratos na horizontal, com curva 3D conforme a velocidade */
       var chapa=area.querySelector('.chapa'),tr=chapa&&chapa.querySelector('.trilho');
-      if(desk&&chapa&&tr){
+      /* No Safari a galeria fica no modo simples (rolagem lateral com as setas): o modo "preso" calculava
+         a distância errada ali e os pratos saíam da tela. */
+      var safari=/^((?!chrome|chromium|android|crios|fxios|edg|opr).)*safari/i.test(navigator.userAgent);
+      var pratos=tr?tr.querySelectorAll('.prato'):[];
+      /* distância medida pelos próprios cartões (do primeiro ao último), com limite de segurança */
+      var dist=function(){
+        if(!pratos.length)return 0;
+        var a=pratos[0].getBoundingClientRect(),b=pratos[pratos.length-1].getBoundingClientRect(),pad=parseFloat(getComputedStyle(tr).paddingLeft)||24;
+        var d=(b.right-a.left)+pad*2-window.innerWidth+48;
+        return (isFinite(d)&&d>0)?Math.min(d,pratos.length*420):0;
+      };
+      if(desk&&chapa&&tr&&!safari&&dist()>0){
         chapa.classList.add('pinado');
-        var pratos=tr.querySelectorAll('.prato');
-        var dist=function(){return Math.max(0,tr.scrollWidth-window.innerWidth+48)};
         gsap.to(tr,{x:function(){return -dist()},ease:'none',scrollTrigger:{trigger:chapa,start:'top top',end:function(){return '+='+dist()},pin:true,scrub:1,invalidateOnRefresh:true,
           onUpdate:function(st){var v=gsap.utils.clamp(-22,22,st.getVelocity()/-120);gsap.to(pratos,{rotateY:v,transformPerspective:1000,duration:.5,overwrite:'auto'})},
           onLeave:function(){gsap.to(pratos,{rotateY:0,duration:.6})},onLeaveBack:function(){gsap.to(pratos,{rotateY:0,duration:.6})}}});
