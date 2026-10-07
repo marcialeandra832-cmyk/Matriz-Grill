@@ -1,6 +1,8 @@
 (function(){
   var reduz=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var desk=window.matchMedia('(min-width: 981px) and (pointer: fine)').matches;
+  /* Safari: sem efeitos em 3D (lá eles faziam blocos sumirem e o menu falhar) e galeria de pratos no modo simples */
+  var safari=/^((?!chrome|chromium|android|crios|fxios|edg|opr).)*safari/i.test(navigator.userAgent);
   var pre=document.getElementById('pre');
   function fimPre(){document.body.classList.remove('carregando');try{sessionStorage.setItem('mgPre','1')}catch(e){}}
   if(document.body.classList.contains('sem-pre')||reduz){if(pre)pre.style.display='none';fimPre();}
@@ -59,7 +61,6 @@
       var chapa=area.querySelector('.chapa'),tr=chapa&&chapa.querySelector('.trilho');
       /* No Safari a galeria fica no modo simples (rolagem lateral com as setas): o modo "preso" calculava
          a distância errada ali e os pratos saíam da tela. */
-      var safari=/^((?!chrome|chromium|android|crios|fxios|edg|opr).)*safari/i.test(navigator.userAgent);
       var pratos=tr?tr.querySelectorAll('.prato'):[];
       /* distância medida pelos próprios cartões (do primeiro ao último), com limite de segurança */
       var dist=function(){
@@ -101,7 +102,7 @@
       cur.classList.toggle('ver',!!ver);cur.classList.toggle('link',!!link);
     });
     /* cartões em 3D */
-    document.querySelectorAll('.prato figure,.peca,.atracao figure,.donos figure,.recebem figure,.evento-esp figure,.porta').forEach(function(el){
+    if(!safari) document.querySelectorAll('.prato figure,.peca,.atracao figure,.donos figure,.recebem figure,.evento-esp figure,.porta').forEach(function(el){
       el.classList.add('tilt');
       var forca=el.classList.contains('porta')?4:10;
       el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
