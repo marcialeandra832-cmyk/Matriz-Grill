@@ -45,7 +45,8 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--carvao:#1A1512;--txt:#F3ECE2}}
 :root[data-theme="dark"]{--carvao:#1A1512;--txt:#F3ECE2}
-html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+/* Não usar scroll-behavior:smooth aqui: com ele, ao trocar de área a página não voltava para o topo. */
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:border-box}
 body{margin:0;background:var(--carvao);color:var(--txt);font-family:var(--texto);font-size:17px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img,video{max-width:100%;display:block}
@@ -1267,6 +1268,13 @@ var SEMANA = {
   var primeira=true;
   /* carrega já as fotos da área aberta, uma atrás da outra, sem depender da rolagem */
   function carregarArea(alvo){[].slice.call(alvo.querySelectorAll('img[loading="lazy"]')).forEach(function(im,i){setTimeout(function(){im.loading='eager'},350+i*110)})}
+  /* toda troca de área começa no topo da página, sempre */
+  try{history.scrollRestoration='manual'}catch(e){}
+  function irTopo(){
+    var l=window.__lenis;
+    if(l){ if(l.resize)l.resize(); l.scrollTo(0,{immediate:true,force:true}); }
+    if(window.scrollY>0||document.documentElement.scrollTop>0) window.scrollTo(0,0);
+  }
   function ativar(id,cat){
     if(!document.getElementById(id)) id='inicio';
     var trocar=function(){
@@ -1275,10 +1283,11 @@ var SEMANA = {
       if(!primeira && !reduz) alvo.classList.add('entrando');
       document.querySelectorAll('[data-ir]').forEach(function(l){ if(l.closest('.links')||l.closest('.overlay')) l.setAttribute('aria-current',l.dataset.ir===id?'page':'false'); });
       if(cat && cardapio[cat]) mostrarCat(cat);
-      if(window.__lenis){window.__lenis.scrollTo(0,{immediate:true,force:true})} else {window.scrollTo(0,0)}
+      irTopo();
       observar();
       carregarArea(alvo);
       if(window.__fxArea) window.__fxArea(id);
+      irTopo();
       if(typeof navEstado==='function') navEstado();
       alvo.querySelectorAll('video').forEach(function(v){var pr=v.play(); if(pr&&pr.catch)pr.catch(function(){})});
       primeira=false;
