@@ -269,6 +269,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* faixa especial */
 .faixa-especial{display:block;background:var(--vinho);color:#fff;transition:background .25s}
 .faixa-especial:hover{background:var(--vinho2)}
+.faixa-especial[hidden]{display:none}
 .faixa-especial .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:84px;flex-wrap:wrap;padding:14px 0}
 .rotulo-esp{font-weight:700;font-size:14px;padding:7px 14px;border-radius:999px;background:rgba(255,255,255,.14)}
 .data-esp{font-family:var(--display);font-weight:800;font-size:clamp(26px,3vw,40px);text-transform:uppercase;line-height:1}
@@ -277,14 +278,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .ver-esp svg{transition:transform .25s}
 a.linha-dia{color:inherit}
 .linha-dia.especial .d{color:#E9A0A8}
-/* área feriados */
-.evento-esp{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;padding:0 0 110px}
-.evento-esp figure{margin:0;border-radius:28px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.5);transform:rotate(2deg)}
-.evento-esp figure img{width:100%;height:auto}
-.data-grande{font-family:var(--display);font-weight:900;font-size:clamp(64px,7.5vw,128px);line-height:.88;text-transform:uppercase;margin:22px 0 20px;color:var(--mel)}
-.infos{list-style:none;margin:30px 0 34px;padding:0;border-top:1px solid rgba(243,236,226,.16)}
-.infos li{display:grid;grid-template-columns:180px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid rgba(243,236,226,.16)}
-.infos b{font-weight:600;color:var(--apagado)}
 
 
 .foto-selo{position:relative}
@@ -433,6 +426,29 @@ html.lenis,html.lenis body{height:auto}
 .mini-video{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:4/5}
 .mini-video video{width:100%;height:100%;object-fit:cover}
 .mini-video .selo-vivo{left:16px;top:16px}
+/* programação do mês */
+.prog-cab{padding:76px 0 28px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px 40px;flex-wrap:wrap}
+.prog-cab h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,4.6vw,68px);text-transform:uppercase;line-height:.9;margin:0}
+.prog-cab p{margin:0;color:var(--creme2);font-size:17px;max-width:46ch}
+.topo-area + .prog-cab{padding-top:10px}
+.prog{border-top:1px solid rgba(243,236,226,.16)}
+.prog .linha-dia.sem-foto{grid-template-columns:220px 1fr}
+.prog .tag-dia{display:table;margin-top:14px;padding:7px 13px;border-radius:999px;background:var(--mel);color:var(--carvao);font-family:var(--texto);font-weight:700;font-size:13px;line-height:1;text-transform:none;letter-spacing:0}
+.prog .rot{display:block;font-weight:700;font-size:13px;color:var(--apagado);text-transform:uppercase;letter-spacing:.09em}
+.prog .linha-dia.destaque .o .btn{margin-top:26px}
+.prog .linha-dia.destaque .o small{font-size:17px;color:var(--creme2);max-width:46ch}
+.prog .mini-video img{width:100%;height:100%;object-fit:cover;object-position:top}
+.mes-prog{font-family:var(--display);font-weight:800;font-size:22px;text-transform:uppercase;letter-spacing:.07em;color:var(--apagado);margin:0;padding:44px 0 14px;border-bottom:1px solid rgba(243,236,226,.16)}
+.linha-show{display:grid;grid-template-columns:220px 1fr 88px;gap:32px;align-items:center;padding:22px 0;border-bottom:1px solid rgba(243,236,226,.16)}
+.linha-show .d{font-family:var(--display);font-weight:800;font-size:34px;text-transform:uppercase;line-height:1;display:flex;align-items:baseline;gap:12px}
+.linha-show .d em{font-style:normal;font-size:18px;color:var(--apagado);min-width:42px}
+.linha-show .o b{display:block;font-family:var(--display);font-weight:800;font-size:clamp(28px,3.2vw,44px);text-transform:uppercase;line-height:.95}
+.linha-show .o small{display:block;color:var(--apagado);font-size:15px;margin-top:7px}
+.linha-show .ft{width:88px;height:88px;border-radius:16px;overflow:hidden;background:var(--carvao2);display:flex;align-items:center;justify-content:center;color:rgba(243,236,226,.22)}
+.linha-show .ft img{width:100%;height:100%;object-fit:cover;object-position:top}
+.linha-show .ft svg{width:42px;height:auto}
+.linha-show.especial .d{color:#E9A0A8}
+.prog-vazio{padding:34px 0;border-bottom:1px solid rgba(243,236,226,.16);color:var(--creme2);font-size:19px;margin:0}
 .fechar-agenda{padding:90px 0 130px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .caixa{padding:48px;border-radius:28px;display:flex;flex-direction:column;gap:18px;align-items:flex-start}
 .caixa h3{font-family:var(--display);font-weight:800;font-size:48px;line-height:.95;text-transform:uppercase;margin:0}
@@ -548,8 +564,6 @@ footer{background:#120E0C;padding:110px 0 50px}
   .atracao .wrap{grid-template-columns:1fr;gap:40px}
   .faixa-especial .wrap{gap:8px}
   .ver-esp{display:none}
-  .evento-esp{grid-template-columns:1fr;gap:44px;padding-bottom:70px}
-  .infos li{grid-template-columns:1fr;gap:2px}
   .donos{grid-template-columns:1fr;gap:44px;padding-bottom:80px}
   .anfitriao{grid-template-columns:1fr;gap:6px}
   .anfitriao b{font-size:40px}
@@ -578,6 +592,18 @@ footer{background:#120E0C;padding:110px 0 50px}
   .topo-area{padding:130px 0 44px}
   .linha-dia,.linha-dia.destaque{grid-template-columns:1fr;gap:10px;padding:26px 0}
   .linha-dia .d{font-size:36px}
+  .prog-cab{padding:52px 0 20px}
+  .prog .linha-dia.sem-foto{grid-template-columns:1fr}
+  .prog .linha-dia.destaque .o .btn{width:100%;margin-top:20px}
+  .prog .mini-video{margin-top:10px}
+  .mes-prog{padding-top:34px}
+  .linha-show{grid-template-columns:1fr 64px;gap:4px 16px;padding:18px 0}
+  .linha-show .d{grid-column:1;font-size:21px;color:var(--mel)}
+  .linha-show .d em{font-size:21px;color:inherit;min-width:0}
+  .linha-show .o{grid-column:1}
+  .linha-show .o b{font-size:30px}
+  .linha-show .ft{grid-column:2;grid-row:1 / span 2;width:64px;height:64px;border-radius:12px}
+  .linha-show .ft svg{width:30px}
   .fechar-agenda{grid-template-columns:1fr;padding:60px 0 90px}
   .caixa{padding:32px}
   .caixa h3{font-size:40px}
@@ -626,7 +652,6 @@ footer{background:#120E0C;padding:110px 0 50px}
     <nav class="links" aria-label="Principal">
       <a href="#inicio" data-ir="inicio">Início</a>
       <a href="#agenda" data-ir="agenda">Agenda</a>
-      <a href="#feriados" data-ir="feriados">Feriados</a>
       <a href="#cardapio" data-ir="cardapio">Cardápio</a>
       <a href="#delivery" data-ir="delivery">Delivery</a>
       <a href="#galeria" data-ir="galeria">Fotos e vídeos</a>
@@ -649,7 +674,6 @@ footer{background:#120E0C;padding:110px 0 50px}
   <nav aria-label="Menu">
     <a href="#inicio" data-ir="inicio">Início</a>
     <a href="#agenda" data-ir="agenda">Agenda</a>
-    <a href="#feriados" data-ir="feriados">Feriados</a>
     <a href="#cardapio" data-ir="cardapio">Cardápio</a>
     <a href="#delivery" data-ir="delivery">Delivery</a>
     <a href="#galeria" data-ir="galeria">Fotos e vídeos</a>
@@ -695,11 +719,11 @@ footer{background:#120E0C;padding:110px 0 50px}
     <button type="button" class="rolar" id="rolar" aria-label="Rolar para baixo"><span></span></button>
   </div>
 
-  <a class="faixa-especial" href="#feriados" data-ir="feriados" data-fim="2026-10-12T03:00:00-03:00">
+  <a class="faixa-especial" id="faixaEsp" href="#agenda" data-ir="agenda" hidden>
     <div class="wrap">
-      <span class="rotulo-esp">Especial de feriado</span>
-      <span class="data-esp">Domingo, 11 de outubro, 20h30</span>
-      <span class="ver-esp">Ver atração <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="rotulo-esp" data-esp="rotulo">Especial</span>
+      <span class="data-esp" data-esp="data"></span>
+      <span class="ver-esp">Ver na agenda <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
 
@@ -739,7 +763,7 @@ footer{background:#120E0C;padding:110px 0 50px}
         <p class="sub" data-sx="texto">Show a partir das 20h30. Mesa reservada até as 20h45, depois é por ordem de chegada.</p>
         <div class="acoes">
           <a class="btn btn-mel" data-sx="zap" href="https://wa.me/5549999328763?text=Ol%C3%A1!%20Quero%20reservar%20uma%20mesa%20pra%20sexta." target="_blank" rel="noopener">Reservar pra sexta</a>
-          <a class="btn btn-linha" href="#agenda" data-ir="agenda">Agenda da semana</a>
+          <a class="btn btn-linha" href="#agenda" data-ir="agenda">Programação do mês</a>
         </div>
       </div>
     </div>
@@ -823,24 +847,23 @@ footer{background:#120E0C;padding:110px 0 50px}
   <div class="wrap">
     <div class="topo-area bg-foto" data-bgk="BANDA_JPG" style="--op:.45">
       <h1 class="gigante">Agenda</h1>
-      <p class="sub">A semana no Matriz. Aberto de terça a domingo, das 17h às 22h30.</p>
+      <p class="sub">Quem toca nas próximas semanas e os horários da casa. Aberto de terça a domingo, das 17h às 22h30.</p>
+    </div>
+    <div class="prog-cab">
+      <h2>Próximos shows</h2>
+      <p>Ao vivo toda sexta, a partir das 20h30. Mesa reservada pelo WhatsApp até as 20h45.</p>
+    </div>
+    <div class="prog" id="prog"></div>
+    <div class="prog-cab">
+      <h2>Horários da casa</h2>
     </div>
     <div class="lista-dias">
       <div class="linha-dia rv"><span class="d">Terça</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
       <div class="linha-dia rv"><span class="d">Quarta</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
       <div class="linha-dia rv"><span class="d">Quinta</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
-      <div class="linha-dia destaque rv">
-        <span class="d">Sexta</span>
-        <span class="o">Ao vivo<b>Show a partir das 20h30</b><small data-sx="linha">Toda sexta. Mesa reservada até as 20h45.</small></span>
-        <div class="mini-video"><img data-k="E_SEXTA" data-sx="foto" alt="Música ao vivo na sexta" loading="lazy" style="width:100%;height:100%;object-fit:cover"><span class="selo-vivo"><i></i>Ao vivo</span></div>
-      </div>
+      <div class="linha-dia rv"><span class="d">Sexta</span><span class="o">Ao vivo, show a partir das 20h30</span><span class="h">17h às 22h30</span></div>
       <div class="linha-dia rv"><span class="d">Sábado</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
       <div class="linha-dia rv"><span class="d">Domingo</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
-      <a class="linha-dia destaque especial rv" href="#feriados" data-ir="feriados" data-fim="2026-10-12T03:00:00-03:00">
-        <span class="d">Dom 11/10</span>
-        <span class="o">Especial de véspera de feriado<b>Show a partir das 20h30</b><small>Segunda, 12 de outubro, é feriado. Toque pra ver a atração.</small></span>
-        <div class="mini-video"><img data-k="E_FERIADO" alt="Atração do domingo, 11 de outubro" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top"><span class="selo-vivo"><i></i>Especial</span></div>
-      </a>
     </div>
     <div class="fechar-agenda">
       <div class="caixa caixa-mel rv">
@@ -857,44 +880,6 @@ footer{background:#120E0C;padding:110px 0 50px}
         <h3>Aniversário ou confraternização?</h3>
         <p>A gente separa as mesas pro seu grupo. Chame no WhatsApp com a data e o número de pessoas.</p>
         <a class="btn btn-mel" href="https://wa.me/5549999328763?text=Ol%C3%A1!%20Quero%20reservar%20mesas%20no%20Matriz%20Grill%20pra%20uma%20comemora%C3%A7%C3%A3o." target="_blank" rel="noopener">Reservar pro meu grupo</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= FERIADOS ================= -->
-<section class="area" id="feriados" data-area>
-  <div class="wrap">
-    <div class="topo-area bg-foto" data-bgk="E_FERIADO" style="--op:.45">
-      <h1 class="gigante">Véspera de<br>feriado.</h1>
-      <p class="sub">Em algumas vésperas de feriado tem show especial no Matriz. Dia seguinte é folga, então a noite pode ir longe.</p>
-    </div>
-    <div class="evento-esp" data-fim="2026-10-12T03:00:00-03:00">
-      <div class="foto-selo rv"><img class="selo-cedo" data-k="SELO" alt="Chegue cedo: reservas até 20h45"><figure><img data-k="E_FERIADO" alt="Atração do show de véspera de feriado, domingo, 11 de outubro" loading="lazy"></figure></div>
-      <div class="rv">
-        <span class="selo-vivo" style="position:static"><i></i>Próximo especial</span>
-        <h2 class="data-grande">Domingo,<br>11 de outubro.</h2>
-        <p class="sub">Show a partir das 20h30. Segunda, 12 de outubro, é feriado.</p>
-        <ul class="infos">
-          <li><b>Horário do show</b><span>A partir das 20h30</span></li>
-          <li><b>Reserva</b><span>Pelo WhatsApp, mesa garantida até as 20h45</span></li>
-          <li><b>Onde</b><span>Rua Padre Anchieta, 304, Videira</span></li>
-        </ul>
-        <div class="acoes">
-          <a class="btn btn-mel" href="https://wa.me/5549999328763?text=Ol%C3%A1!%20Quero%20reservar%20uma%20mesa%20pro%20domingo%2C%2011%2F10." target="_blank" rel="noopener">Reservar pro domingo</a>
-          <a class="btn btn-linha" href="#cardapio" data-ir="cardapio">Ver cardápio</a>
-        </div>
-      </div>
-    </div>
-    <div class="sem-evento" hidden>
-      <p class="sub">O próximo especial de feriado ainda vai ser anunciado.</p>
-    </div>
-    <div class="caixa caixa-escura rv" style="margin:0 0 130px">
-      <h3>Saiba primeiro do próximo</h3>
-      <p style="color:var(--creme2)">Os especiais de feriado são anunciados primeiro no grupo do Matriz no WhatsApp e no Instagram.</p>
-      <div class="acoes">
-        <a class="btn btn-mel" href="https://chat.whatsapp.com/JrkpvZwuntW8oRBd3V7EpU" target="_blank" rel="noopener">Entrar no grupo</a>
-        <a class="btn btn-linha" href="https://www.instagram.com/matrizgrill.videira/" target="_blank" rel="noopener">Seguir no Instagram</a>
       </div>
     </div>
   </div>
@@ -1124,20 +1109,38 @@ footer{background:#120E0C;padding:110px 0 50px}
 
 <script>
 /* =====================================================================
-   ATUALIZAR TODA SEMANA — é só mexer aqui.
-   dia:     a data da sexta, no formato ano-mês-dia
-   artista: o nome de quem toca (deixe '' se ainda não souber)
-   foto:    o arquivo da arte, dentro da pasta public/midia
-            (deixe '' enquanto a arte não chega: entra a foto da casa cheia)
-   fundo:   versão pequena e desfocada da arte, em public/midia/fundo (opcional)
-   Passou a sexta, o site volta sozinho para "Ao vivo toda sexta" e
-   nunca fica mostrando data vencida.
+   PROGRAMAÇÃO — é só mexer aqui. Uma linha por show, em ordem de data.
+   dia:      a data, no formato ano-mês-dia
+   artista:  o nome de quem toca (deixe '' se ainda não souber)
+   foto:     a foto ou arte, dentro da pasta public/midia
+             (deixe '' enquanto não chega: a linha fica só com o nome)
+   fundo:    versão pequena e desfocada da arte, em public/midia/fundo (opcional)
+   especial: nome do evento quando não é a sexta normal
+             (ex.: 'Especial de véspera de feriado'). Ele ganha a faixa vermelha
+             no início do site nas 3 semanas antes da data.
+   hora:     só precisa nos especiais (a sexta já é 20h30)
+   nota:     uma frase curta a mais (opcional)
+   Show que já passou some sozinho. A página inicial e a Agenda mostram
+   sempre o próximo, sem ninguém precisar mexer toda semana.
    ===================================================================== */
-var SEMANA = {
-  sexta: { dia: '2026-10-09', artista: 'Renan Thalles', foto: '/midia/sexta-09-10.jpg', fundo: '/midia/fundo/sexta-09-10.jpg' }
-};
+var SHOWS = [
+  { dia: '2026-10-09', artista: 'Renan Thalles', foto: '/midia/sexta-09-10.jpg', fundo: '/midia/fundo/sexta-09-10.jpg' },
+  { dia: '2026-10-11', especial: 'Especial de véspera de feriado', artista: '', foto: '/midia/e-feriado.jpg', hora: '20h30', nota: 'Segunda, 12 de outubro, é feriado.' },
+  { dia: '2026-10-16', artista: 'João Vitor e José', foto: '' },
+  { dia: '2026-10-23', artista: 'Marco e Anderson', foto: '' },
+  { dia: '2026-10-30', artista: 'Wesley Marques', foto: '' },
+  { dia: '2026-11-01', especial: 'Encontro do Modão', artista: 'Marco e Anderson, Tico e Zimmer', foto: '', nota: 'Segunda, 2 de novembro, é feriado.' },
+  { dia: '2026-11-06', artista: 'Dihh Ribeiro e Duda Ribeiro', foto: '' },
+  { dia: '2026-11-13', artista: 'Claudio Amaral', foto: '' },
+  { dia: '2026-11-20', artista: 'Kaza da Nonna', foto: '' },
+  { dia: '2026-11-27', artista: 'William Amaral', foto: '' }
+];
+/* a "sexta da semana" da página inicial é a próxima sexta da lista acima */
+var HOJE_SP = new Date(Date.now() - 3 * 36e5).toISOString().slice(0, 10);
+var SEMANA = { sexta: SHOWS.filter(function (s) { return !s.especial && s.dia >= HOJE_SP && new Date(s.dia + 'T00:00:00Z').getUTCDay() === 5; })
+                           .sort(function (a, b) { return a.dia < b.dia ? -1 : 1; })[0] || { dia: '2000-01-07', artista: '', foto: '', fundo: '' } };
 </script>
-<script>var ASSETS={"P_ESQUINA": "/midia/p-esquina.jpg","F_PETIT": "/midia/f-petit.jpg","HERO_WIDE_MP4": "/midia/hero-wide-2.mp4","C_DRONE_MP4": "/midia/c-drone.mp4","MONT_JPG": "/midia/mont.jpg","P_DEPOIS": "/midia/p-depois.jpg","F_ENTREVERO": "/midia/f-entrevero.jpg","HERO_JPG": "/midia/hero.jpg","F_VINHOS": "/midia/f-vinhos.jpg","MESAS_JPG": "/midia/mesas.jpg","P_DONOS": "/midia/p-donos.jpg","F_TILAPIA": "/midia/f-tilapia.jpg","P_TETO": "/midia/p-teto.jpg","E_FERIADO": "/midia/e-feriado.jpg","P_ANTES": "/midia/p-antes.jpg","GALERA_JPG": "/midia/galera.jpg","C_DRONE_JPG": "/midia/c-drone.jpg","C_VIOLAO_JPG": "/midia/c-violao.jpg","SELO": "/midia/selo.png","C_CHOPP_MP4": "/midia/c-chopp.mp4","F_TABUA": "/midia/f-tabua.jpg","P_GALERA": "/midia/p-galera.jpg","F_HAMB2": "/midia/f-hamb2.jpg","F_TABUA03": "/midia/f-tabua03.jpg","F_COMBO": "/midia/f-combo.jpg","P_ANTES2": "/midia/p-antes2.jpg","C_VIOLAO_MP4": "/midia/c-violao.mp4","C_CHOPP_JPG": "/midia/c-chopp.jpg","P_ANTES1": "/midia/p-antes1.jpg","MONT_MP4": "/midia/mont-2.mp4","E_SEXTA": "/midia/e-sexta.jpg","F_TABUA02": "/midia/f-tabua02.jpg","F_LINGUICA": "/midia/f-linguica.jpg","HERO_WIDE_JPG": "/midia/hero-wide.jpg","F_HAMB1": "/midia/f-hamb1.jpg","SALAO_JPG": "/midia/salao.jpg","BANDA_JPG": "/midia/banda.jpg","F_POLENTA": "/midia/f-polenta.jpg","LOGO": "/midia/logo.png","FESTA_BOLO_MP4": "/midia/festa-bolo.mp4","FESTA_BOLO_JPG": "/midia/festa-bolo.jpg","C_BANDA_MP4": "/midia/c-banda.mp4","C_BANDA_JPG": "/midia/c-banda.jpg","C_SANFONA_MP4": "/midia/c-sanfona.mp4","C_SANFONA_JPG": "/midia/c-sanfona.jpg","G_DUPLA": "/midia/g-dupla.jpg","G_AMIGOS": "/midia/g-amigos.jpg","G_BANDA": "/midia/g-banda.jpg","G_TURMA": "/midia/g-turma.jpg"};</script>
+<script>var ASSETS={"P_ESQUINA": "/midia/p-esquina.jpg","F_PETIT": "/midia/f-petit.jpg","HERO_WIDE_MP4": "/midia/hero-wide-2.mp4","C_DRONE_MP4": "/midia/c-drone.mp4","MONT_JPG": "/midia/mont.jpg","P_DEPOIS": "/midia/p-depois.jpg","F_ENTREVERO": "/midia/f-entrevero.jpg","HERO_JPG": "/midia/hero.jpg","F_VINHOS": "/midia/f-vinhos.jpg","MESAS_JPG": "/midia/mesas.jpg","P_DONOS": "/midia/p-donos.jpg","F_TILAPIA": "/midia/f-tilapia.jpg","P_TETO": "/midia/p-teto.jpg","P_ANTES": "/midia/p-antes.jpg","GALERA_JPG": "/midia/galera.jpg","C_DRONE_JPG": "/midia/c-drone.jpg","C_VIOLAO_JPG": "/midia/c-violao.jpg","SELO": "/midia/selo.png","C_CHOPP_MP4": "/midia/c-chopp.mp4","F_TABUA": "/midia/f-tabua.jpg","P_GALERA": "/midia/p-galera.jpg","F_HAMB2": "/midia/f-hamb2.jpg","F_TABUA03": "/midia/f-tabua03.jpg","F_COMBO": "/midia/f-combo.jpg","P_ANTES2": "/midia/p-antes2.jpg","C_VIOLAO_MP4": "/midia/c-violao.mp4","C_CHOPP_JPG": "/midia/c-chopp.jpg","P_ANTES1": "/midia/p-antes1.jpg","MONT_MP4": "/midia/mont-2.mp4","E_SEXTA": "/midia/e-sexta.jpg","F_TABUA02": "/midia/f-tabua02.jpg","F_LINGUICA": "/midia/f-linguica.jpg","HERO_WIDE_JPG": "/midia/hero-wide.jpg","F_HAMB1": "/midia/f-hamb1.jpg","SALAO_JPG": "/midia/salao.jpg","BANDA_JPG": "/midia/banda.jpg","F_POLENTA": "/midia/f-polenta.jpg","LOGO": "/midia/logo.png","FESTA_BOLO_MP4": "/midia/festa-bolo.mp4","FESTA_BOLO_JPG": "/midia/festa-bolo.jpg","C_BANDA_MP4": "/midia/c-banda.mp4","C_BANDA_JPG": "/midia/c-banda.jpg","C_SANFONA_MP4": "/midia/c-sanfona.mp4","C_SANFONA_JPG": "/midia/c-sanfona.jpg","G_DUPLA": "/midia/g-dupla.jpg","G_AMIGOS": "/midia/g-amigos.jpg","G_BANDA": "/midia/g-banda.jpg","G_TURMA": "/midia/g-turma.jpg"};</script>
 <script>
 (function(){
   /* ---------- Atração da sexta ---------- */
@@ -1164,6 +1167,67 @@ var SEMANA = {
   var FUNDO_SEXTA=(sxVale&&sx.foto)?(sx.fundo||'/midia/fundo/banda.jpg'):(sxVale?'/midia/fundo/galera.jpg':'/midia/fundo/banda.jpg');
   document.querySelectorAll('[data-bgk]').forEach(function(el){var k=el.dataset.bgk,v=ASSETS[k]; if(!v)return; if(el.classList.contains('bg-foto')) v=(k==='E_SEXTA')?FUNDO_SEXTA:v.replace('/midia/','/midia/fundo/'); el.style.setProperty('--bg','url('+v+')')});
   document.querySelectorAll('[data-pk]').forEach(function(el){el.poster=ASSETS[el.dataset.pk]});
+
+  /* ---------- Programação do mês (Agenda) e faixa do especial (Início) ---------- */
+  (function(){
+    var DIAS=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'], D3=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+    var MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+    var e=function(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})};
+    var dois=function(n){return (n<10?'0':'')+n};
+    var falta=function(dia){return Math.round((Date.parse(dia+'T00:00:00Z')-Date.parse(HOJE_SP+'T00:00:00Z'))/864e5)};
+    var TELHADO='<svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var prox=SHOWS.filter(function(s){return falta(s.dia)>=0}).sort(function(a,b){return a.dia<b.dia?-1:1});
+    var dados=function(s){
+      var dt=new Date(s.dia+'T00:00:00Z'), wd=dt.getUTCDay(), d=dt.getUTCDate(), m=dt.getUTCMonth(), f=falta(s.dia);
+      var nome=(s.artista||'').trim(), hora=s.hora||(!s.especial&&wd===5?'20h30':'');
+      return {wd:wd,d:d,m:m,nome:nome,hora:hora,curto:dois(d)+'/'+dois(m+1),quando:f===0?'Hoje':(f===1?'Amanhã':''),
+        titulo:s.especial||nome||'Atração a confirmar',
+        zap:'https://wa.me/5549999328763?text='+encodeURIComponent('Olá! Quero reservar uma mesa pra '+DIAS[wd].toLowerCase()+', '+d+'/'+(m+1)+'.'),
+        botao:'Reservar '+((wd===0||wd===6)?'pro ':'pra ')+DIAS[wd].toLowerCase(),
+        alt:(s.especial?s.especial:(nome||'Atração'))+', '+DIAS[wd].toLowerCase()+', '+d+' de '+MES[m]+', no Matriz Grill'};
+    };
+    var caixa=document.getElementById('prog');
+    if(caixa){
+      var html='';
+      if(!prox.length){
+        html='<p class="prog-vazio">Ao vivo toda sexta, a partir das 20h30. As próximas atrações saem primeiro no grupo do WhatsApp e no Instagram.</p>';
+      } else {
+        var p=prox[0], x=dados(p), linha=[];
+        if(p.especial&&x.nome) linha.push('Com '+x.nome+'.');
+        if(x.hora) linha.push('Show a partir das '+x.hora+'.');
+        if(p.nota) linha.push(p.nota);
+        if(x.hora==='20h30') linha.push('Mesa reservada até as 20h45.');
+        html+='<div class="linha-dia destaque'+(p.especial?' especial':'')+(p.foto?'':' sem-foto')+'">'
+          +'<span class="d">'+D3[x.wd]+' '+x.curto+(x.quando?'<span class="tag-dia">'+x.quando+'</span>':'')+'</span>'
+          +'<span class="o"><span class="rot">'+(p.especial?'Próximo show · especial':'Próximo show')+'</span><b>'+e(x.titulo)+'</b><small>'+e(linha.join(' '))+'</small>'
+          +'<a class="btn btn-mel" href="'+x.zap+'" target="_blank" rel="noopener">'+x.botao+'</a></span>'
+          +(p.foto?'<div class="mini-video"><img src="'+e(p.foto)+'" alt="'+e(x.alt)+'" loading="lazy" decoding="async"><span class="selo-vivo"><i></i>'+(p.especial?'Especial':'Ao vivo')+'</span></div>':'')
+          +'</div>';
+        var mesAtual=-1;
+        prox.slice(1).forEach(function(s){
+          var y=dados(s), det=[];
+          if(y.m!==mesAtual){mesAtual=y.m; html+='<h3 class="mes-prog">'+MES[y.m]+'</h3>';}
+          det.push(s.especial?'Especial':'Ao vivo');
+          if(s.especial&&y.nome) det.push('com '+y.nome);
+          if(y.hora) det.push(y.hora);
+          html+='<div class="linha-show'+(s.especial?' especial':'')+'">'
+            +'<span class="d"><em>'+D3[y.wd]+'</em>'+y.curto+'</span>'
+            +'<span class="o"><b>'+e(y.titulo)+'</b><small>'+e(det.join(' · '))+'</small></span>'
+            +'<span class="ft">'+(s.foto?'<img src="'+e(s.foto)+'" alt="'+e(y.alt)+'" loading="lazy" decoding="async">':TELHADO)+'</span>'
+            +'</div>';
+        });
+      }
+      caixa.innerHTML=html;
+    }
+    /* faixa vermelha no início: próximo especial, a partir de 3 semanas antes */
+    var esp=prox.filter(function(s){return s.especial&&falta(s.dia)<=21})[0], faixa=document.getElementById('faixaEsp');
+    if(esp&&faixa){
+      var z=dados(esp);
+      faixa.querySelector('[data-esp="rotulo"]').textContent=esp.especial;
+      faixa.querySelector('[data-esp="data"]').textContent=DIAS[z.wd]+', '+z.d+' de '+MES[z.m]+(z.hora?', '+z.hora:'');
+      faixa.hidden=false;
+    }
+  })();
   /* ---------- Vídeo da abertura: horizontal no computador, vertical no celular.
      Cada arquivo já é uma montagem com várias cenas que se alternam e volta ao começo sem corte. ---------- */
   var hv=document.getElementById('heroVideo');
@@ -1315,6 +1379,7 @@ var SEMANA = {
     if(window.scrollY>0||document.documentElement.scrollTop>0) window.scrollTo(0,0);
   }
   function ativar(id,cat){
+    if(id==='feriados') id='agenda';   /* link antigo da aba Feriados cai na Agenda */
     if(!document.getElementById(id)) id='inicio';
     var trocar=function(){
       areas.forEach(function(a){a.classList.toggle('ativa',a.id===id);a.classList.remove('entrando')});

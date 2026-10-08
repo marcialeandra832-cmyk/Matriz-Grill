@@ -1,20 +1,21 @@
 # Site do Matriz Grill
 
-Página única (`index.html`) com as áreas Início, Agenda, Feriados, Cardápio, Delivery, Fotos e vídeos e A casa.
+Página única (`index.html`) com as áreas Início, Agenda, Cardápio, Delivery, Fotos e vídeos e A casa.
 
-## Atualização semanal (sexta ao vivo)
+## Programação (shows do mês)
 
-1. Salve a foto da semana em `public/midia/` (ex.: `sexta-09-10.jpg`). O ideal é a arte quadrada e limpa (sem logo e sem textos), 1200x1200: a data e o nome o site já escreve. Se só houver o story, vale recortar a faixa dos músicos.
-2. No `index.html`, procure por **ATUALIZAR TODA SEMANA** e troque `dia`, `artista` e `foto`.
+No `index.html`, procure por **PROGRAMAÇÃO**: é uma lista com uma linha por show (`dia`, `artista`, `foto`).
 
-3. Use sempre um nome de arquivo novo a cada semana (ex.: `sexta-16-10.jpg`). O navegador guarda as fotos por um dia; com o mesmo nome, quem já visitou veria a foto antiga.
+1. Para incluir os shows do mês, acrescente as linhas em ordem de data. Sem foto, deixe `foto: ''`: a linha aparece só com o nome.
+2. Quando a foto ou a arte chegar, salve em `public/midia/` (ex.: `sexta-16-10.jpg`) e ponha o caminho em `foto`. O ideal é quadrada e limpa (sem logo e sem textos), 1200x1200: a data e o nome o site já escreve.
+3. Use sempre um nome de arquivo novo (o navegador guarda as fotos por um dia; com o mesmo nome, quem já visitou veria a foto antiga).
 4. Opcional: salve em `public/midia/fundo/` uma cópia pequena e desfocada da arte (192 px de largura) e aponte em `fundo`. Sem ela, entra o fundo padrão.
 
-Depois que a sexta passa, o site volta sozinho para "Ao vivo toda sexta".
+Show que já passou some sozinho. A Agenda destaca o próximo show e lista os seguintes por mês; a página inicial mostra sempre a próxima sexta. Sem nenhum show na lista, o site volta para "Ao vivo toda sexta".
 
-## Especial de feriado
+## Especial (véspera de feriado, encontros)
 
-Procure por `data-fim` no `index.html`: é a data em que o aviso some sozinho.
+É uma linha da mesma lista com `especial: 'Nome do evento'` (e `hora`, se souber). Nas 3 semanas antes da data ele ganha a faixa vermelha no início do site, que leva para a Agenda. Não existe mais a aba Feriados.
 
 ## Cardápio
 
