@@ -91,7 +91,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* ---------- ÁREAS ---------- */
 .area{display:none}
 .area.ativa{display:block}
-.area.entrando{animation:entra .75s cubic-bezier(.7,0,.2,1) both}
+/* 'backwards' e não 'both': se a animação ficar presa no fim, a área vira referência pros elementos fixos
+   e a galeria de pratos (que fica presa na tela durante a rolagem) some. */
+.area.entrando{animation:entra .75s cubic-bezier(.7,0,.2,1) backwards}
 @keyframes entra{from{clip-path:inset(100% 0 0 0);transform:translateY(40px)}to{clip-path:inset(0 0 0 0);transform:none}}
 .cortina{position:fixed;inset:0;z-index:45;background:var(--carvao);transform:translateY(100%);pointer-events:none;visibility:hidden;display:flex;align-items:center;justify-content:center}
 .cortina::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px;background:var(--mel)}
@@ -1369,6 +1371,8 @@ var SEMANA = { sexta: SHOWS.filter(function (s) { return !s.especial && s.dia >=
   var reduz=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var cortina=document.getElementById('cortina');
   var primeira=true;
+  /* terminou a entrada da área: tira a classe e refaz as medidas da rolagem (galeria de pratos presa na tela) */
+  areas.forEach(function(a){a.addEventListener('animationend',function(ev){ if(ev.target===a&&ev.animationName==='entra'){a.classList.remove('entrando'); if(window.ScrollTrigger)window.ScrollTrigger.refresh();} })});
   /* carrega já as fotos da área aberta, uma atrás da outra, sem depender da rolagem */
   function carregarArea(alvo){[].slice.call(alvo.querySelectorAll('img[loading="lazy"]')).forEach(function(im,i){setTimeout(function(){im.loading='eager'},350+i*110)})}
   /* toda troca de área começa no topo da página, sempre */
