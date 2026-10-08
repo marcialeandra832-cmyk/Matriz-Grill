@@ -439,6 +439,19 @@ html.lenis,html.lenis body{height:auto}
 .caixa p{margin:0;max-width:40ch}
 .caixa-mel{background:var(--mel);color:var(--carvao)}
 .caixa-escura{background:var(--carvao2)}
+.caixa-vinho{background:var(--vinho);color:#fff;grid-column:1/-1}
+.caixa-vinho p{max-width:52ch}
+.btn-borda-escura{border-color:rgba(26,21,18,.55);color:var(--carvao)}
+.btn-borda-escura:hover{border-color:var(--carvao)}
+.festa{padding:0 0 130px}
+.cartao-festa{display:grid;grid-template-columns:1.15fr .85fr;background:var(--mel);color:var(--carvao);border-radius:32px;overflow:hidden}
+.txt-festa{padding:72px 64px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:22px}
+.rotulo-festa{font-family:var(--display);font-weight:800;font-size:26px;line-height:1;text-transform:uppercase;letter-spacing:.02em}
+.cartao-festa .titulo{font-size:clamp(56px,6.6vw,108px)}
+.cartao-festa p{margin:0;font-size:19px;max-width:42ch}
+.cartao-festa .acoes{margin-top:8px}
+.cartao-festa figure{margin:0;min-height:520px;position:relative}
+.cartao-festa figure img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%}
 
 /* ---------- CARDÁPIO ---------- */
 #cardapio{background:var(--creme);color:var(--carvao)}
@@ -567,6 +580,12 @@ footer{background:#120E0C;padding:110px 0 50px}
   .fechar-agenda{grid-template-columns:1fr;padding:60px 0 90px}
   .caixa{padding:32px}
   .caixa h3{font-size:40px}
+  .festa{padding:0 0 80px}
+  .cartao-festa{grid-template-columns:1fr;border-radius:26px}
+  .cartao-festa figure{min-height:0;aspect-ratio:4/3;order:-1}
+  .txt-festa{padding:32px 26px 36px;gap:16px}
+  .rotulo-festa{font-size:21px}
+  .cartao-festa p{font-size:17px}
   .abas{top:calc(74px + env(safe-area-inset-top,0px))}
   .painel{grid-template-columns:1fr;gap:10px;padding-top:36px}
   .painel h2{position:static;font-size:min(72px,13.5vw)}
@@ -725,6 +744,23 @@ footer{background:#120E0C;padding:110px 0 50px}
     </div>
   </div>
 
+  <div class="festa">
+    <div class="wrap">
+      <div class="cartao-festa rv">
+        <div class="txt-festa">
+          <span class="rotulo-festa">Aniversários e confraternizações</span>
+          <h2 class="titulo">Comemore<br>no Matriz.</h2>
+          <p>Aniversário, confraternização da empresa ou encontro da turma: a gente separa as mesas pro seu grupo. Fim de ano chegando, vale garantir a data logo.</p>
+          <div class="acoes">
+            <a class="btn btn-escuro" href="https://wa.me/5549999328763?text=Ol%C3%A1!%20Quero%20reservar%20mesas%20no%20Matriz%20Grill%20pra%20uma%20comemora%C3%A7%C3%A3o." target="_blank" rel="noopener">Reservar pro meu grupo</a>
+            <a class="btn btn-borda-escura" href="#cardapio" data-ir="cardapio">Ver cardápio</a>
+          </div>
+        </div>
+        <figure><img data-k="MESAS_JPG" alt="Mesas cheias de amigos numa noite no Matriz Grill" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+
   <div class="esquina">
     <img data-k="P_ESQUINA" alt="Fachada do Matriz Grill na esquina, com clientes na calçada" loading="lazy">
     <div class="wrap">
@@ -815,6 +851,11 @@ footer{background:#120E0C;padding:110px 0 50px}
         <h3>Entre no grupo do WhatsApp</h3>
         <p style="color:var(--creme2)">Toda semana, o artista da sexta sai primeiro no grupo do Matriz no WhatsApp.</p>
         <a class="btn btn-linha" href="https://chat.whatsapp.com/JrkpvZwuntW8oRBd3V7EpU" target="_blank" rel="noopener">Entrar no grupo</a>
+      </div>
+      <div class="caixa caixa-vinho rv">
+        <h3>Aniversário ou confraternização?</h3>
+        <p>A gente separa as mesas pro seu grupo. Chame no WhatsApp com a data e o número de pessoas.</p>
+        <a class="btn btn-mel" href="https://wa.me/5549999328763?text=Ol%C3%A1!%20Quero%20reservar%20mesas%20no%20Matriz%20Grill%20pra%20uma%20comemora%C3%A7%C3%A3o." target="_blank" rel="noopener">Reservar pro meu grupo</a>
       </div>
     </div>
   </div>
@@ -940,7 +981,6 @@ footer{background:#120E0C;padding:110px 0 50px}
       <button type="button" class="peca" data-cat="cozinha" data-tipo="i" data-srck="F_LINGUICA" data-alt="Linguiça campeira"><img data-k="F_LINGUICA" alt="Linguiça campeira" loading="lazy"><span class="leg">Linguiça campeira</span></button>
       <button type="button" class="peca" data-cat="vivo" data-tipo="i" data-srck="BANDA_JPG" data-alt="Banda no palco"><img data-k="BANDA_JPG" alt="Banda no palco" loading="lazy"><span class="leg">Banda no palco</span></button>
       <button type="button" class="peca" data-cat="casa" data-tipo="i" data-srck="P_GALERA" data-alt="Amigos na calçada do Matriz"><img data-k="P_GALERA" alt="Amigos na calçada do Matriz" loading="lazy"><span class="leg">Amigos na calçada do Matriz</span></button>
-      <button type="button" class="peca video" data-cat="cozinha" data-tipo="v" data-srck="C_PRATO_MP4" data-alt="Prato servido à mesa"><video data-k="C_PRATO_MP4" data-pk="C_PRATO_JPG" muted loop playsinline preload="none" aria-hidden="true"></video><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15c0 .4.4.6.7.4l12-7.5c.3-.2.3-.6 0-.8l-12-7.5c-.3-.2-.7 0-.7.4z"/></svg></span><span class="leg">Prato servido à mesa</span></button>
       <button type="button" class="peca" data-cat="cozinha" data-tipo="i" data-srck="F_COMBO" data-alt="Burger com bacon e fritas"><img data-k="F_COMBO" alt="Burger com bacon e fritas" loading="lazy"><span class="leg">Burger com bacon e fritas</span></button>
       <button type="button" class="peca" data-cat="vivo" data-tipo="i" data-srck="HERO_JPG" data-alt="Casa cheia numa sexta"><img data-k="HERO_JPG" alt="Casa cheia numa sexta" loading="lazy"><span class="leg">Casa cheia numa sexta</span></button>
       <button type="button" class="peca" data-cat="cozinha" data-tipo="i" data-srck="F_ENTREVERO" data-alt="Entrevero da casa"><img data-k="F_ENTREVERO" alt="Entrevero da casa" loading="lazy"><span class="leg">Entrevero da casa</span></button>
@@ -1090,7 +1130,7 @@ var SEMANA = {
   sexta: { dia: '2026-10-09', artista: 'Renan Thalles', foto: '/midia/sexta-09-10.jpg', fundo: '/midia/fundo/sexta-09-10.jpg' }
 };
 </script>
-<script>var ASSETS={"P_ESQUINA": "/midia/p-esquina.jpg","F_PETIT": "/midia/f-petit.jpg","HERO_WIDE_MP4": "/midia/hero-wide.mp4","C_DRONE_MP4": "/midia/c-drone.mp4","MONT_JPG": "/midia/mont.jpg","P_DEPOIS": "/midia/p-depois.jpg","F_ENTREVERO": "/midia/f-entrevero.jpg","HERO_JPG": "/midia/hero.jpg","F_VINHOS": "/midia/f-vinhos.jpg","C_PRATO_MP4": "/midia/c-prato.mp4","MESAS_JPG": "/midia/mesas.jpg","C_PRATO_JPG": "/midia/c-prato.jpg","P_DONOS": "/midia/p-donos.jpg","F_TILAPIA": "/midia/f-tilapia.jpg","P_TETO": "/midia/p-teto.jpg","E_FERIADO": "/midia/e-feriado.jpg","P_ANTES": "/midia/p-antes.jpg","GALERA_JPG": "/midia/galera.jpg","C_DRONE_JPG": "/midia/c-drone.jpg","C_VIOLAO_JPG": "/midia/c-violao.jpg","SELO": "/midia/selo.png","C_CHOPP_MP4": "/midia/c-chopp.mp4","F_TABUA": "/midia/f-tabua.jpg","P_GALERA": "/midia/p-galera.jpg","F_HAMB2": "/midia/f-hamb2.jpg","F_TABUA03": "/midia/f-tabua03.jpg","F_COMBO": "/midia/f-combo.jpg","P_ANTES2": "/midia/p-antes2.jpg","C_VIOLAO_MP4": "/midia/c-violao.mp4","C_CHOPP_JPG": "/midia/c-chopp.jpg","P_ANTES1": "/midia/p-antes1.jpg","MONT_MP4": "/midia/mont.mp4","E_SEXTA": "/midia/e-sexta.jpg","F_TABUA02": "/midia/f-tabua02.jpg","F_LINGUICA": "/midia/f-linguica.jpg","HERO_WIDE_JPG": "/midia/hero-wide.jpg","F_HAMB1": "/midia/f-hamb1.jpg","SALAO_JPG": "/midia/salao.jpg","BANDA_JPG": "/midia/banda.jpg","F_POLENTA": "/midia/f-polenta.jpg","LOGO": "/midia/logo.png"};</script>
+<script>var ASSETS={"P_ESQUINA": "/midia/p-esquina.jpg","F_PETIT": "/midia/f-petit.jpg","HERO_WIDE_MP4": "/midia/hero-wide.mp4","C_DRONE_MP4": "/midia/c-drone.mp4","MONT_JPG": "/midia/mont.jpg","P_DEPOIS": "/midia/p-depois.jpg","F_ENTREVERO": "/midia/f-entrevero.jpg","HERO_JPG": "/midia/hero.jpg","F_VINHOS": "/midia/f-vinhos.jpg","MESAS_JPG": "/midia/mesas.jpg","P_DONOS": "/midia/p-donos.jpg","F_TILAPIA": "/midia/f-tilapia.jpg","P_TETO": "/midia/p-teto.jpg","E_FERIADO": "/midia/e-feriado.jpg","P_ANTES": "/midia/p-antes.jpg","GALERA_JPG": "/midia/galera.jpg","C_DRONE_JPG": "/midia/c-drone.jpg","C_VIOLAO_JPG": "/midia/c-violao.jpg","SELO": "/midia/selo.png","C_CHOPP_MP4": "/midia/c-chopp.mp4","F_TABUA": "/midia/f-tabua.jpg","P_GALERA": "/midia/p-galera.jpg","F_HAMB2": "/midia/f-hamb2.jpg","F_TABUA03": "/midia/f-tabua03.jpg","F_COMBO": "/midia/f-combo.jpg","P_ANTES2": "/midia/p-antes2.jpg","C_VIOLAO_MP4": "/midia/c-violao.mp4","C_CHOPP_JPG": "/midia/c-chopp.jpg","P_ANTES1": "/midia/p-antes1.jpg","MONT_MP4": "/midia/mont.mp4","E_SEXTA": "/midia/e-sexta.jpg","F_TABUA02": "/midia/f-tabua02.jpg","F_LINGUICA": "/midia/f-linguica.jpg","HERO_WIDE_JPG": "/midia/hero-wide.jpg","F_HAMB1": "/midia/f-hamb1.jpg","SALAO_JPG": "/midia/salao.jpg","BANDA_JPG": "/midia/banda.jpg","F_POLENTA": "/midia/f-polenta.jpg","LOGO": "/midia/logo.png"};</script>
 <script>
 (function(){
   /* ---------- Atração da sexta ---------- */
