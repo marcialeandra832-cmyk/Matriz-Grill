@@ -22,7 +22,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Matriz Grill","description":"Bar e grill em Videira-SC desde 1996. Tábuas na chapa, hambúrgueres, porções, chopp e música ao vivo toda sexta.","foundingDate":"1996","address":{"@type":"PostalAddress","streetAddress":"Rua Padre Anchieta, 304","addressLocality":"Videira","addressRegion":"SC","postalCode":"89560-250","addressCountry":"BR"},"telephone":"+55-49-99932-8763","servesCuisine":["Grill","Hambúrgueres","Petiscos"],"priceRange":"R$ 40–60","acceptsReservations":"True","menu":"https://cardapio-matrizgrill.vercel.app/","url":"https://matrizgrillvideira.vercel.app/","image":"https://matrizgrillvideira.vercel.app/midia/compartilhar.jpg","geo":{"@type":"GeoCoordinates","latitude":-27.0081487,"longitude":-51.1520155},"sameAs":["https://www.instagram.com/matrizgrill.videira/"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"17:00","closes":"22:30"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Restaurant","name":"Matriz Grill","alternateName":"Bar do Seco","description":"Bar e grill em Videira-SC desde 1996. Tábuas na chapa, hambúrgueres, porções, chopp e música ao vivo toda sexta.","foundingDate":"1996","address":{"@type":"PostalAddress","streetAddress":"Rua Padre Anchieta, 304","addressLocality":"Videira","addressRegion":"SC","postalCode":"89560-250","addressCountry":"BR"},"telephone":"+55-49-99932-8763","servesCuisine":["Grill","Hambúrgueres","Petiscos"],"priceRange":"R$ 40–60","acceptsReservations":"True","menu":"https://cardapio-matrizgrill.vercel.app/","url":"https://matrizgrillvideira.vercel.app/","image":"https://matrizgrillvideira.vercel.app/midia/compartilhar.jpg","geo":{"@type":"GeoCoordinates","latitude":-27.0081487,"longitude":-51.1520155},"sameAs":["https://www.instagram.com/matrizgrill.videira/"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"17:00","closes":"22:30"}]}</script>
 <link rel="preload" href="/fontes/big-shoulders-display-latin-900-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:600;font-display:swap;src:url(/fontes/big-shoulders-display-latin-600-normal.woff2) format('woff2')}
@@ -129,14 +129,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .selo-vivo i{width:8px;height:8px;border-radius:50%;background:#fff;animation:pisca 1.2s infinite}
 @keyframes pisca{50%{opacity:.25}}
 
-.semana{background:var(--nogueira);padding:0}
-.semana .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-.dia{display:flex;flex-direction:column;gap:12px;padding:56px 40px 56px 0;border-right:1px solid rgba(243,236,226,.15);transition:background .25s}
-.dia+.dia{padding-left:40px}
-.dia:last-child{border-right:0}
-.dia .nome{font-family:var(--display);font-weight:600;font-size:22px;color:#E9BC84}
-.dia strong{font-family:var(--display);font-weight:800;font-size:clamp(34px,3.4vw,50px);line-height:.95;text-transform:uppercase}
-.dia span:last-child{color:var(--creme2);font-size:16px}
 
 .sexta{position:relative;min-height:88vh;display:flex;align-items:flex-end;overflow:hidden}
 .sexta video,.sexta>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%}
@@ -306,8 +298,8 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;ba
   radial-gradient(1100px 760px at 88% -8%, rgba(200,137,63,.13), transparent 62%),
   radial-gradient(900px 700px at -12% 108%, rgba(101,1,19,.22), transparent 60%)}
 body::after{content:"";position:fixed;inset:0;z-index:90;pointer-events:none;background:url(/midia/fundo/grao.png) 0 0/200px 200px}
-.semana,footer{position:relative;isolation:isolate}
-.semana::before,footer::before{content:"";position:absolute;inset:0;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='300'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .22' numOctaves='3' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");background-size:900px 300px;opacity:.34;mix-blend-mode:multiply;pointer-events:none}
+footer{position:relative;isolation:isolate}
+footer::before{content:"";position:absolute;inset:0;z-index:-1;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='300'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.003 .22' numOctaves='3' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23w)'/%3E%3C/svg%3E");background-size:900px 300px;opacity:.34;mix-blend-mode:multiply;pointer-events:none}
 footer::before{opacity:.35;mix-blend-mode:soft-light}
 .atracao,.recebem-sec,.chapa{position:relative;isolation:isolate}
 .chapa::after{content:"";position:absolute;right:-6vw;top:40px;width:min(640px,60vw);aspect-ratio:600/320;z-index:-1;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 320'%3E%3Cpath d='M8 312 L300 20 L592 312' fill='none' stroke='%23C8893F' stroke-width='3' stroke-opacity='.22'/%3E%3Cpath d='M70 312 L300 92 L530 312' fill='none' stroke='%23C8893F' stroke-width='1.5' stroke-opacity='.14'/%3E%3C/svg%3E") center/contain no-repeat}
@@ -324,7 +316,6 @@ footer::before{opacity:.35;mix-blend-mode:soft-light}
 .bg-foto::before{-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 82%,transparent)}
 .topo-area.bg-foto{overflow:visible}
 .topo-area.bg-foto::before{left:calc(50% - 50vw);right:calc(50% - 50vw);transform:none;top:-90px}
-.semana{background:linear-gradient(180deg,rgba(74,47,28,.80),rgba(58,36,21,.90)),var(--bg,none) center 38%/cover no-repeat,var(--nogueira)}
 footer{background:linear-gradient(180deg,rgba(18,14,12,.86),rgba(18,14,12,.97) 55%),var(--bg,none) center 30%/cover no-repeat,#120E0C}
 
 
@@ -342,12 +333,18 @@ footer{background:linear-gradient(180deg,rgba(18,14,12,.86),rgba(18,14,12,.97) 5
 .hero .apoio .sub{font-size:19px;max-width:44ch}
 .lado-acoes{display:flex;flex-direction:column;align-items:flex-end;gap:14px}
 .hero .status{opacity:0;animation:aparece .8s .5s forwards}
+.topo-hero{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.nomes{margin:0;display:flex;align-items:center;gap:.42em;font-family:var(--display);font-weight:800;font-size:clamp(34px,3.5vw,58px);line-height:1;text-transform:uppercase;letter-spacing:.01em;color:var(--creme);white-space:nowrap;opacity:0;animation:aparece .8s .4s forwards}
+.nomes i{display:block;width:.78em;color:var(--mel);flex:none}
+.nomes svg{display:block;width:100%;height:auto;overflow:visible}
 .rolar{position:absolute;right:max(24px,calc((100vw - 1320px)/2));top:50%;width:30px;height:52px;border-radius:999px;border:1.5px solid rgba(243,236,226,.55);background:transparent;display:flex;justify-content:center;padding-top:9px}
 .rolar span{width:4px;height:10px;border-radius:4px;background:var(--creme);animation:rola 1.8s infinite}
 @keyframes rola{0%{transform:translateY(0);opacity:1}70%{transform:translateY(18px);opacity:0}100%{opacity:0}}
 @media (max-width:980px){
   .hero-conteudo{padding:120px 0 104px;gap:16px}
   .hero h1{font-size:clamp(54px,15.5vw,92px)}
+  .topo-hero{flex-direction:column-reverse;align-items:flex-start;gap:12px}
+  .nomes{font-size:clamp(25px,7.6vw,44px)}
   .hero .apoio{grid-template-columns:1fr;gap:20px}
   .lado-acoes{align-items:stretch}
   .hero .apoio .sub{font-size:17px}
@@ -525,9 +522,6 @@ footer{background:#120E0C;padding:110px 0 50px}
   .barra{display:flex}
   body{padding-bottom:84px}
   .acoes .btn{flex:1;padding:0 14px}
-  .semana .wrap{grid-template-columns:1fr}
-  .dia,.dia+.dia{padding:28px 0;border-right:0;border-bottom:1px solid rgba(243,236,226,.15)}
-  .dia:last-child{border-bottom:0}
   .sexta{min-height:92svh}
   .sexta .wrap{grid-template-columns:1fr;padding:90px 0 60px}
   .portas{grid-template-columns:1fr}
@@ -658,7 +652,10 @@ footer{background:#120E0C;padding:110px 0 50px}
     </div>
     <div class="hero-veu" aria-hidden="true"></div>
     <div class="wrap hero-conteudo">
-      <span class="status" data-status><i></i><em style="font-style:normal">Terça a domingo, 17h às 22h30</em></span>
+      <div class="topo-hero">
+        <p class="nomes"><span>Matriz Grill</span><i aria-hidden="true"><svg viewBox="0 0 600 320"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span>Bar do Seco</span></p>
+        <span class="status" data-status><i></i><em style="font-style:normal">Terça a domingo, 17h às 22h30</em></span>
+      </div>
       <h1 class="gigante">
         <span class="linha"><span>A esquina mais</span></span>
         <span class="linha"><span>badalada</span></span>
@@ -685,14 +682,6 @@ footer{background:#120E0C;padding:110px 0 50px}
       <span class="ver-esp">Ver atração <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
     </div>
   </a>
-
-  <div class="semana" data-bgk="P_TETO">
-    <div class="wrap">
-      <a class="dia rv" href="#cardapio" data-ir="cardapio" data-cat="Tábuas"><span class="nome">Quarta</span><strong>Tábua inteira pelo preço da meia</strong><span>Alcatra, filé mignon ou picanha. Consumo no local.</span></a>
-      <a class="dia rv" href="#cardapio" data-ir="cardapio" data-cat="Hambúrgueres"><span class="nome">Quinta</span><strong>30% off nos hambúrgueres</strong><span>Menos X-Burger, Cordeiro, Mignon e Vegetariano.</span></a>
-      <a class="dia rv" href="#agenda" data-ir="agenda"><span class="nome">Sexta</span><strong>Música ao vivo a partir das 20h30</strong><span>Chegue cedo, a casa enche.</span></a>
-    </div>
-  </div>
 
   <div class="marquee" aria-hidden="true"><div class="m-trilho" id="mTrilho"><div class="m-grupo"><span class="cheio">Chapa quente</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="vazado">Chopp gelado</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="cheio">Ao vivo toda sexta</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="vazado">Desde 1996</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div><div class="m-grupo"><span class="cheio">Chapa quente</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="vazado">Chopp gelado</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="cheio">Ao vivo toda sexta</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="vazado">Desde 1996</span><i><svg viewBox="0 0 600 320" aria-hidden="true"><path d="M8 312 L300 20 L592 312" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></i></div></div></div>
 
@@ -801,8 +790,8 @@ footer{background:#120E0C;padding:110px 0 50px}
     </div>
     <div class="lista-dias">
       <div class="linha-dia rv"><span class="d">Terça</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
-      <div class="linha-dia rv"><span class="d">Quarta</span><span class="o">Tábua inteira pelo preço da meia<small>Alcatra, filé mignon ou picanha. Consumo no local.</small></span><span class="h">17h às 22h30</span></div>
-      <div class="linha-dia rv"><span class="d">Quinta</span><span class="o">30% off nos hambúrgueres<small>Menos X-Burger, Cordeiro, Mignon e Vegetariano. Consumo no local.</small></span><span class="h">17h às 22h30</span></div>
+      <div class="linha-dia rv"><span class="d">Quarta</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
+      <div class="linha-dia rv"><span class="d">Quinta</span><span class="o">Casa aberta</span><span class="h">17h às 22h30</span></div>
       <div class="linha-dia destaque rv">
         <span class="d">Sexta</span>
         <span class="o">Ao vivo<b>Show a partir das 20h30</b><small data-sx="linha">Toda sexta. Mesa reservada até as 20h45.</small></span>
@@ -824,7 +813,7 @@ footer{background:#120E0C;padding:110px 0 50px}
       </div>
       <div class="caixa caixa-escura rv">
         <h3>Entre no grupo do WhatsApp</h3>
-        <p style="color:var(--creme2)">Toda semana, o artista da sexta e as promoções no grupo do Matriz no WhatsApp.</p>
+        <p style="color:var(--creme2)">Toda semana, o artista da sexta sai primeiro no grupo do Matriz no WhatsApp.</p>
         <a class="btn btn-linha" href="https://chat.whatsapp.com/JrkpvZwuntW8oRBd3V7EpU" target="_blank" rel="noopener">Entrar no grupo</a>
       </div>
     </div>
@@ -836,7 +825,7 @@ footer{background:#120E0C;padding:110px 0 50px}
   <div class="wrap">
     <div class="topo-area bg-foto" data-bgk="E_FERIADO" style="--op:.45">
       <h1 class="gigante">Véspera de<br>feriado.</h1>
-      <p class="sub">Toda véspera de feriado tem show especial no Matriz. Dia seguinte é folga, então a noite pode ir longe.</p>
+      <p class="sub">Em algumas vésperas de feriado tem show especial no Matriz. Dia seguinte é folga, então a noite pode ir longe.</p>
     </div>
     <div class="evento-esp" data-fim="2026-10-12T03:00:00-03:00">
       <div class="foto-selo rv"><img class="selo-cedo" data-k="SELO" alt="Chegue cedo: reservas até 20h45"><figure><img data-k="E_FERIADO" alt="Atração do show de véspera de feriado, domingo, 11 de outubro" loading="lazy"></figure></div>
@@ -933,7 +922,7 @@ footer{background:#120E0C;padding:110px 0 50px}
   <div class="wrap">
     <div class="topo-area bg-foto" data-bgk="GALERA_JPG" style="--op:.4">
       <h1 class="gigante">Fotos e<br>vídeos</h1>
-      <p class="sub">As noites, a cozinha e a esquina. Toque numa foto ou vídeo pra ver em tela cheia.</p>
+      <p class="sub">Toque numa foto ou num vídeo pra abrir em tela cheia.</p>
     </div>
     <div class="filtros" role="group" aria-label="Filtrar galeria">
       <button type="button" class="aba-g" data-f="tudo" aria-pressed="true">Tudo</button>
@@ -1136,17 +1125,17 @@ var SEMANA = {
 
   /* ---------- Cardápio ---------- */
   var cardapio = {
-    'Tábuas': {foto:ASSETS.F_TABUA03, nota:'Meia ou inteira, com ou sem cebola. Na quarta, a inteira sai pelo preço da meia.', itens:[
-      ['Tábua de alcatra','Alcatra na chapa (meia com 500g), com batata frita, pão de alho assado, farofa, cebola e maionese da casa.','Quarta: inteira pelo preço da meia','Meia R$ 90\nInteira R$ 125'],
-      ['Tábua de filé mignon','Tiras de filé mignon na chapa (meia com 500g), com batata canoa, pão de alho assado, farofa e maionese da casa.','Quarta: inteira pelo preço da meia','Meia R$ 105\nInteira R$ 150'],
-      ['Tábua de picanha','Picanha fatiada na chapa (meia com 500g), com batata canoa, pão de alho assado, farofa e maionese da casa.','Quarta: inteira pelo preço da meia','Meia R$ 110\nInteira R$ 160'],
+    'Tábuas': {foto:ASSETS.F_TABUA03, nota:'Meia ou inteira, com ou sem cebola.', itens:[
+      ['Tábua de alcatra','Alcatra na chapa (meia com 500g), com batata frita, pão de alho assado, farofa, cebola e maionese da casa.','','Meia R$ 90\nInteira R$ 125'],
+      ['Tábua de filé mignon','Tiras de filé mignon na chapa (meia com 500g), com batata canoa, pão de alho assado, farofa e maionese da casa.','','Meia R$ 105\nInteira R$ 150'],
+      ['Tábua de picanha','Picanha fatiada na chapa (meia com 500g), com batata canoa, pão de alho assado, farofa e maionese da casa.','','Meia R$ 110\nInteira R$ 160'],
       ['Tábua de frios','Salame tipo italiano, mussarela, azeitona recheada, pepino e ovo de codorna.','','R$ 57']
     ]},
-    'Hambúrgueres': {foto:ASSETS.F_COMBO, nota:'Artesanais, na brasa, com mussarela ou cheddar. Todos acompanham batata. Na quinta, 30% off nos marcados.', itens:[
-      ['Matriz Burger','Pão brioche, hambúrguer de costela 160g, queijo, tomate, alface, bacon, cebola roxa, picles agridoce e barbecue.','30% off na quinta','R$ 47'],
-      ['Super Chef Burger','Pão brioche, dois hambúrgueres de costela 160g, queijo, bacon, cebola caramelizada, barbecue e maionese da casa.','30% off na quinta','R$ 48'],
-      ['Burger Picanha','Pão brioche, hambúrguer de picanha 160g, queijo, tomate, alface, bacon, cebola caramelizada e barbecue.','30% off na quinta','R$ 44'],
-      ['Burger Cheddar','Pão brioche, hambúrguer de costela 160g, queijo, bacon, cebola crispy, creme de cheddar e maionese da casa.','30% off na quinta','R$ 41'],
+    'Hambúrgueres': {foto:ASSETS.F_COMBO, nota:'Artesanais, na brasa, com mussarela ou cheddar. Todos acompanham batata.', itens:[
+      ['Matriz Burger','Pão brioche, hambúrguer de costela 160g, queijo, tomate, alface, bacon, cebola roxa, picles agridoce e barbecue.','','R$ 47'],
+      ['Super Chef Burger','Pão brioche, dois hambúrgueres de costela 160g, queijo, bacon, cebola caramelizada, barbecue e maionese da casa.','','R$ 48'],
+      ['Burger Picanha','Pão brioche, hambúrguer de picanha 160g, queijo, tomate, alface, bacon, cebola caramelizada e barbecue.','','R$ 44'],
+      ['Burger Cheddar','Pão brioche, hambúrguer de costela 160g, queijo, bacon, cebola crispy, creme de cheddar e maionese da casa.','','R$ 41'],
       ['Burger Mignon','Pão brioche, tiras de filé mignon, bacon, alface, tomate, cebola caramelizada e barbecue.','','R$ 45'],
       ['Cordeiro Burger','Pão brioche, hambúrguer de cordeiro 160g, queijo, tomate, alface, bacon, cebola crispy e barbecue.','','R$ 50'],
       ['X-Burger','Pão brioche amanteigado, hambúrguer de costela 160g, queijo e maionese da casa.','','R$ 22']
