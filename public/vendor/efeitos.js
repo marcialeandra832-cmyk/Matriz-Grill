@@ -56,7 +56,7 @@
       });
       /* profundidade */
       var esq=area.querySelector('.esquina');
-      if(esq)gsap.fromTo(esq.querySelector('img'),{yPercent:-6,scale:1.14},{yPercent:6,scale:1.14,ease:'none',scrollTrigger:{trigger:esq,start:'top bottom',end:'bottom top',scrub:true}});
+      if(esq&&!desk)gsap.fromTo(esq.querySelector('img'),{yPercent:-6,scale:1.14},{yPercent:6,scale:1.14,ease:'none',scrollTrigger:{trigger:esq,start:'top bottom',end:'bottom top',scrub:true}});
       /* galeria de pratos na horizontal, com curva 3D conforme a velocidade */
       var chapa=area.querySelector('.chapa'),tr=chapa&&chapa.querySelector('.trilho');
       /* No Safari a galeria fica no modo simples (rolagem lateral com as setas): o modo "preso" calculava
