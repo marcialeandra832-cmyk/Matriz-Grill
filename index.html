@@ -1123,6 +1123,7 @@ footer{background:#120E0C;padding:110px 0 50px}
              no início do site nas 3 semanas antes da data.
    hora:     só precisa nos especiais (a sexta já é 20h30)
    nota:     uma frase curta a mais (opcional)
+   vespera:  true quando é véspera de feriado (aparece escrito na agenda e na faixa)
    Show que já passou some sozinho. A página inicial e a Agenda mostram
    sempre o próximo, sem ninguém precisar mexer toda semana.
    ===================================================================== */
@@ -1132,7 +1133,7 @@ var SHOWS = [
   { dia: '2026-10-16', artista: 'João Vitor e José', foto: '/midia/sexta-16-10.jpg', fundo: '/midia/fundo/sexta-16-10.jpg' },
   { dia: '2026-10-23', artista: 'Marco e Anderson', foto: '' },
   { dia: '2026-10-30', artista: 'Wesley Marques', foto: '' },
-  { dia: '2026-11-01', especial: 'Mistura Sertaneja', artista: 'Marco e Anderson, Léo e Zimmer, Tico e Ceron', foto: '/midia/especial-01-11.jpg', fundo: '/midia/fundo/especial-01-11.jpg', hora: '20h30', nota: 'Segunda, 2 de novembro, é feriado.' },
+  { dia: '2026-11-01', especial: 'Mistura Sertaneja', vespera: true, artista: 'Marco e Anderson, Léo e Zimmer, Tico e Ceron', foto: '/midia/especial-01-11.jpg', fundo: '/midia/fundo/especial-01-11.jpg', hora: '20h30', nota: 'Segunda, 2 de novembro, é feriado.' },
   { dia: '2026-11-06', artista: 'Dihh Ribeiro e Duda Ribeiro', foto: '' },
   { dia: '2026-11-13', artista: 'Cláudio Amaral', foto: '' },
   { dia: '2026-11-20', artista: 'Kaza da Nonna', foto: '' },
@@ -1196,6 +1197,7 @@ var SEMANA = { sexta: SHOWS.filter(function (s) { return !s.especial && s.dia >=
         html='<p class="prog-vazio">Ao vivo toda sexta, a partir das 20h30. As próximas atrações saem primeiro no grupo do WhatsApp e no Instagram.</p>';
       } else {
         var p=prox[0], x=dados(p), linha=[];
+        if(p.vespera) linha.push('Véspera de feriado.');
         if(p.especial&&x.nome) linha.push('Com '+x.nome+'.');
         if(x.hora) linha.push('Show a partir das '+x.hora+'.');
         if(p.nota) linha.push(p.nota);
@@ -1210,7 +1212,7 @@ var SEMANA = { sexta: SHOWS.filter(function (s) { return !s.especial && s.dia >=
         prox.slice(1).forEach(function(s){
           var y=dados(s), det=[];
           if(y.m!==mesAtual){mesAtual=y.m; html+='<h3 class="mes-prog">'+MES[y.m]+'</h3>';}
-          det.push(s.especial?'Especial':'Ao vivo');
+          det.push(s.vespera?'Véspera de feriado':(s.especial?'Especial':'Ao vivo'));
           if(s.especial&&y.nome) det.push('com '+y.nome);
           if(y.hora) det.push(y.hora);
           html+='<div class="linha-show'+(s.especial?' especial':'')+'">'
@@ -1227,7 +1229,7 @@ var SEMANA = { sexta: SHOWS.filter(function (s) { return !s.especial && s.dia >=
     if(esp&&faixa){
       var z=dados(esp);
       faixa.querySelector('[data-esp="rotulo"]').textContent=esp.especial;
-      faixa.querySelector('[data-esp="data"]').textContent=DIAS[z.wd]+', '+z.d+' de '+MES[z.m]+(z.hora?', '+z.hora:'');
+      faixa.querySelector('[data-esp="data"]').textContent=(esp.vespera?'Véspera de feriado · ':'')+DIAS[z.wd]+', '+z.d+' de '+MES[z.m]+(z.hora?', '+z.hora:'');
       faixa.hidden=false;
     }
   })();
